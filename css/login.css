@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&display=swap');
+*{
+    padding: 0px;
+    margin: 0px;
+}
+body{
+    background-color: #77aa77;
+        background-image: url("../assets/Abstract-Envelope.svg");
+        background-attachment: fixed;
+        background-size: cover;
+}
+/*Navbar*/
+.navbar{
+    background-color: #43A047;
+}
+.navbar div img{
+    height: 50px;
+    width: 50px;
+}
+.navbar span{
+    vertical-align: middle;
+    font-family: 'Poppins', sans-serif;
+        color: #fff;
+}
+footer .navbar{
+    justify-content: center;
+}
+
+
+/*Center*/
+#loginMenu {
+    height:450px;
+    width: 400px;
+      padding-bottom: 10px;
+      margin-bottom: 15px;
+      margin-top: 40px;
+      background-color:#79DA9E;   
+    border-radius: 20px;
+}
+.form-control, .custom-select {
+    width: 80%;
+}
+.btn{
+    border-radius: 10px;
+}
+
+.container .row{
+    justify-content: center;
+}
+
+.form-group{
+    display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    font-family: 'Poppins', sans-serif;
+}
+
+p{
+    margin-bottom: 0px;
+    margin-top: 1rem;
+}
+.form-group .reg{
+    font-weight: 500;
+    text-decoration: none;
+    color: #43A047;
+}
+label{
+    font-weight: 500;
+}
+.reg:hover{
+    color: #ffffff;
+}
+
+.toast{
+    padding: 1rem;
+    font-size: 11px;
+    background:#e2e2e2;;
+}
+@media (max-width: 575.98px) { 
+    #loginMenu {
+        margin-top: 40px;
+        height:410px;
+        width: 330px;
+    }
+    .form-control ,  .custom-select {
+        width: 90%;
+        height: 34px;
+    }
+    p{
+        font-size: 12px;
+    }
+    label{
+        font-size:12px ;
+    }
+    .navbar .footer,.header-ics{
+        font-size: 12px;
+    }
+}

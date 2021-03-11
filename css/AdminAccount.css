@@ -1,0 +1,145 @@
+*{
+    padding: 0px;
+    margin: 0px;
+}
+body{
+    background-color: #77aa77;
+        background-image: url("../assets/Abstract-Envelope.svg");
+        background-attachment: fixed;
+        background-size: cover;
+}
+a, i, h5{
+    text-decoration: none;
+    outline: none;
+    color: white;
+}
+p{
+    margin-bottom: 0;
+}
+/*Navbar*/
+.navbar{
+    background-color: #43A047;
+}
+.navbar div img{
+    height: 50px;
+    width: 50px;
+}
+.navbar span{
+    vertical-align: middle;
+    font-family: 'Poppins', sans-serif;
+        color: #fff;      
+}
+footer .navbar{
+    justify-content: center;
+}
+.navbar-nav .nav-item a{
+    font-family: 'Poppins', sans-serif;
+    color: #fff
+}
+.navbar-toggler-icon{
+    color:#fff; 
+    height: 1.2em;
+}
+.navbar .nav-item > a:hover{
+    color: #124114;
+}
+.navbar-toggler {
+    font-size: 2rem;
+    background-color: transparent;
+    border: 1px solid transparent;
+        border-radius: .25rem;
+}
+.navbar button{
+    outline: none;
+}
+.dropdown-menu{
+    background-color: #43A047;
+}
+.dropdown-menu a{
+    font-size: .75rem;
+}
+.dropdown-menu  > a:hover {
+    background-color: #124114;
+}
+.dropdown-menu  > li:hover {
+    background-color: #124114;
+}
+/*center*/
+#page-inner{
+    height:auto;
+    width: auto;
+      margin-top: 10px;
+      margin-bottom: 15px;
+      background-color:#50EBC5;   
+}
+#feedback{
+    color: black;
+}
+.jumbotron{
+    display: flex;
+        padding: 1rem 1rem;
+        border-radius: 0px;
+        justify-content: center;
+        margin-bottom: 0px;
+        background-color: #ddffaa;
+}
+
+.jumbotron p{
+    font-family: 'Poppins', sans-serif;
+        font-weight: 700;
+        font-size: 40px;
+        color: #43A047
+
+}
+/*Data table*/
+.col .card .card-body{
+    display: flex;
+    justify-content: center;
+}
+.card{
+    border-radius: 0px;
+}
+
+.card-header{
+    font-family: 'Poppins', sans-serif;
+        font-weight: 700;
+}
+.table thead th {
+    font-weight: 700;
+}
+.table td, .table th{
+    vertical-align: middle;
+}
+
+.table td{
+    padding: .5rem;
+}
+
+.btn-danger span{
+    font-size: 1.4em;
+}
+
+.table_wrapper{
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.dataTables_wrapper .dataTables_filter input, select{
+    outline: none;
+}
+.dropdown-menu a {
+    font-size: .75rem;
+}
+
+@media (max-width: 575.98px) { 
+    .dropdown-menu a{
+        margin-left: .2rem;
+    }
+    .navbar-toggler {
+        font-size: 1.5rem;
+      }
+    .ics{
+        font-size: 12px;
+    }
+}

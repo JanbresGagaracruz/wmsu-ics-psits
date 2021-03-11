@@ -1,0 +1,131 @@
+*{
+    padding: 0px;
+    margin: 0px;
+}
+body{
+    background-color: #77aa77;
+        background-image: url("../assets/background/Abstract-Envelope.svg");
+        background-attachment: fixed;
+        background-size: cover;
+}
+a, i, h5{
+    text-decoration: none;
+    outline: none;
+    color: white;
+}
+/*Navbar*/
+.navbar{
+    background-color: #43A047;
+}
+.navbar div img{
+    height: 50px;
+    width: 50px;
+}
+.navbar span{
+    vertical-align: middle;
+    font-family: 'Poppins', sans-serif;
+        color: #fff;      
+}
+footer .navbar{
+    justify-content: center;
+}
+.navbar-nav .nav-item a{
+    font-family: 'Poppins', sans-serif;
+    color: #fff
+}
+.navbar-toggler-icon{
+    color:#fff; 
+    height: 1.2em;
+}
+.navbar .nav-item > a:hover{
+    color: #124114;
+}
+.navbar-toggler {
+    font-size: 2rem;
+    background-color: transparent;
+    border: 1px solid transparent;
+        border-radius: .25rem;
+}
+.navbar button{
+    outline: none;
+}
+/*Dashboard*/
+.row{
+    justify-content: center;
+        align-items: center;
+}
+.row h1{
+    margin-bottom: 20px;
+    font-family: 'Kaushan Script', cursive;
+        font-weight: 600;
+}
+.row .col-md-5{
+    margin-bottom: 50px;
+}
+.page-line{
+    margin-top: 20px;
+}
+#page-inner{
+    height:auto;
+    width: auto;
+      padding-bottom: 10px;
+      margin-bottom: 15px;
+      margin-top: 15px;
+      background-color:#50EBC5;   
+    border-radius: 20px
+}
+.mb-orange{
+   background-color: #77aa77;
+   padding: 20px;
+   border-radius: 5px;
+}
+.main-box{
+    text-align: center;
+}
+.main-box a{
+    text-decoration: none!important;
+}
+.dropdown-menu{
+    background-color: #43A047;
+}
+.dropdown-menu a{
+    font-size: .75rem;
+}
+.dropdown-menu  > a:hover {
+    background-color: #124114;
+}
+.dropdown-menu  > li:hover {
+    background-color: #124114;
+}
+.fa-lg{
+    font-size: 1rem;
+}
+@media (max-width: 575.98px) { 
+    #page-inner{
+        margin-top: 10px;
+    }
+    .main-box{
+        margin-bottom: 10px;
+    }
+    .col-md-5 {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 40%;
+    flex: 0 0 40%;
+    max-width: 40%;
+    }
+    .dropdown-menu a{
+        margin-left: .20rem;
+    }
+    .navbar-toggler {
+        font-size: 1.5rem;
+      }
+    .ics{
+        font-size: 12px;
+    }
+    h5{
+        font-size: 10px;
+    }
+    .fa{
+        font-size: 2rem;
+    }
+}
