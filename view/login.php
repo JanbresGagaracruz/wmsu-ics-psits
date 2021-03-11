@@ -18,7 +18,7 @@
     <div>
         <nav class="navbar navbar-expand-lg">
             <div class="header">
-                <a href="login.php"><img src="../assets/ics.png" alt="ICSLOGO"></a>
+                <a href="login.php"><img src="../assets/ics.png" alt="icslogo"></a>
                 <span class="navbar-text header-ics">Institute of Computer Studies</span>
             </div>
         </nav>
