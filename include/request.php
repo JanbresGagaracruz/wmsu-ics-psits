@@ -14,7 +14,7 @@
     $date="";
     $status="";
 
-    //Live validation to check wether email is existing or not
+    //Live validation to check whether email is existing or not
     if(isset($_POST['email_add']))
     {
         $email_add = $_POST['email_add'];
@@ -22,14 +22,20 @@
 
         $result = mysqli_query($connect,$query);
         if(mysqli_num_rows($result) > 0){
-            echo '<span class="text-danger p-1"><i class="fa fa-times text-danger ml-1"> This email is already taken.</i></span>';
+            echo '<i class="fa fa-times-circle text-danger ml-1"></i>                    
+                    <span p-1 class="text-danger"> 
+                        This email is already taken.
+                    </span> ';
             echo "<script>$('#register').prop('disabled',true);</script>"; //set disabled register button
         }else{
-            echo  '<span class="text-success p-1"><i class="fa fa-check text-success ml-1"> Available.</i></span>';
+            echo  '<i class="fa fa-check-circle  text-success ml-1"></i>
+                    <span p-1" class="text-success">
+                        Email is Available.
+                    </span>';
             echo "<script>$('#register').prop('disabled',false);</script>"; //set enabled register button
         }
     }
-    //Live validation to check wether email is existing or not
+    //Live validation to check whether email is existing or not
     if(isset($_POST['student_id']))
     {
         $student_id = $_POST['student_id'];
@@ -37,10 +43,16 @@
 
         $result = mysqli_query($connect,$query);
         if(mysqli_num_rows($result) > 0){
-            echo '<span class="text-danger p-1"><i class="fa fa-times text-danger ml-1"> This student id is already taken.</i></span>';
+            echo '<i class="fa fa-times-circle text-danger ml-1"></i>                    
+                    <span p-1 class="text-danger"> 
+                        This student id is already taken.
+                    </span> ';
             echo "<script>$('#register').prop('disabled',true);</script>"; //set disabled register button
         }else{
-            echo  '<span class="text-success p-1"><i class="fa fa-check text-success ml-1"> Available.</i></span>';
+            echo  '<i class="fa fa-check-circle  text-success ml-1"></i>
+                    <span p-1" class="text-success">
+                        Student id is Available.
+                    </span>';
             echo "<script>$('#register').prop('disabled',false);</script>"; //set enabled register button
         }
     }
