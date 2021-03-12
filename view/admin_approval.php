@@ -164,8 +164,7 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
     <!--Custom js-->
-    <script src="../js/datable.js"></script>
-    <script src="/js/alert.js"></script>                                      
+    <script src="../js/datable.js"></script>                                    
 </script>
 </body>
 </html>
