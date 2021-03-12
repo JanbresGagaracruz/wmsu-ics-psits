@@ -28,16 +28,24 @@ body{
 }
 footer .navbar{
     justify-content: center;
+    font-size: .8rem;
 }
 
-
+.alert{
+    margin-bottom: 0;
+    font-size: .8rem;
+    z-index: -9999;
+}
+.alert-dismissible .close {
+    padding: .5rem 1.25rem;
+}
 /*Center*/
 #loginMenu {
-    height:450px;
+    height:auto;
     width: 400px;
       padding-bottom: 10px;
       margin-bottom: 15px;
-      margin-top: 40px;
+      margin-top: 30px;
       background-color:#79DA9E;   
     border-radius: 20px;
 }
@@ -76,14 +84,9 @@ label{
     color: #ffffff;
 }
 
-.toast{
-    padding: 1rem;
-    font-size: 11px;
-    background:#e2e2e2;;
-}
 @media (max-width: 575.98px) { 
     #loginMenu {
-        margin-top: 40px;
+        margin-top: 20px;
         height:410px;
         width: 330px;
     }
