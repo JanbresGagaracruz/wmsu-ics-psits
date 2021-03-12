@@ -49,13 +49,22 @@ $(document).ready(function() {
     $("#reg").validate({
       rules: {
         student_id : {
-          minlength: 3
-        }
+          minlength: 11
+        },
+        password : {
+            minlength: 8
+          }
       },
       messages : {
         student_id: {
-          minlength: "Name should be at least 3 characters"
+          minlength: "Student id should be at least 11 characters"
         },
+        email: {
+            email: "The email format should be in: abc@domain.com"
+        },
+        password: {
+            email: "Password should be at least 8 characters."
+        }
       }
     });
 });
