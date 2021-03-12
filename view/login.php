@@ -1,3 +1,7 @@
+<?php
+    include("../include/userlogin.php")
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,11 +27,22 @@
             </div>
         </nav>
     </div>
-    
+    <div class="container">
+        <div class="row">
+            <?php if(isset($_SESSION['message'])): ?>   
+                <div class="alert alert-danger alert-dismissible mt-2" id="success">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <?php 
+                        echo $_SESSION['message'];  
+                        unset($_SESSION['message']);
+                ?>
+            <?php endif ?>
+        </div>
+    </div>
     <!--Center-->
     <div class="container">
         <div class="row">
-            <form>
+            <form method="POST" action="../include/userlogin.php">
                 <div id="loginMenu">
                     <div class="headerimg animate__animated animate__bounce mb-3">
                         <div class="row mt-3">
@@ -35,20 +50,19 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="studentid">Email address</label>
-                        <input type="email" class="form-control" id="studentid" aria-describedby="emailHelp"
-                            placeholder="Enter email">
+                        <label for="email">Email address</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Enter email">
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>
-                        <input type="password" class="form-control" id="password" placeholder="Password">
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Password">
                     </div>
                     <div class="form-group">
                         <div class="form-group">
-                            <p>Don't have an account? <a href="process_registration.php" class="reg">Register here.</a></p>
+                            <p>Don't have an account? <a href="registration.php" class="reg">Register here.</a></p>
                         </div>
                         <div class="row">
-                            <a href="#" class=" btn btn-success "id="showToast">Sign in</a>
+                            <button type="submit" class=" btn btn-success" id="login" name="login">Sign in</button>
                         </div>
                     </div>
                 </div>
@@ -71,5 +85,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
     </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="../js/alert-slide.js" ></script>
 </body>
 </html>
