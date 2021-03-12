@@ -46,7 +46,7 @@
                 <div id="regMenu" class="animate__animated animate__fadeInDown ">
                     <div class="form-group ">
                         <h4>Registration</h4>
-                        <small>Your account will be verified by the admin</small>
+                        <small id="note">Your account will be verified by the admin</small>
                     </div>
                     <div class="form-group">
                         <label for="student_id">Student ID</label>
@@ -111,7 +111,7 @@
                     <div class="form-group">
                         <label for="pass">Password</label>
                         <div class="input-group" id="pass">
-                            <input type="password" class="form-control"  name="password" aria-describedby="passHelp"
+                            <input type="password" class="form-control"  name="password" id="password"
                                 placeholder="Enter password" required>
                             <div class="input-group-addon">
                                 <a href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
@@ -141,8 +141,9 @@
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
-
+    <!--Custom scripts-->
     <script src="../js/password.js"></script>      
     <script src="../js/validation.js"></script>
+    <script src="../js/alert-slide.js" ></script>
 </body>
 </html>
