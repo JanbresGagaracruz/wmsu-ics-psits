@@ -24,7 +24,7 @@ h4{
     margin-top: 10px;
     font-weight:700 ;
 }
-small{
+#note{
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     color: #227226;
 }
@@ -76,7 +76,7 @@ footer .navbar{
     align-items: stretch;
     width: 80%;
 }
-i{
+.input-group-addon i{
     color:#43A047
 }
 .input-group i:hover{
@@ -141,8 +141,14 @@ input.error {
 label.password{
     margin-top: 10px;
 }
-#password-error.label{
-    margin-top: 100px;
+
+.text-danger,.text-success{
+    font: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: .9rem;
+}
+.alert-dismissible .close{
+    padding: .55rem 1.25rem;
 }
 @media (max-width: 575.98px) { 
     #regMenu {
