@@ -45,7 +45,7 @@
             }catch(Exception $e){
                 echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
             }
-            header('location: ../view/admin_approval.php');
+            header('location: ../view/account_approval.php');
             $_SESSION['message'] = "Account has been approve and successfully send an email.";
         }  
     }
@@ -57,7 +57,27 @@
             $row = $result->fetch_array();
             $id = $row['id'];   
             $connect->query("DELETE FROM request WHERE id= '$id';") or die($connect->error);
-            header('location: ../view/admin_approval.php');
+            try{
+                $mail->isSMTP();                                           
+                $mail->Host       = Host;                     
+                $mail->SMTPAuth   = true;                            
+                $mail->Username   = Username;                 
+                $mail->Password   = Password;                         
+                $mail->Port       = 25; 
+
+                $mail->setFrom(Username, 'WMSU ICS PSITS');
+                $mail->addAddress($email);    
++
+                $mail->isHTML(true);         
+
+                $mail->Subject = 'Your account has been declined';
+                $mail->Body    = 'Im sorry to inform you that your account has been declined due to invalid details';
+
+                $mail->send();
+            }catch(Exception $e){
+                echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+            }
+            header('location: ../view/account_approval.php');
             $_SESSION['message'] = "Account has been declined.";
         }  
     }
