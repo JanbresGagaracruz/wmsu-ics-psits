@@ -24,7 +24,7 @@
 <body>
     <nav class="navbar navbar-expand-lg sticky-top">
         <div class="header">
-            <a href="process_dashboard.php"><img src="../assets/ics.png" alt="ICSLOGO"></a>
+            <a href="dashboard.php"><img src="../assets/ics.png" alt="icslog"></a>
             <span class="navbar-text ics">Institute of Computer Studies</span>
         </div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
@@ -35,27 +35,49 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav dropdown ml-auto">
+                <li class="nav-item ">
+                    <a class="nav-link" href="dashboard.php">Home</a>
+                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navdropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Menu
+                      Fees
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navdropdown">
-                        <a class="nav-link" href="/menu/admin/admin.html"><i class="fa fa-home"></i> Home</a>
-                        <a class="nav-link" href="../admin/admin_promissory.html"><i class="fa fa-file-text"></i> Promissory</a>
-                        <a class="nav-link" href="../admin/admin_acc.html"><i class="fa fa-users"></i> Approval</a>
-                        <a class="nav-link" href="../admin/admin_create.html"><i class="fa fa-user-alt"></i> Add User</a>
-                        <a class="nav-link" href="../admin/admin_pay.html"><i class="fa fa-money-check"></i> Payment</a>
-                        <a class="nav-link" href="../admin/admin_year.html"><i class="fa fa-calendar-alt"></i> Add Year</a>
-                        <a class="nav-link" href="../admin/admin_manage.html"><i class="fa fa-tasks"></i> Manage Fees</a>
-                        <a class="nav-link" href="../admin/admin_sem.html"><i class="fa fa-plus-square"></i> Add Semester</a>
-                        <a class="nav-link" href="../admin/admin_course.html"><i class="fa fa-chalkboard"></i> Add Course</a>
-                        <a class="nav-link" href="../admin/admin_withdraw.html"><i class="fa fa-bank"></i> Manage Withdraw</a>
-                        <a class="nav-link" href="../admin/admin_announcement.html"><i class="fa fa-bullhorn"></i> Add Announcement</a>  
-                        <a class="nav-link" href="../admin/admin_section.html"><i class="fa fa-pen-square"></i> Add Section</a>
+                        <a class="nav-link" href="#"><i class="fa fa-file-text"></i> Promissory</a>
+                        <a class="nav-link" href="#"><i class="fa fa-money-check"></i> Payment</a>
                     </div>
                 </li>
-                <li class="nav-item ">
-                    <a class="nav-link" href="/index.html">Log out</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navdropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Management
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navdropdown">
+                        <a class="nav-link" href="account_approval.php"><i class="fa fa-users"></i> Approval</a>
+                        <a class="nav-link" href="#"><i class="fa fa-tasks"></i> Manage Fees</a>
+                        <a class="nav-link" href="#"><i class="fa fa-bank"></i> Manage Withdraw</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navdropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      School
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navdropdown">
+                        <a class="nav-link" href="#"><i class="fa fa-user-alt"></i> Add User</a>
+                        <a class="nav-link" href="#"><i class="fa fa-calendar-alt"></i> Add School year</a>
+                        <a class="nav-link" href="#"><i class="fa fa-calendar-alt"></i> Add Year level</a>
+                        <a class="nav-link" href="#"><i class="fa fa-plus-square"></i> Add Semester</a>
+                        <a class="nav-link" href="course.php"><i class="fa fa-chalkboard"></i> Add Course</a>
+                        <a class="nav-link" href="#"><i class="fa fa-pen-square"></i> Add Section</a>
+                        <a class="nav-link" href="#"><i class="fa fa-bullhorn"></i> Add Announcement</a>  
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navdropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Account
+                    </a>
+                    <div class="dropdown-menu sign-out" aria-labelledby="navdropdown">
+                        <a class="nav-link" href="#"><i class="fa fa-sign-out-alt"></i> Logout</a>
+                    </div>
                 </li>
             </ul>
         </div>
@@ -71,11 +93,10 @@
             <div class="row">
                 <div class="col-md-5">
                     <div class="main-box mb-orange">
-                        <a href="process_adminAccount.php">
+                        <a href="account_approval.php">
                             <i class="fa fa-users fa-5x"></i>
                             <h5>
                                 Approval
-                                <span class="badge badge-warning">5</span>
                             </h5>
                         </a>
                     </div>
@@ -86,7 +107,6 @@
                             <i class="fa fa-file-text fa-5x"></i>
                             <h5>
                                 Promissory
-                                <span class="badge badge-warning">5</span>
                             </h5>
                         </a>
                     </div>
@@ -105,7 +125,7 @@
                 </div>
                 <div class="col-md-5">
                     <div class="main-box mb-orange">
-                        <a href="admin_school.html">
+                        <a href="school_year.php">
                             <i class="fa fa-calendar-alt fa-5x"></i>
                             <h5>
                                 School Year
@@ -161,7 +181,7 @@
             <div class="row">
                 <div class="col-md-5">
                     <div class="main-box mb-orange">
-                        <a href="admin_course.html">
+                        <a href="course.php">
                             <i class="fa fa-chalkboard fa-5x"></i>
                             <h5>
                                 Course
