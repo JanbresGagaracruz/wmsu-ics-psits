@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&display=swap');
+*{
+    padding: 0px;
+    margin: 0px;
+}
+body{
+    font-family: 'Poppins', sans-serif;
+    background-color: #77aa77;
+        background-image: url("../assets/Abstract-Envelope.svg");
+        background-attachment: fixed;
+        background-size: cover;
+}
+
+/*Navbar*/
+.navbar{
+    background-color: #43A047;
+}
+.navbar div img{
+    height: 50px;
+    width: 50px;
+}
+.navbar span{
+    vertical-align: middle;
+    font-family: 'Poppins', sans-serif;
+        color: #fff;
+}
+.navbar-nav .nav-item > a:hover{
+    color: #124114;
+}
+.navbar .header span{
+    vertical-align: middle;
+    font-family: 'Poppins', sans-serif;
+}
+.navbar-nav .nav-item a{
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
+}
+.nav-item a{
+    color: #fff;
+}
+.navbar-toggler-icon{
+    color:#fff; 
+    height: 1.2em;
+}
+.navbar-toggler {
+    font-size: 2rem;
+    background-color: transparent;
+    border: 1px solid transparent;
+        border-radius: .25rem;
+}
+.dropdown-menu{
+    background-color: #43A047;
+}
+.dropdown-menu  > a:hover {
+    background-color: #124114; 
+}
+.dropdown-menu  > li:hover {
+    background-color: #124114;
+}
+.fees{
+    border: 0;
+    border-radius: none;
+}   
+h2 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    color: #43A047;
+    font-size: 30px;
+}
+.top-card {
+    background-color: #ddffaa;
+}
+.dropdown-menu a {
+    font-size: .75rem;
+}
+.course_delete{
+    display: flow-root;
+}
+.card-title {
+    margin-bottom: 0;
+}
+
+.input-group-addon {
+    padding: .5rem .75rem;
+    margin-bottom: 0;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.25;
+    color: #495057;
+    text-align: center;
+    background-color: #e9ecef;
+    border: 1px solid rgba(0,0,0,.15);
+}
+@media (max-width: 576px) { 
+    .d-flex{
+        justify-content: center;
+    }
+    .navbar-toggler {
+        font-size: 1.5rem;
+      }
+    .ics{
+        font-size: 12px;
+    }
+}
