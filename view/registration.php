@@ -94,8 +94,8 @@
                     <div class="form-group">
                         <label for="gender">Gender</label>
                         <select class="custom-select" id="inlineFormCustomSelect"  name="gender"required>
-                            <option value="Student" selected>Male</option>
-                            <option value="President">Female</option>
+                            <option value="Male" selected>Male</option>
+                            <option value="Femal">Female</option>
                         </select>
                     </div>
                     <div class="form-group">
