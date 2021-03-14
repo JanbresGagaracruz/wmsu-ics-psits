@@ -1,4 +1,4 @@
-//alert danger for login
+//alert danger message
 $(document).ready(function () {
     window.setTimeout(function() {
     $(".alert-danger").fadeTo(800, 0).slideUp(800, function(){
@@ -6,7 +6,7 @@ $(document).ready(function () {
     });
     }, 1000);
 });
-//alert success for registration
+//alert success message
 $(document).ready(function () {
     window.setTimeout(function() {
     $(".alert-success").fadeTo(800, 0).slideUp(800, function(){
