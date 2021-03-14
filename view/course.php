@@ -92,11 +92,12 @@
             <div class="alert alert-success alert-dismissible mt-2" id="success">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
             <?php 
-                    echo $_SESSION['message'];  
-                    unset($_SESSION['message']);
+                echo $_SESSION['message'];  
+                unset($_SESSION['message']);
             ?>
         <?php endif ?>
     </div>
+    <!--end of alert message-->
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-10 pt-3 pb-3">
@@ -180,10 +181,10 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="course">Course</label>
-                            <input type="text" class="form-control" name="course" id="course"placeholder="Enter course">
+                            <input type="text" class="form-control" name="course" id="course" placeholder="Enter course">
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary" name="create">Create</button>
+                            <button type="submit" class="btn btn-primary" name="create" id="create">Create</button>
                         </div>
                     </div>
                 </form>
@@ -200,10 +201,9 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
     </script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
     <script src="../js/datable.js"></script>
-    <script src="../js/alert-slide.js" ></script>
+    <script src="../js/alert-slide.js"></script>
 </body>
-
 </html>
