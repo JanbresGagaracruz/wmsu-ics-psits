@@ -182,10 +182,10 @@
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
     </script>
     <script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
     <!--Custom js-->
-    <script src="../js/datable.js"></script>                                    
+    <script src="../js/datable.js"></script>    
+    <script src="../js/alert-slide.js"></script>                                
 </script>
 </body>
 </html>
