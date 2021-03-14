@@ -1,7 +1,8 @@
 <?php
     include("database.php");
 
-    if(isset($_POST['save'])){ //create a new school year
+    //create a new school year
+    if(isset($_POST['save'])){ 
         $current = $_POST['current'];
         $to = $_POST['end'];
         $status = $_POST['status'];
@@ -13,5 +14,57 @@
             header('location: ../view/school_year.php');
             $_SESSION['message'] = "You have successfully added a new school year.";
         }
+    }
+    //setting school year of active
+    if(isset($_GET['stat_on'])){
+        $id = $_GET['stat_on'];
+        $result = $connect->query("SELECT * FROM year WHERE id = '$id';") or die($connect->error());
+        if(count($result) == 1){
+            $row = $result->fetch_array();
+            $id = $row['id'];
+            $check = $connect->query("UPDATE year SET status='open' WHERE id='$id'")or die($connect->error);
+            if($check){
+                header('location: ../view/school_year.php');
+                $_SESSION['message'] = "School year has successfully opened.";
+            }else{
+                header('location: ../view/school_year.php');
+                $_SESSION['message'] = "Something went wrong.";
+            }
+        }
+    }
+    //setting school year of inactive
+    if(isset($_GET['stat_off'])){
+        $id = $_GET['stat_off'];
+        $result = $connect->query("SELECT * FROM year WHERE id = '$id';") or die($connect->error());
+        if(count($result) == 1){
+            $row = $result->fetch_array();
+            $id = $row['id'];
+            $check = $connect->query("UPDATE year SET status='close' WHERE id='$id'")or die($connect->error);
+            if($check){
+                header('location: ../view/school_year.php');
+                $_SESSION['message'] = "School year has successfully closed.";
+            }else{
+                header('location: ../view/school_year.php');
+                $_SESSION['message'] = "Something went wrong.";
+            }
+        }
+    }
+
+    //delete school year
+    if(isset($_GET['delete'])){
+        $id = $_GET['delete'];
+        $result = $connect->query("SELECT * FROM year WHERE id = '$id';") or die($connect->error());
+        if(count($result) == 1){
+            $row = $result->fetch_array();
+            $id = $row['id'];   
+            $check=$connect->query("DELETE FROM year WHERE id= '$id';") or die($connect->error);
+            if($check){
+                header('location: ../view/school_year.php');
+                $_SESSION['message'] = "Successfully deleted.";
+            }else{
+                header('location: ../view/school_year.php');
+                $_SESSION['message'] = "Something went wrong.";
+            }
+        }  
     }
 ?>
