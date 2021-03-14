@@ -1,14 +1,16 @@
 <?php
     include("database.php");
 
-    if(isset($_POST['create'])){ //create a new course
+    //create a new course
+    if(isset($_POST['create'])){ 
         $course = $_POST['course'];
-        $sql = "INSERT INTO course (course) VALUES ('$course')";
-        $query_run=mysqli_query($connect, $sql);
-
-        if($query_run){
+        $check=$connect->query("INSERT INTO course (course) VALUES ('$course')") or die($connect->error());
+        $_SESSION['message'] = "You have successfully added a new course.";
+        if($check){
             header('location: ../view/course.php');
             $_SESSION['message'] = "You have successfully added a new course.";
+        }else{
+            $_SESSION['message'] = "Something went wrong.";
         }
     }
 
@@ -19,9 +21,14 @@
         if(count($result) == 1){
             $row = $result->fetch_array();
             $id = $row['id'];   
-            $connect->query("DELETE FROM course WHERE id= '$id';") or die($connect->error);
-            header('location: ../view/course.php');
-            $_SESSION['message'] = "Course has been deleted.";
+            $check=$connect->query("DELETE FROM course WHERE id= '$id';") or die($connect->error);
+            if($check){
+                header('location: ../view/course.php');
+                $_SESSION['message'] = "Course has been deleted.";
+            }else{
+                header('location: ../view/course.php');
+                $_SESSION['message'] = "Something went wrong.";
+            }
         }  
     }
 ?>
