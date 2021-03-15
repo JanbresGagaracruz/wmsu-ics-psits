@@ -63,11 +63,11 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navdropdown">
                         <a class="nav-link" href="#"><i class="fa fa-user-alt"></i> Add User</a>
-                        <a class="nav-link" href="#"><i class="fa fa-calendar-alt"></i> Add School year</a>
-                        <a class="nav-link" href="#"><i class="fa fa-calendar-alt"></i> Add Year level</a>
-                        <a class="nav-link" href="#"><i class="fa fa-plus-square"></i> Add Semester</a>
+                        <a class="nav-link" href="school_year.php"><i class="fa fa-calendar-alt"></i> Add School year</a>
+                        <a class="nav-link" href="year_lvl.php"><i class="fa fa-calendar-alt"></i> Add Year level</a>
+                        <a class="nav-link" href="semester.php"><i class="fa fa-plus-square"></i> Add Semester</a>
                         <a class="nav-link" href="course.php"><i class="fa fa-chalkboard"></i> Add Course</a>
-                        <a class="nav-link" href="#"><i class="fa fa-pen-square"></i> Add Section</a>
+                        <a class="nav-link" href="section.php"><i class="fa fa-pen-square"></i> Add Section</a>
                         <a class="nav-link" href="#"><i class="fa fa-bullhorn"></i> Add Announcement</a>  
                     </div>
                 </li>
@@ -137,7 +137,7 @@
             <div class="row">
                 <div class="col-md-5">
                     <div class="main-box mb-orange">
-                        <a href="admin_year.html">
+                        <a href="year_lvl.php">
                             <i class="fa fa-calendar-plus fa-5x"></i>
                             <h5>
                                 Year level
@@ -169,7 +169,7 @@
                 </div>
                 <div class="col-md-5">
                     <div class="main-box mb-orange">
-                        <a href="admin_sem.html">
+                        <a href="semester.php">
                             <i class="fa fa-plus-square fa-5x"></i>
                             <h5>
                                 Semester
@@ -213,7 +213,7 @@
                 </div>
                 <div class="col-md-5">
                     <div class="main-box mb-orange">
-                        <a href="admin_section.html">
+                        <a href="section.php">
                             <i class="fa fa-pen-square fa-5x"></i>
                             <h5>
                                 Class Section
