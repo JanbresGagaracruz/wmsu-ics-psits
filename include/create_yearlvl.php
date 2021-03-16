@@ -31,5 +31,26 @@
         }  
     }
 
+    if(isset($_POST['year_id']))
+    {
+        $year_id = $_POST['year_id'];
+        $query = "SELECT * FROM year_lvl WHERE year = '$year_id';";
+
+        $result = mysqli_query($connect,$query);
+        if(mysqli_num_rows($result) > 0){
+            echo '<i class="fa fa-times-circle text-danger ml-1"></i>                    
+                    <span p-1 class="text-danger"> 
+                        This year level is already existing.
+                    </span> ';
+            echo "<script>$('#create').prop('disabled',true);</script>"; //set disabled register button
+        }else{
+            echo  '<i class="fa fa-check-circle  text-success ml-1"></i>
+                    <span p-1" class="text-success">
+                        Year level is Available.
+                    </span>';
+            echo "<script>$('#create').prop('disabled',false);</script>"; //set enabled register button
+        }
+    }
+
 
 ?>
