@@ -180,6 +180,7 @@
                         <div class="form-group">
                             <label for="semester">Semester</label>
                             <input type="number" class="form-control" name="semester" id="semester" placeholder="Enter semester">
+                            <div id="semester_validation"></div>
                         </div>
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-primary" name="create" id="create">Create</button>
@@ -203,5 +204,6 @@
     <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
     <script src="../js/datable.js"></script>
     <script src="../js/alert-slide.js"></script>
+    <script src="../js/validation.js"></script>
 </body>
 </html>
