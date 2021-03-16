@@ -175,11 +175,12 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="section.php" method="POST" >
+                <form action="year_lvl.php" method="POST" >
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="year_lvl">Year level</label>
                             <input type="number" class="form-control" name="year_lvl" id="year_lvl" placeholder="Enter year level">
+                            <div id="yearlvl_validation"></div>
                         </div>
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-primary" name="create" id="create">Create</button>
@@ -203,5 +204,6 @@
     <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
     <script src="../js/datable.js"></script>
     <script src="../js/alert-slide.js"></script>
+    <script src="../js/validation.js"></script>
 </body>
 </html>
