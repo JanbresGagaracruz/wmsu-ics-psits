@@ -31,4 +31,26 @@
             }
         }  
     }
+
+    //Live validation to check whether course is existing or not
+    if(isset($_POST['course_check']))
+    {
+        $course_check = $_POST['course_check'];
+        $query = "SELECT * FROM course WHERE course = '$course_check';";
+
+        $result = mysqli_query($connect,$query);
+        if(mysqli_num_rows($result) > 0){
+            echo '<i class="fa fa-times-circle text-danger ml-1"></i>                    
+                    <span p-1 class="text-danger"> 
+                        This course is already existing.
+                    </span> ';
+            echo "<script>$('#create').prop('disabled',true);</script>"; //set disabled register button
+        }else{
+            echo  '<i class="fa fa-check-circle  text-success ml-1"></i>
+                    <span p-1" class="text-success">
+                        Course is Available.
+                    </span>';
+            echo "<script>$('#create').prop('disabled',false);</script>"; //set enabled register button
+        }
+    }
 ?>
