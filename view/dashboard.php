@@ -203,7 +203,7 @@
             <div class="row">
                 <div class="col-md-5">
                     <div class="main-box mb-orange">
-                        <a href="admin_announcement.html">
+                        <a href="announcement.php">
                             <i class="fa fa-bullhorn fa-5x"></i>
                             <h5>
                                 Announcement
