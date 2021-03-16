@@ -1,18 +1,6 @@
 <?php
     //create a request account verification
     include("database.php");
-    $studentid="";
-    $firstname="";
-    $lastname="";
-    $middlename="";
-    $email="";
-    $course="";
-    $year="";
-    $gender="";
-    $usertype="";
-    $password="";
-    $date="";
-    $status="";
 
     //Live validation to check whether email is existing or not
     if(isset($_POST['email_add']))
