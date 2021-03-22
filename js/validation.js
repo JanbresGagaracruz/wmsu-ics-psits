@@ -133,6 +133,28 @@ $(document).ready(function(){
         }                           
     });
 });
+//Check the availability of file name
+$("#name").blur(function(){
+    var name = $("#name").val();
+    if(name == "")
+    {
+        $('#title_validation').html("");
+        $("#submit").prop('disabled', false);
+    }else{
+    $.ajax({
+        url:"../include/submit_file.php",
+        method: "POST",
+        data:
+        {
+            name:name
+        },
+        datatype: "text",
+        success:function(html){
+            $('#title_validation').html(html);
+        }
+    });   
+    }                           
+});
 
 
 $(document).ready(function() {
