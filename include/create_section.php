@@ -8,8 +8,11 @@
         $query_run=mysqli_query($connect, $sql);
 
         if($query_run){
-            header('location: ../view/section.php');
+            header('location: ../view/section.php?success=1');
             $_SESSION['message'] = "You have successfully added a new section.";
+        }else{
+            header('location: ../view/section.php?success=1');
+            $_SESSION['message'] = "Something went wrong.";
         }
     }
 
@@ -22,10 +25,10 @@
             $id = $row['id'];   
             $check=$connect->query("DELETE FROM section WHERE sec= '$section';") or die($connect->error);
             if($check){
-                header('location: ../view/semester.php');
+                header('location: ../view/section.php?success=1');
                 $_SESSION['message'] = "Successfully deleted.";
             }else{
-                header('location: ../view/semester.php');
+                header('location: ../view/section.php?success=1');
                 $_SESSION['message'] = "Something went wrong.";
             }
         }  
