@@ -7,9 +7,10 @@
         $check=$connect->query("INSERT INTO course (course) VALUES ('$course')") or die($connect->error());
         $_SESSION['message'] = "You have successfully added a new course.";
         if($check){
-            header('location: ../view/course.php');
+            header('location: ../view/course.php?success=1');
             $_SESSION['message'] = "You have successfully added a new course.";
         }else{
+            header('location: ../view/course.php?success=1');
             $_SESSION['message'] = "Something went wrong.";
         }
     }
@@ -23,10 +24,10 @@
             $id = $row['id'];   
             $check=$connect->query("DELETE FROM course WHERE id= '$id';") or die($connect->error);
             if($check){
-                header('location: ../view/course.php');
+                header('location: ../view/course.php?success=1');
                 $_SESSION['message'] = "Course has been deleted.";
             }else{
-                header('location: ../view/course.php');
+                header('location: ../view/course.php?success=1');
                 $_SESSION['message'] = "Something went wrong.";
             }
         }  
