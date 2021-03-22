@@ -88,7 +88,7 @@
     </nav>
     <!--Create alert message-->
     <div class="container">
-        <?php if(isset($_SESSION['message'])): ?>   
+        <?php if(isset($_SESSION['message']) && $_GET['success'] == 1): ?>   
             <div class="alert alert-success alert-dismissible mt-2" id="success">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
             <?php 
@@ -170,7 +170,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Add section</h5>
+                    <h5 class="modal-title">Add Year level</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
