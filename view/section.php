@@ -88,7 +88,7 @@
     </nav>
     <!--Create alert message-->
     <div class="container">
-        <?php if(isset($_SESSION['message'])): ?>   
+        <?php if(isset($_SESSION['message'])&& $_GET['success'] == 1): ?>   
             <div class="alert alert-success alert-dismissible mt-2" id="success">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
             <?php 
