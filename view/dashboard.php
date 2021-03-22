@@ -76,7 +76,7 @@
                       Account
                     </a>
                     <div class="dropdown-menu sign-out" aria-labelledby="navdropdown">
-                        <a class="nav-link" href="#"><i class="fa fa-sign-out-alt"></i> Logout</a>
+                        <a class="nav-link" href="login.php"><i class="fa fa-sign-out-alt"></i> Logout</a>
                     </div>
                 </li>
             </ul>
