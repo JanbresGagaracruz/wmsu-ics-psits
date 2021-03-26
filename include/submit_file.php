@@ -1,7 +1,6 @@
 <?php
 // Include the database configuration file
     include('database.php');
-    $statusMsg = '';
     //check the availability of file name
     if(isset($_POST['name']))
     {
@@ -16,16 +15,12 @@
                     </span> ';
             echo "<script>$('#create').prop('disabled',true);</script>"; //set disabled register button
         }else{
-            echo  '<i class="fa fa-check-circle  text-success ml-1"></i>
-                    <span p-1" class="text-success">
-                        File name is Available.
-                    </span>';
             echo "<script>$('#create').prop('disabled',false);</script>"; //set enabled register button
         }
     }
     //upload a pdf file
     if(isset($_POST["submit"]) && !empty($_FILES["file"]["name"])){
-        $targetDir = "../uploads/";
+        $targetDir = "../pdf_file/";
         $Upload_type = array('pdf');
         $fileName = basename($_FILES["file"]["name"]);
         $name= $_POST['name'];
