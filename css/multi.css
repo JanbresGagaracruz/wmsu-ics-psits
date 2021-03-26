@@ -70,6 +70,7 @@ h2 {
     font-weight: 700;
     color: #43A047;
     font-size: 30px;
+    margin-bottom: 0;
 }
 .top-card {
     background-color: #ddffaa;
@@ -94,6 +95,28 @@ h2 {
     text-align: center;
     background-color: #e9ecef;
     border: 1px solid rgba(0,0,0,.15);
+}
+label.error {
+    color: red;
+    font-size: .8rem;
+    display: block;
+}
+input.error {
+    border: 1px dashed red;
+    font-weight: 300;
+    color: red;
+}
+.text-danger,.text-success{
+    font: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: .9rem;
+}
+.alert-dismissible .close{
+    padding: .55rem 1.25rem;
+}
+th, td { white-space: nowrap; }
+div.dataTables_wrapper {
+    margin: 0 auto;
 }
 @media (max-width: 576px) { 
     .d-flex{
