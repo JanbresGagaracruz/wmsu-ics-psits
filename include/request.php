@@ -16,10 +16,6 @@
                     </span> ';
             echo "<script>$('#register').prop('disabled',true);</script>"; //set disabled register button
         }else{
-            echo  '<i class="fa fa-check-circle  text-success ml-1"></i>
-                    <span p-1" class="text-success">
-                        Email is Available.
-                    </span>';
             echo "<script>$('#register').prop('disabled',false);</script>"; //set enabled register button
         }
     }
@@ -37,10 +33,6 @@
                     </span> ';
             echo "<script>$('#register').prop('disabled',true);</script>"; //set disabled register button
         }else{
-            echo  '<i class="fa fa-check-circle  text-success ml-1"></i>
-                    <span p-1" class="text-success">
-                        Student id is Available.
-                    </span>';
             echo "<script>$('#register').prop('disabled',false);</script>"; //set enabled register button
         }
     }
@@ -57,10 +49,12 @@
         $gender = $_POST['gender'];
         $usertype = $_POST['usertype'];
         $password = $_POST['password'];
-        $status = $_POST['status'];
+        $status = "uncheck";
+        $payment_status="ongoing";
+        $assessment_status="not assessed";
 
-        $sql = "INSERT INTO request (student_id, first_name, last_name,middle_name,email,course,year,gender,usertype,password,date,status) 
-        VALUES ('$student_id','$first_name','$last_name','$middle_name','$email','$course','$year','$gender','$usertype','$password',CURRENT_TIMESTAMP,'$status')";
+        $sql = "INSERT INTO request (student_id, first_name, last_name,middle_name,email,course,year,gender,usertype,password,status,assessment_status,payment_status) 
+        VALUES ('$student_id','$first_name','$last_name','$middle_name','$email','$course','$year','$gender','$usertype','$password','$status','$assessment_status','$payment_status')";
         mysqli_query($connect, $sql);
         header('location: ../view/registration.php');
         $_SESSION['message'] = "Your account request is now pending for approval. Please wait for confirmation. Thank you. <a href='process_login.php'>Login instead?</a>";
