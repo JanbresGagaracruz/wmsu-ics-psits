@@ -47,10 +47,6 @@
                     </span> ';
             echo "<script>$('#create').prop('disabled',true);</script>"; //set disabled register button
         }else{
-            echo  '<i class="fa fa-check-circle  text-success ml-1"></i>
-                    <span p-1" class="text-success">
-                        Semester is Available.
-                    </span>';
             echo "<script>$('#create').prop('disabled',false);</script>"; //set enabled register button
         }
     }
