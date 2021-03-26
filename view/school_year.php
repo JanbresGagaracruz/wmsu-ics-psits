@@ -183,12 +183,12 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="school_year.php" method="POST">
+                <form action="school_year.php" method="POST" id="school_form">
                     <div class="modal-body">
                         <div class="input-group input-daterange">
-                            <input type="month" class="form-control"  name="current" id="datepicker"autocomplete="off">
+                            <input type="month" class="form-control" min="2021-03"name="current">
                             <div class="input-group-addon">to</div>
-                            <input type="month" class="form-control" name="end" autocomplete="off">
+                            <input type="month" class="form-control" min="2021-03"name="end">
                             <div id="school_validation"></div>
                         </div>
                         <input type="hidden" value="closed">
@@ -213,6 +213,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
     <script src="../js/datable.js"></script>
