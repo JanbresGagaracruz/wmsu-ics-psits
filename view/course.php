@@ -177,7 +177,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="course.php" method="POST" >
+                <form action="course.php" method="POST" id="course_form">
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="course">Course</label>
