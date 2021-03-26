@@ -176,10 +176,10 @@
                 <span aria-hidden="true">&times;</span>
             </button>
             </div>
-            <form action="announcement.php" method="post" enctype="multipart/form-data" id="fupForm">
+            <form action="announcement.php" method="post" enctype="multipart/form-data" id="announce_form">
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="name">Title</label>
+                        <label for="name">File name</label>
                         <input type="text" class="form-control" id="name" name="name" placeholder="Enter title">
                         <div id="title_validation"></div>
                     </div>
@@ -212,11 +212,11 @@
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>  
     <script src="../js/datable.js"></script>
     <script src="../js/alert-slide.js"></script>
     <script src="../js/validation.js"></script>
 
 </body>
-
 </html>
