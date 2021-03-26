@@ -5,7 +5,6 @@
     if(isset($_POST['create'])){ 
         $course = $_POST['course'];
         $check=$connect->query("INSERT INTO course (course) VALUES ('$course')") or die($connect->error());
-        $_SESSION['message'] = "You have successfully added a new course.";
         if($check){
             header('location: ../view/course.php?success=1');
             $_SESSION['message'] = "You have successfully added a new course.";
@@ -47,10 +46,6 @@
                     </span> ';
             echo "<script>$('#create').prop('disabled',true);</script>"; //set disabled register button
         }else{
-            echo  '<i class="fa fa-check-circle  text-success ml-1"></i>
-                    <span p-1" class="text-success">
-                        Course is Available.
-                    </span>';
             echo "<script>$('#create').prop('disabled',false);</script>"; //set enabled register button
         }
     }
