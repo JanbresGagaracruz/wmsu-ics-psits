@@ -26,7 +26,7 @@
 </head>
 
 <body>
-<nav class="navbar navbar-expand-lg sticky-top">
+    <nav class="navbar navbar-expand-lg sticky-top">
         <div class="header">
             <a href="dashboard.php"><img src="../assets/ics.png" alt="icslog"></a>
             <span class="navbar-text ics">Institute of Computer Studies</span>
@@ -175,11 +175,11 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="year_lvl.php" method="POST" >
+                <form action="year_lvl.php" method="POST" id="year_form">
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="year_lvl">Year level</label>
-                            <input type="number" class="form-control" name="year_lvl" id="year_lvl" placeholder="Enter year level">
+                            <input type="text" class="form-control" name="year_lvl" id="year_lvl" placeholder="Enter year level" autocomplete="off">
                             <div id="yearlvl_validation"></div>
                         </div>
                         <div class="modal-footer">
@@ -201,9 +201,10 @@
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
     <script src="../js/datable.js"></script>
-    <script src="../js/alert-slide.js"></script>
     <script src="../js/validation.js"></script>
+    <script src="../js/alert-slide.js"></script>
 </body>
 </html>
