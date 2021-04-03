@@ -1,5 +1,5 @@
 <?php
-    include("../include/userlogin.php")
+    include("../include/userlogin.php");
 ?>
 
 <!DOCTYPE html>
@@ -29,8 +29,9 @@
     </div>
     <div class="container">
         <div class="row">
+        <div class="form-group">
             <?php if(isset($_SESSION['message'])): ?>   
-                <div class="alert alert-danger alert-dismissible mt-2" id="success">
+                <div class="alert alert-danger alert-dismissible mt-3" id="success">
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
                 <?php 
                         echo $_SESSION['message'];  
@@ -42,7 +43,7 @@
     <!--Center-->
     <div class="container">
         <div class="row">
-            <form method="POST" action="../include/userlogin.php">
+            <form method="POST" action="../include/userlogin.php" id="login_form">
                 <div id="loginMenu">
                     <div class="headerimg animate__animated animate__bounce mb-3">
                         <div class="row mt-3">
