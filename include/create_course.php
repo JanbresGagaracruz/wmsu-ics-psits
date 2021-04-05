@@ -1,6 +1,10 @@
 <?php
+    ob_start();
+    if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
     include("database.php");
-
     //create a new course
     if(isset($_POST['create'])){ 
         $course = $_POST['course'];
@@ -49,4 +53,5 @@
             echo "<script>$('#create').prop('disabled',false);</script>"; //set enabled register button
         }
     }
+    ob_end_flush();
 ?>

@@ -1,6 +1,10 @@
 <?php
+    ob_start();
+    if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
     include('database.php');
-
 
     if(isset($_POST['submit'])){
         $sy = $_POST['school_year'];
@@ -36,4 +40,5 @@
             }
         }  
     }
+    ob_end_flush();
 ?>

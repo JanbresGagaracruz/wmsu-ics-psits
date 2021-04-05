@@ -30,6 +30,7 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navdropdown">
                         <a class="nav-link" href="account_approval.php"><i class="fa fa-users"></i> Approval</a>
+                        <a class="nav-link" href="active_users.php"><i class="fa fa-user-circle"></i> Active User</a>
                         <a class="nav-link" href="manage_fees.php"><i class="fa fa-tasks"></i> Manage Fees</a>
                         <a class="nav-link" href="withdraw.php"><i class="fa fa-bank"></i> Manage Withdraw</a>
                     </div>
@@ -49,9 +50,13 @@
                     </div>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navdropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Account
-                    </a>
+                    <?php if($_SESSION['usertype']): ?>
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-user-alt"></i> Welcome, 
+                            <?php echo $_SESSION['usertype']; ?>
+                        </a>
+                    <?php endif; ?>
                     <div class="dropdown-menu sign-out" aria-labelledby="navdropdown">
                         <a class="nav-link" href="login.php?logout=1"><i class="fa fa-sign-out-alt"></i> Logout</a>
                     </div>

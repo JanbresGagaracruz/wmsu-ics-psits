@@ -1,6 +1,15 @@
 <?php
     ob_start();
-    require('../include/assess_student.php')
+    require('../include/assess_student.php');
+    include("../include/userlogin.php");
+    if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
+    if($_SESSION['usertype'] != "1"){
+        header("location: login.php?success=1");
+        $_SESSION['message'] = "You cannot access this page unless you are a officer!";
+    }
     ob_end_flush();
 ?>
 <!doctype html>

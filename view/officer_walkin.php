@@ -1,14 +1,14 @@
 <?php
     ob_start();
-    require("../include/walkin_account.php");
+    require('../include/walkin_account.php');
     include("../include/userlogin.php");
     if(!isset($_SESSION)) 
     { 
         session_start(); 
     } 
-    if($_SESSION['usertype'] != "admin"){
+    if($_SESSION['usertype'] != "1"){
         header("location: login.php?success=1");
-        $_SESSION['message'] = "You cannot access only admin is allowed!";
+        $_SESSION['message'] = "You cannot access this page unless you are a officer!";
     }
     ob_end_flush();
 ?>
@@ -36,7 +36,7 @@
 
 </head>
 <body>
-    <?php require('admin_template.php'); ?>
+    <?php require('officer_template.php'); ?>
     <!--Create alert message-->
     <div class="container">
         <?php if(isset($_SESSION['message'])&& $_GET['success'] == 1): ?>   
@@ -96,7 +96,7 @@
                                                             </thead>
                                                             <tbody>
                                                                 <?php 
-                                                                    $query = ("SELECT * FROM request WHERE status='check' AND usertype NOT LIKE 'admin';");
+                                                                    $query = ("SELECT * FROM request WHERE status='check' AND usertype NOT LIKE 'admin' AND usertype='Student';");
                                                                     $result = mysqli_query($connect, $query);
                                                                     while($row = $result->fetch_assoc()){ 
                                                                 ?>
@@ -208,10 +208,6 @@
                             <label for="usertype">Create account as</label>
                             <select class="custom-select" id="usertype" name="usertype">
                                 <option value="Student" selected>Student</option>
-                                <option value="President">President</option>
-                                <option value="VP">Vice President</option>
-                                <option value="Treasurer">Treasurer</option>
-                                <option value="Officer">Officer</option>
                             </select>
                         </div>
                         <div class="modal-footer">

@@ -1,6 +1,7 @@
 <?php
-    //
+    ob_start();
     require('../include/request.php');
+    ob_end_flush();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,7 +29,7 @@
     </nav>
     <!--Create alert message-->
     <div class="container">
-        <?php if(isset($_SESSION['message'])): ?>   
+        <?php if(isset($_SESSION['message'])&& $_GET['success'] == 1): ?>   
             <div class="alert alert-success alert-dismissible mt-2" id="success">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
             <?php 
@@ -67,7 +68,7 @@
                     <div class="form-group">
                         <label for="ln">Last name</label>
                         <input type="text" class="form-control" id="ln"  name="last_name"aria-describedby="nameHelp"
-                        autocomplete="off" placeholder="Enter first name" required>
+                        autocomplete="off" placeholder="Enter last name" required>
                     </div>
                     <div class="form-group">
                         <label for="email">Email address</label>
@@ -77,7 +78,7 @@
                     </div>
                     <div class="form-group">
                         <label for="course">Course</label>
-                        <select class="custom-select" id="course" name="course">
+                        <select class="custom-select" id="course" name="course" required>
                             <?php
                                 $result = $connect->query("SELECT * FROM course") or die($connect->error());
                                 while($row = $result->fetch_assoc()):

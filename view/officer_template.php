@@ -28,8 +28,8 @@
                       Management
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navdropdown">
-                        <a class="nav-link" href="manage_fees.php"><i class="fa fa-bank"></i> Manage Withdraw</a>
-                        <a class="nav-link" href="student_assessment.php"><i class="fa fa-bank"></i> Student Assessment</a>
+                        <a class="nav-link" href="officer_withdraw.php"><i class="fa fa-bank"></i> Manage Withdraw</a>
+                        <a class="nav-link" href="officer_assessment.php"><i class="fa fa-bank"></i> Student Assessment</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown">
@@ -37,14 +37,18 @@
                       School
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navdropdown">
-                        <a class="nav-link" href="walkin_user.php"><i class="fa fa-user-alt"></i> Add User</a>
-                        <a class="nav-link" href="announcement.php"><i class="fa fa-user-alt"></i> Add Announcement</a>
+                        <a class="nav-link" href="officer_walkin.php"><i class="fa fa-user-alt"></i> Add User</a>
+                        <a class="nav-link" href="officer_announcement.php"><i class="fa fa-user-alt"></i> Add Announcement</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navdropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Account
-                    </a>
+                    <?php if($_SESSION['usertype']): ?>
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-user-alt"></i> Welcome, 
+                            <?php echo $_SESSION['usertype']; ?>
+                        </a>
+                    <?php endif; ?>
                     <div class="dropdown-menu sign-out" aria-labelledby="navdropdown">
                         <a class="nav-link" href="login.php?logout=1"><i class="fa fa-sign-out-alt"></i> Logout</a>
                     </div>

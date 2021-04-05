@@ -1,9 +1,15 @@
 <?php
-    include("../include/userlogin.php");
+    ob_start();
+    if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
+        include("../include/userlogin.php");
     if($_SESSION['usertype'] != "admin"){
-        header("location: login.php?success=1");
         $_SESSION['message'] = "You cannot access only admin is allowed!";
+        header("location: login.php?success=1");
     }
+    ob_end_flush();
 ?>
 <!doctype html>
 <html lang="en">
@@ -52,54 +58,32 @@
                 </div>
                 <div class="col-md-5">
                     <div class="main-box mb-orange">
-                        <a href="#">
-                            <i class="fa fa-file-text fa-5x"></i>
+                        <a href="active_users.php">
+                            <i class="fa fa-user-circle fa-5x"></i>
                             <h5>
-                                Promissory
+                                Active users
                             </h5>
                         </a>
                     </div>
                 </div>
-            </div>
+            </div>   
             <div class="row">
+                <div class="col-md-5">
+                    <div class="main-box mb-orange">
+                        <a href="walkin_user.php">
+                            <i class="fa fa-user-alt fa-5x"></i>
+                            <h5>
+                                Add User
+                            </h5>
+                        </a>
+                    </div>
+                </div>
                 <div class="col-md-5">
                     <div class="main-box mb-orange">
                         <a href="fees.php">
                             <i class="fa fa-money-check fa-5x"></i>
                             <h5>
                                 Fees
-                            </h5>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-5">
-                    <div class="main-box mb-orange">
-                        <a href="school_year.php">
-                            <i class="fa fa-calendar-alt fa-5x"></i>
-                            <h5>
-                                School Year
-                            </h5>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-5">
-                    <div class="main-box mb-orange">
-                        <a href="year_lvl.php">
-                            <i class="fa fa-calendar-plus fa-5x"></i>
-                            <h5>
-                                Year level
-                            </h5>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-5">
-                    <div class="main-box mb-orange">
-                        <a href="admin_create.html">
-                            <i class="fa fa-user-alt fa-5x"></i>
-                            <h5>
-                                Add User
                             </h5>
                         </a>
                     </div>
@@ -118,10 +102,54 @@
                 </div>
                 <div class="col-md-5">
                     <div class="main-box mb-orange">
-                        <a href="semester.php">
-                            <i class="fa fa-plus-square fa-5x"></i>
+                        <a href="#">
+                            <i class="fa fa-file-text fa-5x"></i>
                             <h5>
-                                Semester
+                                Promissory
+                            </h5>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="main-box mb-orange">
+                        <a href="withdraw.php">
+                            <i class="fa fa-bank fa-5x"></i>
+                            <h5>
+                                Withdraw Management
+                            </h5>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="main-box mb-orange">
+                        <a href="announcement.php">
+                            <i class="fa fa-bullhorn fa-5x"></i>
+                            <h5>
+                                Announcement
+                            </h5>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="main-box mb-orange">
+                        <a href="school_year.php">
+                            <i class="fa fa-calendar-alt fa-5x"></i>
+                            <h5>
+                                School Year
+                            </h5>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="main-box mb-orange">
+                        <a href="year_lvl.php">
+                            <i class="fa fa-calendar-plus fa-5x"></i>
+                            <h5>
+                                Year level
                             </h5>
                         </a>
                     </div>
@@ -140,26 +168,16 @@
                 </div>
                 <div class="col-md-5">
                     <div class="main-box mb-orange">
-                        <a href="withdraw.php">
-                            <i class="fa fa-bank fa-5x"></i>
+                        <a href="semester.php">
+                            <i class="fa fa-plus-square fa-5x"></i>
                             <h5>
-                                Withdraw Management
+                                Semester
                             </h5>
                         </a>
                     </div>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-5">
-                    <div class="main-box mb-orange">
-                        <a href="announcement.php">
-                            <i class="fa fa-bullhorn fa-5x"></i>
-                            <h5>
-                                Announcement
-                            </h5>
-                        </a>
-                    </div>
-                </div>
                 <div class="col-md-5">
                     <div class="main-box mb-orange">
                         <a href="section.php">

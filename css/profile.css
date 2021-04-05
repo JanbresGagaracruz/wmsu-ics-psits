@@ -1,0 +1,142 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+*{
+    padding: 0px;
+    margin: 0px;
+}
+body{
+    background-color: #77aa77;
+        background-image: url("../assets/Abstract-Envelope.svg");
+        background-attachment: fixed;
+        background-size: cover;
+}
+.top-card{
+    background-color: #ddffaa;
+}
+h2{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    color: #43A047;
+}
+/*Navbar*/
+.navbar{
+    background-color: #43A047;
+}
+.navbar div img{
+    height: 50px;
+    width: 50px;
+}
+.navbar span{
+    vertical-align: middle;
+    font-family: 'Poppins', sans-serif;
+        color: #fff;
+}
+footer .navbar{
+    vertical-align: middle;
+    justify-content: center;
+}
+/*Navbar*/
+.navbar-nav .nav-item > a:hover{
+    color: #124114;
+}
+.navbar .header span{
+    vertical-align: middle;
+    font-family: 'Poppins', sans-serif;
+}
+.navbar-nav .nav-item a{
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
+}
+.nav-item a{
+    color: #fff;
+}
+.navbar-toggler-icon{
+    color:#fff; 
+    height: 1.2em;
+}
+.navbar-toggler {
+    font-size: 2rem;
+    background-color: transparent;
+    border: 1px solid transparent;
+        border-radius: .25rem;
+}
+.dropdown-menu{
+    background-color: #43A047;
+}
+.dropdown-menu  > a:hover {
+    background-color: #124114; 
+}
+.dropdown-menu  > li:hover {
+    background-color: #124114;
+}
+
+/*User profile*/
+.card-user-profile{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.user-info{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+
+} 
+/*notification*/
+.notifications {
+    width: 300px;
+    height: 0px;
+    opacity: 0;
+    position: absolute;
+    right: 62px;
+    border-radius: 5px 0px 5px 5px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    z-index: 99999;
+  }
+  
+  .notifications h2 {
+    font-size: 14px;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    color: #999
+  }
+  
+  .notifications h2 span {
+    color: #f00
+  }
+  
+  .notifications-item {
+    display: flex;
+    border-bottom: 1px solid #eee;
+    padding: 6px 9px;
+    margin-bottom: 0px;
+    cursor: pointer
+  }
+  
+  .notifications-item:hover {
+    background-color: #eee
+  }
+  .notifications-item .text h4 {
+    color: #777;
+    font-size: 16px;
+    margin-top: 3px
+  }
+  
+  .notifications-item .text p {
+    color: #aaa;
+    font-size: 12px
+  }
+@media (max-width: 576px) { 
+    .d-flex{
+        justify-content: center;
+    }
+    .navbar-toggler {
+        font-size: 1.5rem;
+      }
+    .ics{
+        font-size: 12px;
+    }
+}
+

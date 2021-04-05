@@ -1,5 +1,5 @@
 <?php
-    define('Username','icspsits@gmail.com');
-    define('Password','Wmsuics_psits');
+    define('Username','wmsupsits886@gmail.com');
+    define('Password','katalepsy123');
     define('Host','smtp.gmail.com')
 ?>

@@ -1,16 +1,16 @@
 <?php
     ob_start();
-    include('../include/submit_file.php');
+    require('../include/create_withdraw.php');
     include("../include/userlogin.php");
     if(!isset($_SESSION)) 
     { 
         session_start(); 
     } 
-    if($_SESSION['usertype'] != "admin"){
+    if($_SESSION['usertype'] != "1"){
         header("location: login.php?success=1");
-        $_SESSION['message'] = "You cannot access only admin is allowed!";
+        $_SESSION['message'] = "You cannot access this page unless you are a officer!";
     }
-   ob_end_flush();
+    ob_end_flush();
 ?>
 <!doctype html>
 <html lang="en">
@@ -31,17 +31,16 @@
     <!--Custom CSS-->
     <link rel="shortcut icon" href="../assets/ics_icon.ico">
     <link rel="stylesheet" href="../css/multi.css">
-<!--     <link rel="stylesheet" href="../css/uploadfile.css"> -->
 
-    <title>Upload Announcement | Institute of Computer Studies</title>
+    <title>Withdraw Management | Institute of Computer Studies</title>
 
 </head>
 
 <body>
-    <?php require('admin_template.php'); ?>
+    <?php require('officer_template.php'); ?>
     <!--Create alert message-->
     <div class="container">
-        <?php if(isset($_SESSION['message']) && $_GET['success'] == 1): ?>   
+        <?php if(isset($_SESSION['message'])&& $_GET['success'] == 1): ?>   
             <div class="alert alert-success alert-dismissible mt-2" id="success">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
             <?php 
@@ -50,6 +49,7 @@
             ?>
         <?php endif ?>
     </div>
+    <!--end of alert message-->
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-12 pt-3 pb-3">
@@ -57,7 +57,7 @@
                     <div class="card-body ">
                         <div class="d-flex">
                             <div class="card-title">
-                                <h2>Upload Announcement</h2>
+                                <h2>Track Withdraw history</h2>
                             </div>
                         </div>
                     </div>
@@ -66,37 +66,44 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-sm-10 col-md-12">
                                     <div class="card user-profile">
                                         <div class="card-body">
                                             <form>
                                                 <div id="regMenu" class="animate__animated animate__fadeInDown">
                                                     <div class="form-group">
-                                                        <h4>New Announcement</h4>
+                                                        <h4>Withdraw Management</h4>
                                                     </div>
-                                                    <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#announce">
-                                                        Create Announcement
+                                                    <button type="button" class="btn btn-primary  mb-2"
+                                                        data-toggle="modal" data-target="#withdraw_modal">
+                                                        Add history
                                                     </button>
                                                     <div class="table_wrapper">
                                                         <table id="table" class="table table-hover table-responsive">
                                                             <thead>
                                                                 <tr>
-                                                                    <th scope="col">File</th>
-                                                                    <th scope="col">Title</th>
+                                                                    <th scope="col">Transaction no.</th>
+                                                                    <th scope="col">Amount</th>
+                                                                    <th scope="col">Date</th>
+                                                                    <th scope="col">Withdrawn by</th>
+                                                                    <th scope="col">Receipt</th>
                                                                     <th scope="col">Action</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
                                                                 <?php 
-                                                                    $query = ("SELECT * FROM file_upload");
+                                                                    $query = ("SELECT * FROM withdraw");
                                                                     $result = mysqli_query($connect, $query);
                                                                     while($row = $result->fetch_assoc()){ 
                                                                 ?>
                                                                 <tr>
+                                                                    <td><?php echo $row['transaction']; ?></td>
+                                                                    <td><?php echo $row['amount']; ?></td>
+                                                                    <td><?php echo $row['date']; ?></td>
                                                                     <td><?php echo $row['name']; ?></td>
-                                                                    <td><?php echo $row['file_name']; ?></td>
+                                                                    <td><?php echo $row['img']; ?></td>
                                                                     <td>
-                                                                        <a href="../include/submit_file.php?delete=<?php echo $row['id'] ?>" class="btn btn-danger btn-xs" id="delete" name="delete">
+                                                                        <a href="../include/create_withdraw.php?delete=<?php echo $row['id'] ?>" class="btn btn-danger btn-xs" id="delete" name="delete">
                                                                             <span class="fas fa-trash-alt"></span>
                                                                         </a>
                                                                     </td>
@@ -118,39 +125,50 @@
             </div>
         </div>
     </div>
-    <!-- Modal -->
-    <div class="modal fade" id="announce" tabindex="-1" role="dialog" aria-labelledby="announcemodal" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-            <h5 class="modal-title" id="announcemodal">Create Announcement</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
+
+    <div class="modal fade" id="withdraw_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add Withdraw history</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form method="POST" enctype="multipart/form-data" action="withdraw.php" id="withdraw_form" >
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="transaction">Transaction no.</label>
+                            <input type="text" class="form-control" id="transaction" name="transaction" placeholder="Enter transaction no." autocomplete="off">
+                            <div id="transaction_validation"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="amount">Amount</label>
+                            <input type="text" class="form-control" id="amount" name="amount" placeholder="Enter amount"autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <label for="date">Date</label>
+                            <input type="date" class="form-control" id="date" name="date" min="2021-03-23"placeholder="Enter Date"autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Withdrawn by</label>
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Enter name"autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <label for="file">Receipt</label>
+                            <input type="file" class="form-control" id="file" name="file" required>
+                            <div id="image_validation"></div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary" name="create" name="create">Submit</button>
+                    </div>
+                </form>
             </div>
-            <form action="announcement.php" method="post" enctype="multipart/form-data" id="announce_form">
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="name">File name</label>
-                        <input type="text" class="form-control" id="name" name="name" placeholder="Enter title">
-                        <div id="title_validation"></div>
-                    </div>
-                    <div class="form-group">
-                        <label for="file">File</label>
-                        <input type="file" class="form-control" id="file" name="file" required>
-                        <small class="text-success">Only PDF file are accepted.</small>
-                        <div id="filename_validation"></div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary submitBtn" name="submit">Submit</button>
-                </div>
-            </form>
-        </div>
         </div>
     </div>
-   
+
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -165,10 +183,9 @@
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>  
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
     <script src="../js/datable.js"></script>
     <script src="../js/alert-slide.js"></script>
     <script src="../js/validation.js"></script>
-
 </body>
 </html>

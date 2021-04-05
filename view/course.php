@@ -1,9 +1,16 @@
 <?php
+    ob_start();
     require("../include/create_course.php");
+    include("../include/userlogin.php");
+    if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
     if($_SESSION['usertype'] != "admin"){
         header("location: login.php?success=1");
         $_SESSION['message'] = "You cannot access only admin is allowed!";
     }
+    ob_end_flush();
 ?>
 <!doctype html>
 <html lang="en">

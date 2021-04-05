@@ -1,9 +1,12 @@
 <?php
+    ob_start();
     include('../include/userlogin.php');
+    include('../include/submit_file.php');
     if($_SESSION['usertype'] != 'Student'){
         header('location: login.php?success=1');
         $_SESSION['message'] = "Access denied make sure you log in first.";
     }
+    ob_end_flush();
 ?>
 
 <!doctype html>
@@ -36,67 +39,9 @@
             <span class="navbar-text" id="headertitle1">Technology Students</span>
         </div>
     </div>
-    <nav class="navbar navbar-expand-lg sticky-top">
-        <div class="header">
-            <a href="../menu/_menu.html"><img src="../assets/ics.png" alt="ICSLOGO"></a>
-            <span class="navbar-text ics">Institute of Computer Studies</span>
-        </div>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon">
-                <i class="fas fa-bars"></i>
-            </span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav dropdown ml-auto">
-                <li class="nav-item ">
-                    <a class="nav-link" href="homepage.php"><i class="fa fa-home"></i> Home</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fa fa-money-bill"></i> Payment
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="nav-link" href="/menu/payment/onlinepayment.html"><i class="fa fa-credit-card"></i> Payment</a>
-                        <a class="nav-link" href="/menu/payment/promissory.html"><i class="fa fa-id-card"></i> Promissory</a>
-                    </div>
-                   
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#" id="bell"><i class="fa fa-bell"></i> Notification</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fa fa-user-alt"></i> Account
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <?php if($_SESSION['first_name']): ?>
-                            <a class="dropdown-item" href="/menu/student/student.html">
-                            <i class="fa fa-id-badge"></i> 
-                            <?php echo $_SESSION['first_name']; ?></a>
-                        <?php endif; ?>
-                        <a class="dropdown-item" href="/menu/student/student.html"><i class="fa fa-id-badge"></i> User Profile</a>
-                    </div>
-                </li>
-                <li class="nav-item ">
-                    <a class="nav-link" href="login.php?logout=1"><i class="fa fa-sign-out-alt"></i> Log out</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-    <!--Notification-->
-    <div class="notifications" id="box">
-        <h2>Notifications <span>( 1 )</span>
-        </h2>
-        <div class="notifications-item">
-            <div class="text">
-                <h4>Promissory Due date</h4>  
-                <p><a href="../menu/payment/payment_due.html">Lorem ipsum dolor sit amet consectetur adipisicing elit.</a></p>
-            </div>
-        </div>
-    </div>
+
+    <?php require('homepage_template.php');?>
+    
     <!--Carousel-->
     <div class="container">
         <div class="row">
@@ -136,17 +81,18 @@
                     <div class="col-md-6 animate__animated animate__fadeInLeft">
                         <div id="announcement">
                             <h2 class="section-title">Announcements</h2>
+                            <?php 
+                                $query = ("SELECT * FROM file_upload");
+                                $result = mysqli_query($connect, $query);
+                                while($row = $result->fetch_assoc()){ 
+                            ?>
                             <ul class="list-group">
                                 <li class="list-group-item" id="announcement-post">
-                                    <a href="files/Financial Report.pdf">Financial Report</a>
-                                </li>
-                                <li class="list-group-item" id="announcement-post">
-                                    <a href="files/Financial Report.pdf">Financial Report</a>
-                                </li>
-                                <li class="list-group-item" id="announcement-post">
-                                    <a href="files/Financial Report.pdf">Financial Report</a>
+                                    <a href="../include/submit_file.php?file_id=<?php echo $row['id'] ?>"><?php echo $row['name'];?></a>
                                 </li>
                             </ul>
+                                
+                            <?php }  ?>
                         </div>
                     </div>
                     <div class="col-md-6 animate__animated animate__fadeInRight">
@@ -262,7 +208,7 @@
             </div>
             <div class="modal-body aboutus">
                 <div class="row justify-content-center">
-                    <img src="../assets/default.png" alt="pixelslogo" class="companylogo">
+                    <img src="../assets/pixels.png" alt="pixelslogo" class="companylogo">
                 </div>
                 <div class="row justify-content-center p-4">
                     <h3>Vision</h3>
@@ -304,7 +250,7 @@
                 <li class="list-inline-item"><a href="#">Home</a></li>
                 <li class="list-inline-item"><a href="#" data-toggle="modal" data-target="#about">About</a></li>
             </ul>
-            <p class="copyright">PIXELS COMPANY © 2020</p>
+            <p class="copyright mb-2">PIXELS COMPANY © 2020</p>
         </footer>
     </div>
     <!-- Optional JavaScript -->

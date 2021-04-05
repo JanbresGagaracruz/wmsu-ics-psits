@@ -56,7 +56,7 @@
             <div class="row">
                 <div class="col">
                     <div class="jumbotron">
-                        <p>Account Approval</p>
+                        <p>Active accounts</p>
                     </div>
                     <div class="card">
                         <div class="card-header">
@@ -67,46 +67,39 @@
                             <table class="table table-hover table-responsive" id="table">
                                     <thead>
                                         <tr>
-                                            <th>Student ID</th>
+                                            <th>Student id</th>
                                             <th>First Name</th>
                                             <th>Last Name</th>
-                                            <th>Middle Name</th>
                                             <th>Email</th>
                                             <th>Course</th>
-                                            <th>Year</th>
-                                            <th>Gender</th>
                                             <th>User type</th>
-                                            <th>Password</th>
                                             <th>Date</th>
+                                            <th>Status</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php 
-                                            $query = ("SELECT * FROM request WHERE status='uncheck';");
+                                            $query = ("SELECT * FROM request WHERE usertype NOT LIKE 'admin' ");
                                             $result = mysqli_query($connect, $query);
                                             while($row = $result->fetch_assoc()){ 
                                         ?>
-                                        <tr><?php if($row['status'] == 'uncheck'){ ?>
-                                            <?php } ?>
+                                        <tr>
                                         
                                             <td><?php echo $row['student_id']; ?></td>
                                             <td><?php echo $row['first_name']; ?></td>
                                             <td><?php echo $row['last_name']; ?></td>
-                                            <td><?php echo $row['middle_name']; ?></td>
                                             <td><?php echo $row['email']; ?></td>
                                             <td><?php echo $row['course']; ?></td>
-                                            <td><?php echo $row['year']; ?></td>
-                                            <td><?php echo $row['gender']; ?></td>
                                             <td><?php echo $row['usertype']; ?></td>
-                                            <td><?php echo $row['password']; ?></td>
                                             <td><?php echo $row['date']; ?></td>
+                                            <td><?php echo $row['status']; ?></td>
                                             <td>
-                                                <a href="../include/approval.php?accept=<?php echo $row['id']; echo $row['email'];?>"class="btn btn-success btn-xs" type="submit"id="accept" name="accept">
-                                                    <span class="fas fa-check"> </span>
+                                                <a href="../include/active_account.php?stat_on=<?php echo $row['id'] ?>" class="btn btn-primary btn-xs" id="stat_on" name="stat_on">
+                                                    <span class="fas fa-toggle-on"></span>
                                                 </a>
-                                                <a href="../include/approval.php?decline=<?php echo $row['id'] ?>" class="btn btn-danger btn-xs" id="decline" name="decline">
-                                                    <span class="fas fa-times"></span>
+                                                <a href="../include/active_account.php?stat_off=<?php echo $row['id'] ?>" class="btn btn-danger btn-xs" id="stat_off" name="stat_off">
+                                                    <span class="fas fa-toggle-off"></span>
                                                 </a>
                                             </td>
                                         </tr>

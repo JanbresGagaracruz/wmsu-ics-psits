@@ -1,4 +1,9 @@
 <?php
+    ob_start();
+    if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
     //create a request account verification
     include("database.php");
 
@@ -56,10 +61,10 @@
         $sql = "INSERT INTO request (student_id, first_name, last_name,middle_name,email,course,year,gender,usertype,password,status,assessment_status,payment_status) 
         VALUES ('$student_id','$first_name','$last_name','$middle_name','$email','$course','$year','$gender','$usertype','$password','$status','$assessment_status','$payment_status')";
         mysqli_query($connect, $sql);
-        header('location: ../view/registration.php');
-        $_SESSION['message'] = "Your account request is now pending for approval. Please wait for confirmation. Thank you. <a href='process_login.php'>Login instead?</a>";
+        header('location: ../view/registration.php?success=1');
+        $_SESSION['message'] = "Your account request is now pending for approval. Please wait for confirmation. Thank you. <a href='../view/login.php'>Login instead?</a>";
     }
-
+    ob_end_flush();
 ?>
 
 

@@ -1,4 +1,9 @@
 <?php
+    ob_start();
+    if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
     include('database.php');
 
     if(isset($_POST['create_local'])){
@@ -52,8 +57,9 @@
     //delete school year
     if(isset($_GET['delete'])){
         $id = $_GET['delete'];
-        $result = $connect->query("SELECT * FROM fees WHERE id = '$id';") or die($connect->error());
-        if(count($result) == 1){
+        $result = "SELECT * FROM fees WHERE id = '$id';";
+        $result = mysqli_query($connect,$query);
+        if(mysqli_num_rows($result) == 1){
             $row = $result->fetch_array();
             $id = $row['id']; 
             $fee_name = $row['fee_name'];  
@@ -67,5 +73,5 @@
             }
         }  
     }
-
+    ob_end_flush();
 ?>

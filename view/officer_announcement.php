@@ -6,11 +6,11 @@
     { 
         session_start(); 
     } 
-    if($_SESSION['usertype'] != "admin"){
+    if($_SESSION['usertype'] != "1"){
         header("location: login.php?success=1");
-        $_SESSION['message'] = "You cannot access only admin is allowed!";
+        $_SESSION['message'] = "You cannot access this page unless you are a officer!";
     }
-   ob_end_flush();
+    ob_end_flush();
 ?>
 <!doctype html>
 <html lang="en">
@@ -38,7 +38,7 @@
 </head>
 
 <body>
-    <?php require('admin_template.php'); ?>
+    <?php require('officer_template.php'); ?>
     <!--Create alert message-->
     <div class="container">
         <?php if(isset($_SESSION['message']) && $_GET['success'] == 1): ?>   

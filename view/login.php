@@ -38,6 +38,7 @@
                         unset($_SESSION['message']);
                 ?>
             <?php endif ?>
+            </div>
         </div>
     </div>
     <!--Center-->

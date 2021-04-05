@@ -1,4 +1,9 @@
 <?php
+    ob_start();
+    if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
     include('database.php');
 
     if(isset($_POST["create"]) && !empty($_FILES["file"]["name"])){
@@ -62,4 +67,5 @@
             }
         }  
     }
+    ob_end_flush();
 ?>

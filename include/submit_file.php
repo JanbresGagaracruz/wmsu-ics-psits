@@ -1,5 +1,10 @@
 <?php
-// Include the database configuration file
+    ob_start();
+    if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
+    // Include the database configuration file
     include('database.php');
     //check the availability of file name
     if(isset($_POST['name']))
@@ -57,7 +62,7 @@
             $row = $result->fetch_array();
             $id = $row['id'];  
             $file_name = $row['file_name']; 
-            $targetDir = "../uploads/";
+            $targetDir = "../pdf_file/";
             //concatenate file name and upload directory to delete the file inside the folder
             $targetFilePath = $targetDir . $file_name;
             $check=$connect->query("DELETE FROM file_upload WHERE id = '$id';") or die($connect->error);
@@ -76,4 +81,29 @@
             }
         }  
     }
+
+    if (isset($_GET['file_id'])) {
+        $id = $_GET['file_id'];
+
+        // fetch file to download from database
+        $sql = "SELECT * FROM file_upload WHERE id=$id";
+        $result = mysqli_query($connect, $sql);
+
+        $file = mysqli_fetch_assoc($result);
+        $filepath = '../pdf_file/' . $file['file_name'];
+
+        if (file_exists($filepath)) {
+            header('Content-Description: File Transfer');
+            header('Content-Type: application/pdf');
+            header('Content-Disposition: attachment; filename=' . basename($filepath));
+            header('Expires: 0');
+            header('Cache-Control: must-revalidate');
+            header('Pragma: public');
+            header('Content-Length: ' . filesize('../pdf_file/' . $file['file_name']));
+            readfile('../pdf_file/' . $file['file_name']);
+            flush();
+            exit; 
+        }
+    }
+    ob_end_flush();
 ?>

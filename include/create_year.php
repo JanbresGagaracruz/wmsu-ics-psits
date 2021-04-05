@@ -1,4 +1,9 @@
 <?php
+    ob_start();
+    if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
     include("database.php");
 
     //create a new school year
@@ -70,4 +75,5 @@
             }
         }  
     }
+    ob_end_flush();
 ?>
