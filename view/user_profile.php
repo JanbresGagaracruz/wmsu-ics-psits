@@ -29,168 +29,172 @@
     <?php require('homepage_template.php');?>
 
     <!--top section-->
-    <div class="col-12 pt-3 pb-3">
-        <div class="card top-card">
-            <div class="card-body ">
-                <div class="d-flex">
-                    <div class="card-title">
-                        <h2>Student Profile</h2>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <section id="region-main">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-sm-7 col-md-6">
-                            <div class="card user-profile">
-                                <div class="card-body">
-                                    <div class="card-user-profile">
-                                        <img src="../assets/user_profile.png" class="user-img">
-                                    </div>
-                                    <div class="user-info">
-                                        <?php
-                                            $student_id = $_SESSION['id'];
-                                            $query = ("SELECT * FROM request WHERE id = '$student_id' ");
-                                            $result = mysqli_query($connect, $query);
-                                            while($row = $result->fetch_assoc()){ 
-                                        ?>
-                                            <strong><h3><?php echo $row['email']; ?></h1></strong>
-                                            <small>Name: <?php echo $row['first_name']; ?> <?php echo $row['last_name']; ?> <?php echo $row['middle_name']; ?></small>
-                                            <small>Course: <?php echo $row['course']; ?></small>
-                                        <?php } ?>
-                                        <button class="btn btn-primary" data-toggle="modal"data-target="#yearlvl"><i class="fas fa-edit"></i> Update profile</button>
-                                    </div>
-                                </div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-10 pt-3 pb-3">
+                <div class="card top-card">
+                    <div class="card-body ">
+                        <div class="d-flex">
+                            <div class="card-title">
+                                <h2>Student Profile</h2>
                             </div>
                         </div>
-                        
-                        <div class="col-sm-12 col-md-6">
-                            <div class="card">
-                                <div class="card-body">
-                                    <ul class="nav nav-tabs">
-                                        <li class="nav-item">
-                                            <a class="nav-link active" data-toggle="tab" href="#history" role="tab"
-                                                aria-controls="history" aria-selected="true"><strong>Payment History</strong></a>
-                                        </li>
-                                    </ul>
-                                    <div class="tab-content" id="mypublic-tab">
-                                        <div class="tab-pane fade active show" id="history" role="tabpanel"
-                                            aria-labelledby="paymenthistory-tab">
-                                            <div id="course-9" class="card mt-1">
-                                                <div class="card-body row">
-                                                    <table id="table" class="table table-hover table-responsive">
-                                                        <thead>
-                                                            <tr>
-                                                                <th scope="col">School Year</th>
-                                                                <th scope="col">StudentID</th>
-                                                                <th scope="col">First name</th>
-                                                                <th scope="col">Middle name</th>
-                                                                <th scope="col">Last name</th>
-                                                                <th scope="col">Course</th>
-                                                                <th scope="col">Section</th>
-                                                                <th scope="col">Year level</th>
-                                                                <th scope="col">Semester</th>
-                                                                <th scope="col">School fees</th>
-                                                                <th scope="col">Total payment</th>
-                                                                <th scope="col">Payment type</th>
-                                                                <th scope="col">Amount</th>
-                                                                <th scope="col">Current balance</th>
-                                                                <th scope="col">Payment Status</th>
-                                                                <th scope="col">Date</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td>2020-2021</td>
-                                                                <td>BG201803394</td>
-                                                                <td>Janbres</td>
-                                                                <td>Molino</td>
-                                                                <td>Gagaracruz</td>
-                                                                <td>Computer Science</td>
-                                                                <td>B</td>
-                                                                <td>1</td>
-                                                                <td>1</td>
-                                                                <td>ICS FEST, University Digest</td>
-                                                                <td>280</td>
-                                                                <td>Full</td>
-                                                                <td>280</td>
-                                                                <td>0</td>
-                                                                <td>PAID</td>
-                                                                <td>1/23/2021</td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
+                    </div>
+                </div>
+                <section id="region-main">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-7 col-md-12">
+                                    <div class="card user-profile">
+                                        <div class="card-body">
+                                            <div class="card-user-profile">
+                                                <img src="../assets/user_profile.png" class="user-img">
+                                            </div>
+                                            <div class="user-info">
+                                                <?php
+                                                    $student_id = $_SESSION['id'];
+                                                    $query = ("SELECT * FROM request WHERE id = '$student_id' ");
+                                                    $result = mysqli_query($connect, $query);
+                                                    while($row = $result->fetch_assoc()){ 
+                                                ?>
+                                                    <strong><h3><?php echo $row['email']; ?></h1></strong>
+                                                    <small>Name: <?php echo $row['first_name']; ?> <?php echo $row['last_name']; ?> <?php echo $row['middle_name']; ?></small>
+                                                    <small>Course: <?php echo $row['course']; ?></small>
+                                                <?php } ?>
+                                                <button class="btn btn-primary" data-toggle="modal"data-target="#yearlvl"><i class="fas fa-edit"></i> Update profile</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-sm-12 col-md-12 mt-3">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <ul class="nav nav-tabs">
+                                                <li class="nav-item">
+                                                    <a class="nav-link active" data-toggle="tab" href="#history" role="tab"
+                                                        aria-controls="history" aria-selected="true"><strong>Payment History</strong></a>
+                                                </li>
+                                            </ul>
+                                            <div class="tab-content" id="mypublic-tab">
+                                                <div class="tab-pane fade active show" id="history" role="tabpanel"
+                                                    aria-labelledby="paymenthistory-tab">
+                                                    <div id="course-9" class="card mt-1">
+                                                        <div class="card-body row">
+                                                            <table id="table" class="table table-hover table-responsive">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th scope="col">School Year</th>
+                                                                        <th scope="col">StudentID</th>
+                                                                        <th scope="col">First name</th>
+                                                                        <th scope="col">Middle name</th>
+                                                                        <th scope="col">Last name</th>
+                                                                        <th scope="col">Course</th>
+                                                                        <th scope="col">Section</th>
+                                                                        <th scope="col">Year level</th>
+                                                                        <th scope="col">Semester</th>
+                                                                        <th scope="col">School fees</th>
+                                                                        <th scope="col">Total payment</th>
+                                                                        <th scope="col">Payment type</th>
+                                                                        <th scope="col">Amount</th>
+                                                                        <th scope="col">Current balance</th>
+                                                                        <th scope="col">Payment Status</th>
+                                                                        <th scope="col">Date</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td>2020-2021</td>
+                                                                        <td>BG201803394</td>
+                                                                        <td>Janbres</td>
+                                                                        <td>Molino</td>
+                                                                        <td>Gagaracruz</td>
+                                                                        <td>Computer Science</td>
+                                                                        <td>B</td>
+                                                                        <td>1</td>
+                                                                        <td>1</td>
+                                                                        <td>ICS FEST, University Digest</td>
+                                                                        <td>280</td>
+                                                                        <td>Full</td>
+                                                                        <td>280</td>
+                                                                        <td>0</td>
+                                                                        <td>PAID</td>
+                                                                        <td>1/23/2021</td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--Promissory note-->
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <ul class="nav nav-tabs">
+                                                <li class="nav-item">
+                                                    <a class="nav-link active" data-toggle="tab" href="#history" role="tab"
+                                                        aria-controls="history" aria-selected="true"><strong>Promissory History</strong></a>
+                                                </li>
+                                            </ul>
+                                            <div class="tab-content" id="mypublic-tab">
+                                                <div class="tab-pane fade active show" id="history" role="tabpanel"
+                                                    aria-labelledby="paymenthistory-tab">
+                                                    <div id="course-9" class="card mt-1">
+                                                        <div class="card-body row">
+                                                            <table id="table" class="table table-hover table-responsive">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th scope="col">School Year</th>
+                                                                        <th scope="col">StudentID</th>
+                                                                        <th scope="col">First name</th>
+                                                                        <th scope="col">Middle name</th>
+                                                                        <th scope="col">Last name</th>
+                                                                        <th scope="col">Course</th>
+                                                                        <th scope="col">Year level</th>
+                                                                        <th scope="col">Semester</th>
+                                                                        <th scope="col">School fees</th>
+                                                                        <th scope="col">Total payment</th>
+                                                                        <th scope="col">Reason</th>
+                                                                        <th scope="col">Current date</th>
+                                                                        <th scope="col">Date to pay</th>
+                                                                        <th scope="col">Payment Status</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td>2020-2021</td>
+                                                                        <td>BG201803394</td>
+                                                                        <td>Janbres</td>
+                                                                        <td>Molino</td>
+                                                                        <td>Gagaracruz</td>
+                                                                        <td>Computer Science</td>
+                                                                        <td>1</td>
+                                                                        <td>1</td>
+                                                                        <td>ICS FEST, University Digest</td>
+                                                                        <td>280</td>
+                                                                        <td>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</td>
+                                                                        <td>1/23/2021</td>
+                                                                        <td>2/23/2021</td>
+                                                                        <td>ONGOING</td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <!--Promissory note-->
-                            <div class="card">
-                                <div class="card-body">
-                                    <ul class="nav nav-tabs">
-                                        <li class="nav-item">
-                                            <a class="nav-link active" data-toggle="tab" href="#history" role="tab"
-                                                aria-controls="history" aria-selected="true"><strong>Promissory History</strong></a>
-                                        </li>
-                                    </ul>
-                                    <div class="tab-content" id="mypublic-tab">
-                                        <div class="tab-pane fade active show" id="history" role="tabpanel"
-                                            aria-labelledby="paymenthistory-tab">
-                                            <div id="course-9" class="card mt-1">
-                                                <div class="card-body row">
-                                                    <table id="table" class="table table-hover table-responsive">
-                                                        <thead>
-                                                            <tr>
-                                                                <th scope="col">School Year</th>
-                                                                <th scope="col">StudentID</th>
-                                                                <th scope="col">First name</th>
-                                                                <th scope="col">Middle name</th>
-                                                                <th scope="col">Last name</th>
-                                                                <th scope="col">Course</th>
-                                                                <th scope="col">Year level</th>
-                                                                <th scope="col">Semester</th>
-                                                                <th scope="col">School fees</th>
-                                                                <th scope="col">Total payment</th>
-                                                                <th scope="col">Reason</th>
-                                                                <th scope="col">Current date</th>
-                                                                <th scope="col">Date to pay</th>
-                                                                <th scope="col">Payment Status</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td>2020-2021</td>
-                                                                <td>BG201803394</td>
-                                                                <td>Janbres</td>
-                                                                <td>Molino</td>
-                                                                <td>Gagaracruz</td>
-                                                                <td>Computer Science</td>
-                                                                <td>1</td>
-                                                                <td>1</td>
-                                                                <td>ICS FEST, University Digest</td>
-                                                                <td>280</td>
-                                                                <td>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</td>
-                                                                <td>1/23/2021</td>
-                                                                <td>2/23/2021</td>
-                                                                <td>ONGOING</td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
-                </div>
+                </section>
             </div>
-        </section>
+        </div>                                       
         <!--END-->
 
         <div class="modal fade" id="yearlvl" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -198,7 +202,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Edit details</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Update details</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -207,23 +211,20 @@
                     <form>
                         <div class="form-group">
                             <div class="form-group">
-                                <img src="/assets/stud.png" class="img-fluid" alt="Responsive image">
-                                <div class="file-loading">
-                                    <input id="input-b9" name="input-b9[]" multiple type="file"'>
-                                </div>
-                                <div id="kartik-file-errors"></div>
+                                <label for="contact">Contact number</label>
+                                <input type="text" class="form-control" id="contact" name="contact" aria-describedby="contact"
+                                    placeholder="Enter contact number">
                             </div>
                             <div class="form-group">
-                                <label for="studentid">Email address</label>
-                                <input type="email" class="form-control" id="studentid" aria-describedby="emailHelp"
-                                    placeholder="Enter email">
+                                <label for="bio">Bio</label>
+                                <input type="text" class="form-control" id="bio" name="bio" aria-describedby="bio"
+                                    placeholder="Enter bio">
                             </div>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Save</button>
+                    <button type="submit" class="btn btn-primary" data-dismiss="modal">Save</button>
                 </div>
             </div>
         </div>
