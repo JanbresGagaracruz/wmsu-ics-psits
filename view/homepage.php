@@ -265,8 +265,7 @@
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
     </script>
     <!--Custom Script-->
-    <script src="../js/_menuview.js"></script>
-    <script src="../js/smoothscroll.js"></script>
-    <script src="../js/notification.js"></script>
+    <script src="../js/view_image.js"></script>
+    <script src="../js/smooth_scroll.js"></script>
 </body>
 </html>
