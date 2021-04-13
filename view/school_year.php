@@ -1,5 +1,16 @@
 <?php
+    ob_start();
     require("../include/create_year.php");
+    include("../include/userlogin.php");
+    if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
+    if($_SESSION['usertype'] != "admin"){
+        header("location: login.php?success=1");
+        $_SESSION['message'] = "You cannot access only admin is allowed!";
+    }
+    ob_end_flush();
 ?>
 <!doctype html>
 <html lang="en">
@@ -27,74 +38,15 @@
 </head>
 
 <body>
-<nav class="navbar navbar-expand-lg sticky-top">
-        <div class="header">
-            <a href="dashboard.php"><img src="../assets/ics.png" alt="icslog"></a>
-            <span class="navbar-text ics">Institute of Computer Studies</span>
-        </div>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon">
-                <i class="fas fa-bars"></i>
-            </span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav dropdown ml-auto">
-                <li class="nav-item ">
-                    <a class="nav-link" href="dashboard.php">Home</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navdropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Fees
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navdropdown">
-                        <a class="nav-link" href="#"><i class="fa fa-file-text"></i> Promissory</a>
-                        <a class="nav-link" href="#"><i class="fa fa-money-check"></i> Payment</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navdropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Management
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navdropdown">
-                        <a class="nav-link" href="account_approval.php"><i class="fa fa-users"></i> Approval</a>
-                        <a class="nav-link" href="#"><i class="fa fa-tasks"></i> Manage Fees</a>
-                        <a class="nav-link" href="#"><i class="fa fa-bank"></i> Manage Withdraw</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navdropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      School
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navdropdown">
-                        <a class="nav-link" href="#"><i class="fa fa-user-alt"></i> Add User</a>
-                        <a class="nav-link" href="#"><i class="fa fa-calendar-alt"></i> Add School year</a>
-                        <a class="nav-link" href="#"><i class="fa fa-calendar-alt"></i> Add Year level</a>
-                        <a class="nav-link" href="#"><i class="fa fa-plus-square"></i> Add Semester</a>
-                        <a class="nav-link" href="course.php"><i class="fa fa-chalkboard"></i> Add Course</a>
-                        <a class="nav-link" href="#"><i class="fa fa-pen-square"></i> Add Section</a>
-                        <a class="nav-link" href="#"><i class="fa fa-bullhorn"></i> Add Announcement</a>  
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navdropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Account
-                    </a>
-                    <div class="dropdown-menu sign-out" aria-labelledby="navdropdown">
-                        <a class="nav-link" href="#"><i class="fa fa-sign-out-alt"></i> Logout</a>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </nav>
+    <?php require('admin_template.php'); ?>
     <!--Create alert message-->
     <div class="container">
-        <?php if(isset($_SESSION['message'])): ?>   
+        <?php if(isset($_SESSION['message']) && $_GET['success'] == 1): ?>   
             <div class="alert alert-success alert-dismissible mt-2" id="success">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
             <?php 
-                    echo $_SESSION['message'];  
-                    unset($_SESSION['message']);
+                echo $_SESSION['message'];  
+                unset($_SESSION['message']);
             ?>
         <?php endif ?>
     </div>
@@ -183,16 +135,17 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="school_year.php" method="POST">
+                <form action="school_year.php" method="POST" id="school_form">
                     <div class="modal-body">
                         <div class="input-group input-daterange">
-                            <input type="text" class="form-control" value="2021-03-013" name="current" id="datepicker"autocomplete="off">
+                            <input type="month" class="form-control" min="2021-03"name="current">
                             <div class="input-group-addon">to</div>
-                            <input type="text" class="form-control" value="2021-03-013"name="end" autocomplete="off">
+                            <input type="month" class="form-control" min="2021-03"name="end">
+                            <div id="school_validation"></div>
                         </div>
                         <input type="hidden" value="closed">
                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary" name="save">Save</button>
+                            <button type="submit" class="btn btn-primary" name="save">Create</button>
                         </div>
                     </div>
                 </form>
@@ -212,11 +165,11 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
     <script src="../js/datable.js"></script>
     <script src="../js/alert-slide.js"></script>  
-    <script src="../js/datepicker.js"></script>  
-    <!-- <script src="../js/jquery.min.js"></script> SCRIPTS ERROR-->  
+    <script src="../js/validation.js"></script> 
 </body>
 </html>

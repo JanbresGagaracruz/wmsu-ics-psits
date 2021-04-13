@@ -4,8 +4,11 @@ $localhost = "localhost";
 $username = "root";
 $password = "";
 $dbname = "psits_system";
-session_start(); //start session
-
+/* 
+$username = "root";
+$password = "";
+$dbname = "psits_system";
+ */
 // create connection
 $connect = new mysqli($localhost, $username, $password, $dbname);
 

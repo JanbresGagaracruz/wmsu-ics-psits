@@ -1,6 +1,6 @@
 <?php
     ob_start();
-    require("../include/create_course.php");
+    require("../include/create_section.php");
     include("../include/userlogin.php");
     if(!isset($_SESSION)) 
     { 
@@ -32,15 +32,15 @@
     <link rel="shortcut icon" href="../assets/ics_icon.ico">
     <link rel="stylesheet" href="../css/multi.css">
 
-    <title>Create Course | Institute of Computer Studies</title>
+    <title>Create New Section | Institute of Computer Studies</title>
 
 </head>
 
 <body>
-    <?php require('admin_template.php'); ?> 
+    <?php require('admin_template.php'); ?>
     <!--Create alert message-->
     <div class="container">
-        <?php if(isset($_SESSION['message']) && $_GET['success'] == 1): ?>   
+        <?php if(isset($_SESSION['message'])&& $_GET['success'] == 1): ?>   
             <div class="alert alert-success alert-dismissible mt-2" id="success">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
             <?php 
@@ -57,7 +57,7 @@
                     <div class="card-body ">
                         <div class="d-flex">
                             <div class="card-title">
-                                <h2>Course</h2>
+                                <h2>Section</h2>
                             </div>
                         </div>
                     </div>
@@ -72,32 +72,30 @@
                                             <form>
                                                 <div id="regMenu">
                                                     <div class="form-group">
-                                                        <h4>Create Course</h4>
+                                                        <h4>Create section</h4>
                                                     </div>
                                                     <button type="button" class="btn btn-primary  mb-2"
-                                                        data-toggle="modal" data-target="#course_modal">
-                                                        Add course
+                                                        data-toggle="modal" data-target="#section_modal">
+                                                        Add section
                                                     </button>
                                                     <div class="table_wrapper">
                                                         <table id="table" class="table table-hover table-responsive">
                                                             <thead>
                                                                 <tr>
-                                                                    <th scope="col">No</th>
-                                                                    <th scope="col">Course</th>
+                                                                    <th scope="col">Section</th>
                                                                     <th scope="col">Action</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
                                                                 <?php 
-                                                                    $query = ("SELECT * FROM course");
+                                                                    $query = ("SELECT * FROM section");
                                                                     $result = mysqli_query($connect, $query);
                                                                     while($row = $result->fetch_assoc()){ 
                                                                 ?>
                                                                 <tr>
-                                                                    <td><?php echo $row['id']; ?></td>
-                                                                    <td><?php echo $row['course']; ?></td>
+                                                                    <td><?php echo $row['sec']; ?></td>
                                                                     <td>
-                                                                        <a href="../include/create_course.php?delete=<?php echo $row['id'] ?>" class="btn btn-danger btn-md course_delete" id="delete" name="delete">
+                                                                        <a href="../include/create_section.php?delete=<?php echo $row['id'] ?>" class="btn btn-danger btn-md course_delete" id="delete" name="delete">
                                                                             <span class="fas fa-times"></span>
                                                                         </a>
                                                                     </td>
@@ -120,21 +118,21 @@
         </div>
     </div>
 
-    <div class="modal fade" id="course_modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal fade" id="section_modal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Add Course</h5>
+                    <h5 class="modal-title">Add section</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="course.php" method="POST" id="course_form">
+                <form action="section.php" method="POST" id="section_form">
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="course">Course</label>
-                            <input type="text" class="form-control" name="course" id="course" placeholder="Enter course" required>
-                            <div id="course_validation"></div>
+                            <label for="section">Section</label>
+                            <input type="text" class="form-control" name="section" id="section" placeholder="Enter section" autocomplete="off">
+                        <div id="section_validation"></div>
                         </div>
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-primary" name="create" id="create">Create</button>
@@ -154,8 +152,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
     <script src="../js/datable.js"></script>
     <script src="../js/validation.js"></script>

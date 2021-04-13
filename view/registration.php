@@ -1,6 +1,7 @@
 <?php
-    //
+    ob_start();
     require('../include/request.php');
+    ob_end_flush();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,7 +29,7 @@
     </nav>
     <!--Create alert message-->
     <div class="container">
-        <?php if(isset($_SESSION['message'])): ?>   
+        <?php if(isset($_SESSION['message'])&& $_GET['success'] == 1): ?>   
             <div class="alert alert-success alert-dismissible mt-2" id="success">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
             <?php 
@@ -67,7 +68,7 @@
                     <div class="form-group">
                         <label for="ln">Last name</label>
                         <input type="text" class="form-control" id="ln"  name="last_name"aria-describedby="nameHelp"
-                        autocomplete="off" placeholder="Enter first name" required>
+                        autocomplete="off" placeholder="Enter last name" required>
                     </div>
                     <div class="form-group">
                         <label for="email">Email address</label>
@@ -76,31 +77,37 @@
                         <div id="availability"></div>
                     </div>
                     <div class="form-group">
-                        <label for="inlineFormCustomSelect">Course</label>
-                        <select class="custom-select" id="inlineFormCustomSelect"  name="course" required>
-                            <option value="CS" selected>Computer Science</option>
-                            <option value="IT">Information Technology</option>
+                        <label for="course">Course</label>
+                        <select class="custom-select" id="course" name="course" required>
+                            <?php
+                                $result = $connect->query("SELECT * FROM course") or die($connect->error());
+                                while($row = $result->fetch_assoc()):
+                            ?>
+                                <option value="<?php echo $row['course']; ?>"><?php echo $row["course"]; ?></option>
+                            <?php endwhile; ?>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="inlineFormCustomSelect">Year</label>
-                        <select class="custom-select" id="inlineFormCustomSelect"  name="year"required>
-                            <option value="1" selected>1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
+                        <label for="year">Year</label>
+                        <select class="custom-select" id="year" name="year" required>
+                            <?php
+                                $result = $connect->query("SELECT * FROM year_lvl") or die($connect->error());
+                                while($row = $result->fetch_assoc()):
+                            ?>
+                                <option value="<?php echo $row['year']; ?>"><?php echo $row["year"]; ?></option>
+                            <?php endwhile; ?>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="gender">Gender</label>
-                        <select class="custom-select" id="inlineFormCustomSelect"  name="gender"required>
+                        <select class="custom-select" id="gender"  name="gender"required>
                             <option value="Male" selected>Male</option>
-                            <option value="Femal">Female</option>
+                            <option value="Female">Female</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="inlineFormCustomSelect">Create account as</label>
-                        <select class="custom-select" id="inlineFormCustomSelect" name="usertype" required>
+                        <label for="usertype">Create account as</label>
+                        <select class="custom-select" id="usertype" name="usertype" required>
                             <option value="Student" selected>Student</option>
                             <option value="President">President</option>
                             <option value="VP">Vice President</option>
@@ -119,7 +126,6 @@
                         </div>
                         <label id="password-error" class="error" for="password"></label>
                     </div>
-                    <input type="hidden" name="status" value="uncheck" >
                     <div class="form-group">
                         <button class="btn btn-success" name="register" id="register"type="submit">Sign up</button>
                     </div>

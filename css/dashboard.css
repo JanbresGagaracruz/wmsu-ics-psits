@@ -1,10 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap');
 *{
     padding: 0px;
     margin: 0px;
 }
 body{
     background-color: #77aa77;
-        background-image: url("../assets/background/Abstract-Envelope.svg");
+        background-image: url("../assets/Abstract-Envelope.svg");
         background-attachment: fixed;
         background-size: cover;
 }
@@ -58,7 +59,7 @@ footer .navbar{
     margin-bottom: 20px;
     font-family: 'Poppins', sans-serif;
         font-weight: 600;
-        color: #124114;
+        color: #ffffff;
 }
 .row .col-md-5{
     margin-bottom: 50px;

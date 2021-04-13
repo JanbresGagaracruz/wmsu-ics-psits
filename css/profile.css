@@ -1,20 +1,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&display=swap');
 *{
     padding: 0px;
     margin: 0px;
 }
 body{
-    font-family: 'Poppins', sans-serif;
     background-color: #77aa77;
         background-image: url("../assets/Abstract-Envelope.svg");
         background-attachment: fixed;
         background-size: cover;
 }
-
+.top-card{
+    background-color: #ddffaa;
+}
+h2{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    color: #43A047;
+}
 /*Navbar*/
 .navbar{
     background-color: #43A047;
@@ -28,6 +30,11 @@ body{
     font-family: 'Poppins', sans-serif;
         color: #fff;
 }
+footer .navbar{
+    vertical-align: middle;
+    justify-content: center;
+}
+/*Navbar*/
 .navbar-nav .nav-item > a:hover{
     color: #124114;
 }
@@ -61,63 +68,66 @@ body{
 .dropdown-menu  > li:hover {
     background-color: #124114;
 }
-.fees{
-    border: 0;
-    border-radius: none;
-}   
-h2 {
-    font-family: 'Poppins', sans-serif;
-    font-weight: 700;
-    color: #43A047;
-    font-size: 30px;
-    margin-bottom: 0;
-}
-.top-card {
-    background-color: #ddffaa;
-}
-.dropdown-menu a {
-    font-size: .75rem;
-}
-.course_delete{
-    display: flow-root;
-}
-.card-title {
-    margin-bottom: 0;
-}
 
-.input-group-addon {
-    padding: .5rem .75rem;
-    margin-bottom: 0;
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.25;
-    color: #495057;
-    text-align: center;
-    background-color: #e9ecef;
-    border: 1px solid rgba(0,0,0,.15);
+/*User profile*/
+.card-user-profile{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-label.error {
-    color: red;
-    font-size: .8rem;
-    display: block;
-}
-input.error {
-    border: 1px dashed red;
-    font-weight: 300;
-    color: red;
-}
-.text-danger,.text-success{
-    font: 'Poppins', sans-serif;
-    font-weight: 400;
-    font-size: .9rem;
-}
-.alert-dismissible .close{
-    padding: .55rem 1.25rem;
-}
-th, td { white-space: nowrap; }
-div.dataTables_wrapper {
-    margin: 0 auto;
-}
+.user-info{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+
+} 
+/*notification*/
+.notifications {
+    width: 300px;
+    height: 0px;
+    opacity: 0;
+    position: absolute;
+    right: 62px;
+    border-radius: 5px 0px 5px 5px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    z-index: 99999;
+  }
+  
+  .notifications h2 {
+    font-size: 14px;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    color: #999
+  }
+  
+  .notifications h2 span {
+    color: #f00
+  }
+  
+  .notifications-item {
+    display: flex;
+    border-bottom: 1px solid #eee;
+    padding: 6px 9px;
+    margin-bottom: 0px;
+    cursor: pointer
+  }
+  
+  .notifications-item:hover {
+    background-color: #eee
+  }
+  .notifications-item .text h4 {
+    color: #777;
+    font-size: 16px;
+    margin-top: 3px
+  }
+  
+  .notifications-item .text p {
+    color: #aaa;
+    font-size: 12px
+  }
 @media (max-width: 576px) { 
     .d-flex{
         justify-content: center;
@@ -129,3 +139,4 @@ div.dataTables_wrapper {
         font-size: 12px;
     }
 }
+
