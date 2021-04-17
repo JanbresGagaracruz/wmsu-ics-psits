@@ -239,13 +239,13 @@ $(document).ready(function () {
     rules: {
       name: {
         minlength: 5,
-        maxlength: 20,
+        maxlength: 15,
       },
     },
     messages: {
       name: {
         minlength: "File name should be at least 5 characters.",
-        maxlength: "File name maximum character is 20.",
+        maxlength: "File name maximum character is 15.",
       },
     },
   });

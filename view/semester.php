@@ -138,7 +138,7 @@
                             <button type="submit" class="btn btn-primary" name="create" id="create">Create</button>
                         </div>
                     </form>
-                    </div>
+                </div>
             </div>
         </div>
     </div>

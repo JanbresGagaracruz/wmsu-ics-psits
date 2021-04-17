@@ -16,10 +16,10 @@
         $query_run=mysqli_query($connect, $sql);
 
         if($query_run){
-            header('location: ../view/school_year.php?success=1');
+            header('location: ../new/school_year.php?success=1');
             $_SESSION['message'] = "You have successfully added a new school year.";
         }else{
-            header('location: ../view/school_year.php?success=1');
+            header('location: ../new/school_year.php?success=2');
             $_SESSION['message'] = "Something went wrong.";
         }
     }
@@ -32,10 +32,10 @@
             $id = $row['id'];
             $check = $connect->query("UPDATE year SET status='open' WHERE id='$id'")or die($connect->error);
             if($check){
-                header('location: ../view/school_year.php?success=1');
+                header('location: ../new/school_year.php?success=1');
                 $_SESSION['message'] = "School year has successfully opened.";
             }else{
-                header('location: ../view/school_year.php?success=1');
+                header('location: ../new/school_year.php?success=2');
                 $_SESSION['message'] = "Something went wrong.";
             }
         }
@@ -49,10 +49,10 @@
             $id = $row['id'];
             $check = $connect->query("UPDATE year SET status='close' WHERE id='$id'")or die($connect->error);
             if($check){
-                header('location: ../view/school_year.php?success=1');
+                header('location: ../new/school_year.php?success=1');
                 $_SESSION['message'] = "School year has successfully closed.";
             }else{
-                header('location: ../view/school_year.php?success=1');
+                header('location: ../new/school_year.php?success=2');
                 $_SESSION['message'] = "Something went wrong.";
             }
         }
@@ -67,10 +67,10 @@
             $id = $row['id'];   
             $check=$connect->query("DELETE FROM year WHERE id= '$id';") or die($connect->error);
             if($check){
-                header('location: ../view/school_year.php?success=1');
+                header('location: ../new/school_year.php?success=2');
                 $_SESSION['message'] = "Successfully deleted.";
             }else{
-                header('location: ../view/school_year.php?success=1');
+                header('location: ../new/school_year.php?success=2');
                 $_SESSION['message'] = "Something went wrong.";
             }
         }  

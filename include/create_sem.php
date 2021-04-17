@@ -13,10 +13,10 @@
         $query_run=mysqli_query($connect, $sql);
 
         if($query_run){
-            header('location: ../view/semester.php?success=1');
+            header('location: ../new/semester.php?success=1');
             $_SESSION['message'] = "You have successfully added a new semester.";
         }else{
-            header('location: ../view/semester.php?success=1');
+            header('location: ../new/semester.php?success=2');
             $_SESSION['message'] = "Something went wrong.";
         }
     }
@@ -30,10 +30,10 @@
             $id = $row['id'];   
             $check=$connect->query("DELETE FROM semester WHERE id= '$id';") or die($connect->error);
             if($check){
-                header('location: ../view/semester.php?success=1');
+                header('location: ../new/semester.php?success=1');
                 $_SESSION['message'] = "Successfully deleted.";
             }else{
-                header('location: ../view/semester.php?success=1');
+                header('location: ../new/semester.php?success=2');
                 $_SESSION['message'] = "Something went wrong.";
             }
         }  

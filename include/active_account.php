@@ -12,12 +12,12 @@
         if(count($result) == 1){
             $row = $result->fetch_array();
             $id = $row['id'];
-            $check = $connect->query("UPDATE request SET status='check' WHERE id='$id'")or die($connect->error);
+            $check = $connect->query("UPDATE request SET status='active' WHERE id='$id'")or die($connect->error);
             if($check){
-                header('location: ../view/active_users.php?success=1');
-                $_SESSION['message'] = "Account has been sucessfully activated.";
+                header('location: ../new/active_user.php?success=1');
+                $_SESSION['message'] = "Account has been successfully activated.";
             }else{
-                header('location: ../view/active_users.php?success=1');
+                header('location: ../new/active_user.php?success=1');
                 $_SESSION['message'] = "Something went wrong.";
             }
         }
@@ -29,12 +29,12 @@
         if(count($result) == 1){
             $row = $result->fetch_array();
             $id = $row['id'];
-            $check = $connect->query("UPDATE request SET status='uncheck' WHERE id='$id'")or die($connect->error);
+            $check = $connect->query("UPDATE request SET status='inactive' WHERE id='$id'")or die($connect->error);
             if($check){
-                header('location: ../view/active_users.php?success=1');
-                $_SESSION['message'] = "Account has been sucessfully deactivated.";
+                header('location: ../new/active_user.php?success=2');
+                $_SESSION['message'] = "Account has been successfully deactivated.";
             }else{
-                header('location: ../view/active_users.php?success=1');
+                header('location: ../new/active_user.php?success=2');
                 $_SESSION['message'] = "Something went wrong.";
             }
         }

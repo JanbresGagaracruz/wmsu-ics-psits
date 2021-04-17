@@ -9,10 +9,10 @@
     $email = "";
     $usertype = "";
     $first_name = "";
-    $status="check";
+    $status="active";
     if(isset($_POST['login'])){
-        $email=$_POST['email'];
-        $password=$_POST['password'];
+        $email = mysqli_real_escape_string($connect,$_POST['email']);
+        $password= mysqli_real_escape_string($connect,$_POST['password']);
         $sql = "SELECT * FROM request WHERE email='$email' AND password='$password' AND status='$status';";
         $result=mysqli_query($connect, $sql);
             if($email == "" && $password == ""){

@@ -13,10 +13,10 @@
         $query_run=mysqli_query($connect, $sql);
 
         if($query_run){
-            header('location: ../view/section.php?success=1');
+            header('location: ../new/section.php?success=1');
             $_SESSION['message'] = "You have successfully added a new section.";
         }else{
-            header('location: ../view/section.php?success=1');
+            header('location: ../new/section.php?success=2');
             $_SESSION['message'] = "Something went wrong.";
         }
     }
@@ -30,16 +30,15 @@
             $id = $row['id'];   
             $check=$connect->query("DELETE FROM section WHERE id= '$id';") or die($connect->error);
             if($check){
-                header('location: ../view/section.php?success=1');
+                header('location: ../new/section.php?success=1');
                 $_SESSION['message'] = "Successfully deleted.";
             }else{
-                header('location: ../view/section.php?success=1');
+                header('location: ../new/section.php?success=2');
                 $_SESSION['message'] = "Something went wrong.";
             }
         }  
     }
 
-    
     if(isset($_POST['section']))
     {
         $section_id = $_POST['section'];

@@ -13,7 +13,7 @@
         $query_run=mysqli_query($connect, $sql);
 
         if($query_run){
-            header('location: ../view/year_lvl.php?success=1');
+            header('location: ../new/year_level.php?success=1');
             $_SESSION['message'] = "You have successfully added a new year level.";
         }
     }
@@ -27,10 +27,10 @@
             $id = $row['id'];   
             $check=$connect->query("DELETE FROM year_lvl WHERE id = '$id';") or die($connect->error);
             if($check){
-                header('location: ../view/year_lvl.php?success=1');
+                header('location: ../new/year_level.php?success=1');
                 $_SESSION['message'] = "Successfully deleted.";
             }else{
-                header('location: ../view/year_lvl.php?success=1');
+                header('location: ../new/year_level.php?success=2');
                 $_SESSION['message'] = "Something went wrong.";
             }
         }  
