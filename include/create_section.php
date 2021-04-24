@@ -20,7 +20,26 @@
             $_SESSION['message'] = "Something went wrong.";
         }
     }
+    if(isset($_POST["id"]))  
+    {  
+         $query = "SELECT * FROM section WHERE id = '".$_POST["id"]."'";  
+         $result = mysqli_query($connect, $query);  
+         $row = mysqli_fetch_array($result);  
+         echo json_encode($row);  
+    } 
 
+    if(isset($_POST['Update'])){
+        $id=$_POST['edit_id'];
+        $section=$_POST['edit_section'];
+        $check=$connect->query("UPDATE section SET sec='$section' WHERE id='$id' ") or die($connect->error());
+        if($check){
+            header('location: ../new/section.php?success=1');
+            $_SESSION['message'] = "You have successfully updated section.";
+        }else{
+            header('location: ../new/section.php?success=2');
+            $_SESSION['message'] = "Something went wrong.";
+        }
+    }
     //delete semester
     if(isset($_GET['delete'])){
         $id = $_GET['delete'];
@@ -53,6 +72,23 @@
             echo "<script>$('#create').prop('disabled',true);</script>"; //set disabled register button
         }else{
             echo "<script>$('#create').prop('disabled',false);</script>"; //set enabled register button
+        }
+    }
+
+    if(isset($_POST['edit_section']))
+    {
+        $section_id = $_POST['edit_section'];
+        $query = "SELECT * FROM section WHERE sec = '$section_id';";
+
+        $result = mysqli_query($connect,$query);
+        if(mysqli_num_rows($result) > 0){
+            echo '<i class="fa fa-times-circle text-danger ml-1"></i>                    
+                    <span p-1 class="text-danger"> 
+                        This section is already existing.
+                    </span> ';
+            echo "<script>$('#Update').prop('disabled',true);</script>"; //set disabled register button
+        }else{
+            echo "<script>$('#Update').prop('disabled',false);</script>"; //set enabled register button
         }
     }
     ob_end_flush();

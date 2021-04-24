@@ -88,6 +88,9 @@
                                             <a href="../include/create_fees.php?delete=<?php echo $row['id'] ?>" class="btn btn-danger btn-xs" id="delete" name="delete">
                                                 <span class="fas fa-trash-alt"></span>
                                             </a>
+                                            <a type="button" name="edit" id="<?php echo $row["id"];?>" class="btn btn-info btn-xs edit_data"> 
+                                                <span class="fas fa-edit"></span>
+                                            </a>
                                         </td>
                                     </tr>
                                     <?php } ?>
@@ -106,7 +109,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Add Local fees</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close fees_close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -128,21 +131,59 @@
                                 <option value="required">required</option>
                             </select>
                         </div>                     
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary" name="create_local">Create</button>
+                        <div class="modal-footer">      
+                            <input type="submit" class="btn btn-primary" id="create_local" name="create_local" value="Create"></input>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-
+    <!-- Edit modal -->
+    <div class="modal fade" id="edit_localfees" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Local fees</h5>
+                    <button type="button" class="close fees_close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form  method="POST" action="fees.php" id="edit_local_form">
+                        <input type="hidden" class="form-control" id="edit_id" name="edit_id">
+                        <div class="form-group">
+                            <label for="fee_name">Local fees</label>
+                            <input type="text" class="form-control" id="edit_fee_name" name="edit_fee_name"placeholder="Enter local fees" >
+                            <div id="edit_fee_validation"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="amount">Amount</label>
+                            <input type="text" class="form-control" id="edit_amount" name="edit_amount"placeholder="Enter Amount" >
+                        </div>
+                        <div class="form-group">
+                            <label for="type">Type</label>
+                            <select class="form-control" id="edit_type"  name="edit_type"required>
+                                <option value="optional" selected>optional</option>
+                                <option value="required">required</option>
+                            </select>
+                        </div>                     
+                        <div class="modal-footer">      
+                            <input type="submit" class="btn btn-primary" id="Update" name="Update" value="Update"></input>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Footer -->
-    <div id="footer-sec">
+    <div id="footer">
        <strong>WMSU ICS PSITS COLLECTION 2020</strong>
     </div>
        
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
     <!--Custom js-->
@@ -153,7 +194,26 @@
     <script src="../js/custom1.js"></script>
     <script src="../js/view_user.js"></script>
     <script src="../js/validation.js"></script>
-
-    
+    <script>
+        $(document).on('click', '.edit_data', function(){  
+        var id = $(this).attr("id");  
+        $.ajax({  
+            url:"../include/create_fees.php",  
+            method:"POST",  
+            data:{id:id},  
+            dataType:"json",  
+            success:function(data){  
+                $('#edit_fee_name').val(data.fee_name);  
+                $('#edit_amount').val(data.amount);  
+                $('#edit_type').val(data.type); 
+                $('#edit_id').val(data.id);
+                $('#edit_localfees').modal('show');
+            }  
+        }); 
+        $('#localfees').on('hidden.bs.modal', function () {
+            $(this).find('form').trigger('reset'); 
+            });
+        }); 
+    </script>                               
 </body>
 </html>

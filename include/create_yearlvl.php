@@ -18,6 +18,25 @@
         }
     }
 
+    if(isset($_POST["id"]))  {  
+        $query = "SELECT * FROM year_lvl WHERE id = '".$_POST["id"]."'";  
+        $result = mysqli_query($connect, $query);  
+        $row = mysqli_fetch_array($result);  
+        echo json_encode($row);  
+    }
+    
+    if(isset($_POST['Update'])){
+        $id=$_POST['edit_id'];
+        $edit_year_lvl=$_POST['edit_year_lvl'];
+        $check=$connect->query("UPDATE year_lvl SET year='$edit_year_lvl' WHERE id='$id' ") or die($connect->error());
+        if($check){
+            header('location: ../new/year_level.php?success=1');
+            $_SESSION['message'] = "You have successfully updated semester.";
+        }else{
+            header('location: ../new/year_level.php?success=2');
+            $_SESSION['message'] = "Something went wrong.";
+        }
+    } 
     //delete semester
     if(isset($_GET['delete'])){
         $id = $_GET['delete'];
@@ -50,6 +69,23 @@
             echo "<script>$('#create').prop('disabled',true);</script>"; //set disabled register button
         }else{
             echo "<script>$('#create').prop('disabled',false);</script>"; //set enabled register button
+        }
+    }
+
+    if(isset($_POST['edit_year_lvl']))
+    {
+        $edit_year_lvl = $_POST['edit_year_lvl'];
+        $query = "SELECT * FROM year_lvl WHERE year = '$edit_year_lvl';";
+
+        $result = mysqli_query($connect,$query);
+        if(mysqli_num_rows($result) > 0){
+            echo '<i class="fa fa-times-circle text-danger ml-1"></i>                    
+                    <span p-1 class="text-danger"> 
+                        This year level is already existing.
+                    </span> ';
+            echo "<script>$('#Update').prop('disabled',true);</script>"; //set disabled register button
+        }else{
+            echo "<script>$('#Update').prop('disabled',false);</script>"; //set enabled register button
         }
     }
     ob_end_flush();

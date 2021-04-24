@@ -24,7 +24,7 @@
     <link href="../css/basic.css" rel="stylesheet" />
     <link rel="shortcut icon" href="../assets/ics_icon.ico">
 
-    <title>School year | Institute of computer studies</title>
+    <title>School session | Institute of computer studies</title>
 </head>
 <body>
     <?php
@@ -34,7 +34,7 @@
             <div id="page-inner">
                 <div class="row">
                     <div class="col-md-12">
-                        <h2 class="page-head-line" >School year</h2>
+                        <h2 class="page-head-line" >School session</h2>
                     </div>
                 </div>
                 <center class="center">
@@ -99,7 +99,6 @@
             </div>
         </div>
     </div>
-
     <!-- Modal for school year -->
     <div class="modal fade" id="schoolyear" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
@@ -144,6 +143,5 @@
     <script src="../js/jquery.metisMenu.js"></script>
     <script src="../js/custom1.js"></script>
     <script src="../js/validation.js"></script>
-    
 </body>
 </html>

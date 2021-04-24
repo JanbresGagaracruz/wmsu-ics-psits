@@ -77,6 +77,9 @@
                                     <tr>
                                         <td><?php echo $row['sec']; ?></td>
                                         <td>
+                                            <a name="edit" id="<?php echo $row["id"];?>" class="btn btn-info btn-md edit_data"> 
+                                                <span class="fas fa-edit"></span>
+                                            </a>
                                             <a href="../include/create_section.php?delete=<?php echo $row['id'] ?>" class="btn btn-danger btn-md course_delete" id="delete" name="delete">
                                                 <span class="fas fa-times"></span>
                                             </a>
@@ -91,7 +94,7 @@
             </div>
         </div>
     </div>
-    <!-- Modal for course -->
+    <!-- Modal for section -->
     <div class="modal fade" id="section_modal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -116,8 +119,34 @@
             </div>
         </div>
     </div>
+    <!-- Modal for edit section -->
+    <div class="modal fade" id="edit_section_modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Update section</h5>
+                    <button type="button" class="close section_close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="section.php" method="POST" id="edit_section_form">
+                    <div class="modal-body">
+                        <input type="hidden" class="form-control" id="edit_id" name="edit_id">                   
+                        <div class="form-group">
+                            <label for="section">Section</label>
+                            <input type="text" class="form-control" name="edit_section" id="edit_section" placeholder="Enter section" autocomplete="off">
+                        <div id="edit_section_validation"></div>
+                        </div>
+                        <div class="modal-footer">
+                            <input type="submit" class="btn btn-primary" id="Update" name="Update" value="Update"/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
     <!-- Footer -->
-    <div id="footer-sec">
+    <div id="footer">
        <strong>WMSU ICS PSITS COLLECTION 2020</strong>
     </div>
        
@@ -132,6 +161,24 @@
     <script src="../js/jquery.metisMenu.js"></script>
     <script src="../js/custom1.js"></script>
     <script src="../js/validation.js"></script>
-    
+    <script>
+        $(document).on('click', '.edit_data', function(){  
+        var id = $(this).attr("id");  
+        $.ajax({  
+            url:"../include/create_section.php",  
+            method:"POST",  
+            data:{id:id},  
+            dataType:"json",  
+            success:function(data){  
+                $('#edit_section').val(data.sec);
+                $('#edit_id').val(data.id);
+                $('#edit_section_modal').modal('show');
+            }  
+        }); 
+        $('#section_modal').on('hidden.bs.modal', function () {
+            $(this).find('form').trigger('reset'); 
+            });
+        }); 
+    </script> 
 </body>
 </html>
