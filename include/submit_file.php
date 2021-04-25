@@ -37,18 +37,18 @@
             if(move_uploaded_file($_FILES["file"]["tmp_name"], $path)){
                 $insert = $connect->query("INSERT into file_upload (name,file_name) VALUES ('".$name."','".$fileName."')");
                 if($insert){
-                    header('location: ../new/announcement.php?success=1');
+                    header('location: ../view/announcement.php?success=1');
                     $_SESSION['message'] = "The file ".$fileName. " has been uploaded successfully.";
                 }else{
-                    header('location: ../new/announcement.php?success=2');
+                    header('location: ../view/announcement.php?success=2');
                     $_SESSION['message'] = "File upload failed, please try again."; 
                 } 
             }else{
-                header('location: ../new/announcement.php?success=2');
+                header('location: ../view/announcement.php?success=2');
                 $_SESSION['message'] = "Sorry, there was an error uploading your file.";  
             }
         }else{
-            header('location: ../new/announcement.php?success=2');
+            header('location: ../view/announcement.php?success=2');
             $_SESSION['message'] = 'Sorry, only PDF file is allowed to upload.';
         }
     }
@@ -69,14 +69,14 @@
             if($check){
                 //check if the file path does exist and delete from upload folder
                 if(!unlink($targetFilePath)){
-                    header('location: ../new/announcement.php?success=1');
+                    header('location: ../view/announcement.php?success=1');
                     $_SESSION['message'] = "Successfully deleted.";
                 }else{
-                    header('location: ../new/announcement.php?success=1');
+                    header('location: ../view/announcement.php?success=1');
                     $_SESSION['message'] = "Successfully deleted.";
                 }
             }else{
-                header('location: ../new/announcement.php?success=2');
+                header('location: ../view/announcement.php?success=2');
                 $_SESSION['message'] = "Something went wrong.";
             }
         }  

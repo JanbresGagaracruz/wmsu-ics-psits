@@ -13,7 +13,7 @@
         $designation="local fees";
         $check=$connect->query("INSERT INTO fees (fee_name,amount,type,designation) VALUES ('$fee_name','$amount','$type','$designation')") or die($connect->error());
         if($check){
-            header('location: ../new/fees.php?success=1');
+            header('location: ../view/fees.php?success=1');
             $_SESSION['message'] = "You have successfully added ".$fee_name. " designation ".$designation.".";
         }else{
             header('location: ../view/fees.php?success=1');
@@ -68,10 +68,10 @@
             $fee_name = $row['fee_name'];  
             $check=$connect->query("DELETE FROM fees WHERE id= '$id';") or die($connect->error);
             if($check){
-                header('location: ../new/fees.php?success=2');
+                header('location: ../view/fees.php?success=2');
                 $_SESSION['message'] = "Successfully deleted ".$fee_name. ".";
             }else{
-                header('location: ../new/fees.php?success=2');
+                header('location: ../view/fees.php?success=2');
                 $_SESSION['message'] = "Something went wrong.";
             }
         }  
@@ -93,7 +93,7 @@
         $designation="local fees";
         $check=$connect->query("UPDATE fees SET fee_name='$fee_name',amount='$amount',type='$type',designation='$designation' WHERE id='$id' ") or die($connect->error());
         if($check){
-            header('location: ../new/fees.php?success=1');
+            header('location: ../view/fees.php?success=1');
             $_SESSION['message'] = "You have successfully Update ".$fee_name. " designation ".$designation.".";
         }else{
             header('location: ../view/fees.php?success=2');

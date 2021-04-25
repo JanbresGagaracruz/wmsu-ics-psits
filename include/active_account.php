@@ -14,10 +14,10 @@
             $id = $row['id'];
             $check = $connect->query("UPDATE request SET status='active' WHERE id='$id'")or die($connect->error);
             if($check){
-                header('location: ../new/active_user.php?success=1');
+                header('location: ../view/active_user.php?success=1');
                 $_SESSION['message'] = "Account has been successfully activated.";
             }else{
-                header('location: ../new/active_user.php?success=1');
+                header('location: ../view/active_user.php?success=1');
                 $_SESSION['message'] = "Something went wrong.";
             }
         }
@@ -31,10 +31,10 @@
             $id = $row['id'];
             $check = $connect->query("UPDATE request SET status='inactive' WHERE id='$id'")or die($connect->error);
             if($check){
-                header('location: ../new/active_user.php?success=2');
+                header('location: ../view/active_user.php?success=2');
                 $_SESSION['message'] = "Account has been successfully deactivated.";
             }else{
-                header('location: ../new/active_user.php?success=2');
+                header('location: ../view/active_user.php?success=2');
                 $_SESSION['message'] = "Something went wrong.";
             }
         }

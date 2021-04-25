@@ -1,11 +1,16 @@
 <?php
     ob_start();
     include('../include/database.php');
+    include("../include/userlogin.php");
     if(!isset($_SESSION)) 
     { 
         session_start(); 
+    } 
+    if($_SESSION['usertype'] != "admin"){
+        header("location: login.php?success=1");
+        $_SESSION['message'] = "You cannot access only admin is allowed!";
     }
-    ob_end_flush();
+   ob_end_flush();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,17 +29,17 @@
     <link href="../css/basic.css" rel="stylesheet" />
     <link rel="shortcut icon" href="../assets/ics_icon.ico">
 
-    <title>Accounts | Institute of computer studies</title>
+    <title>Active User | Institute of computer studies</title>
 </head>
 <body>
     <?php
-        include("../view/header.php");
+        include("header.php");
     ?>
         <div id="page-wrapper">
             <div id="page-inner">
                 <div class="row">
                     <div class="col-md-12">
-                        <h2 class="page-head-line" >Account Approval</h2>
+                        <h2 class="page-head-line" >Active Accounts</h2>
                     </div>
                 </div>
                 <center class="center">
@@ -45,11 +50,18 @@
                                 echo $_SESSION['message'];  
                                 unset($_SESSION['message']);
                         ?>
+                        <?php elseif(isset($_SESSION['message']) && $_GET['success'] == 2): ?>    
+                        <div class="alert alert-danger alert-dismissible mt-2" id="success">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <?php 
+                                echo $_SESSION['message'];  
+                                unset($_SESSION['message']);
+                        ?>
                     <?php endif ?>
                 </center>
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        Pending request
+                        Students information
                     </div>
                     <div class="panel-body">
                         <div class="table-sorting  table-responsive">
@@ -59,32 +71,34 @@
                                         <th>Student ID</th>
                                         <th>Full Name</th>
                                         <th>Email</th>
-                                        <th>Course</th>
+                                        <th>Usertype</th>
+                                        <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php 
-                                        $query = ("SELECT * FROM request WHERE approval_status='inactive';");
+                                        $query = ("SELECT * FROM request WHERE usertype NOT LIKE 'admin' AND approval_status='active' ");
                                         $result = mysqli_query($connect, $query);
                                         while($row = $result->fetch_assoc()){ 
                                     ?>
-                                    <tr><?php if($row['approval_status'] == 'inactive'){ ?>
+                                    <tr><?php if($row['approval_status'] == 'active'){ ?>
                                         <?php } ?>
                                     
                                         <td><?php echo $row['student_id']; ?></td>
-                                        <td><?php echo $row['last_name']; echo ',';?> <?php echo $row['first_name'];?> <?php echo $row['middle_name']; ?></td>
+                                        <td><?php echo $row['last_name']; echo ',';?> <?php echo $row['first_name'];?>  <?php echo $row['middle_name']; ?></td>
                                         <td><?php echo $row['email']; ?></td>
-                                        <td><?php echo $row['course']; ?></td>
+                                        <td><?php echo $row['usertype']; ?></td>
+                                        <td><?php echo $row['status']; ?></td>
                                         <td>
                                             <a type="button" name="view"  id="<?php echo $row["id"]; ?>" class="btn btn-info btn-xs view_data">
                                                 <span class="fas fa-eye fa-2x"></span>
                                             </a> 
-                                            <a href="../include/approval.php?accept=<?php echo $row['id']; echo $row['email'];?>"class="btn btn-success btn-xs" type="submit"id="accept" name="accept">
-                                                <span class="fas fa-check fa-2x"> </span>
+                                            <a href="../include/active_account.php?stat_on=<?php echo $row['id'] ?>" class="btn btn-primary btn-xs" id="stat_on" name="stat_on">
+                                                <span class="fas fa-toggle-on fa-2x"></span>
                                             </a>
-                                            <a href="../include/approval.php?decline=<?php echo $row['id'] ?>" class="btn btn-danger btn-xs" id="decline" name="decline">
-                                                <span class="fas fa-times fa-2x"></span>
+                                            <a href="../include/active_account.php?stat_off=<?php echo $row['id'] ?>" class="btn btn-danger btn-xs" id="stat_off" name="stat_off">
+                                                <span class="fas fa-toggle-off fa-2x"></span>
                                             </a>
                                         </td>
                                     </tr>
@@ -102,8 +116,8 @@
       <div class="modal-dialog">  
            <div class="modal-content">  
                 <div class="modal-header">  
-                     <button type="button" class="close account" data-dismiss="modal">&times;</button>  
-                     <h4 class="modal-title">Student Details</h4>  
+                     <button type="button" class="close active_user" data-dismiss="modal">&times;</button>  
+                     <h4 class="modal-title">Active user details</h4>  
                 </div>  
                 <div class="modal-body" id="student_detail">  
                 </div>  
@@ -114,17 +128,17 @@
         </div>  
     </div> 
 
-    <div id="footer-sec">
+    <div id="footer">
        <strong>WMSU ICS PSITS COLLECTION 2020</strong>
     </div>
-       
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
     <!--Custom js-->
     <script src="../js/bootstrap.js"></script>
     <script src="../js/datable.js"></script>    
-    <script src="../js/alert-slide.js"></script>  
+    <script src="../js/alert-slide.js"></script> 
     <script src="../js/jquery.metisMenu.js"></script>
     <script src="../js/custom1.js"></script>
     <script src="../js/view_user.js"></script>

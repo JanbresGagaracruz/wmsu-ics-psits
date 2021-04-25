@@ -22,18 +22,18 @@
                 $imgContent = addslashes(file_get_contents($image));
                 $insert = $connect->query("INSERT INTO withdraw (transaction,amount,date,name,img) VALUES ('".$transaction."','".$amount."','".$date."','".$name."','".$imgContent."')");
                 if($insert){
-                    header('location: ../new/withdraw.php?success=1');
+                    header('location: ../view/withdraw.php?success=1');
                     $_SESSION['message'] = "You successfully added a new record.";
                 }else{
-                    header('location: ../new/withdraw.php?success=2');
+                    header('location: ../view/withdraw.php?success=2');
                     $_SESSION['message'] = "File upload failed, please try again."; 
                 } 
             }else{
-                header('location: ../new/withdraw.php?success=2');
+                header('location: ../view/withdraw.php?success=2');
                 $_SESSION['message'] = 'Sorry, only jpg and png image is allowed to upload.';
             }
         }else{
-            header('location: ../new/withdraw.php?success=2');
+            header('location: ../view/withdraw.php?success=2');
             $_SESSION['message'] = 'Please, select an image file to upload';
         }
     }
@@ -54,10 +54,10 @@
             if($check){
                 //check if the file path does exist and delete from upload folder
                 if(!unlink($targetFilePath)){
-                    header('location: ../new/withdraw.php?success=1');
+                    header('location: ../view/withdraw.php?success=1');
                     $_SESSION['message'] = "Successfully deleted.";
                 }else{
-                    header('location: ../new/withdraw.php?success=1');
+                    header('location: ../view/withdraw.php?success=1');
                     $_SESSION['message'] = "Successfully deleted.";
                 }
             }else{

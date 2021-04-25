@@ -221,6 +221,10 @@ div.dataTables_wrapper {
 .modal-header .fees_close{
     margin-top: -20px;
 }
+.modal-header .withdraw_close{
+    margin-top: -20px;
+}
+
 #record_data{
     color: #fff;
 }

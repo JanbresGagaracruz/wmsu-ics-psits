@@ -13,7 +13,7 @@
         $query_run=mysqli_query($connect, $sql);
 
         if($query_run){
-            header('location: ../new/year_level.php?success=1');
+            header('location: ../view/year_level.php?success=1');
             $_SESSION['message'] = "You have successfully added a new year level.";
         }
     }
@@ -30,10 +30,10 @@
         $edit_year_lvl=$_POST['edit_year_lvl'];
         $check=$connect->query("UPDATE year_lvl SET year='$edit_year_lvl' WHERE id='$id' ") or die($connect->error());
         if($check){
-            header('location: ../new/year_level.php?success=1');
+            header('location: ../view/year_level.php?success=1');
             $_SESSION['message'] = "You have successfully updated semester.";
         }else{
-            header('location: ../new/year_level.php?success=2');
+            header('location: ../view/year_level.php?success=2');
             $_SESSION['message'] = "Something went wrong.";
         }
     } 
@@ -46,10 +46,10 @@
             $id = $row['id'];   
             $check=$connect->query("DELETE FROM year_lvl WHERE id = '$id';") or die($connect->error);
             if($check){
-                header('location: ../new/year_level.php?success=1');
+                header('location: ../view/year_level.php?success=1');
                 $_SESSION['message'] = "Successfully deleted.";
             }else{
-                header('location: ../new/year_level.php?success=2');
+                header('location: ../view/year_level.php?success=2');
                 $_SESSION['message'] = "Something went wrong.";
             }
         }  

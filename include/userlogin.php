@@ -28,21 +28,26 @@
                     if($_SESSION['usertype']=="Student"){
                         $_SESSION['usertype']='Student';
                         header("location: ../view/homepage.php");
-                        }else if($_SESSION['usertype']=="President"){
+                        }else if($_SESSION['usertype']=="President?success=1"){
                             $_SESSION['usertype']='1';
-                            header("location: ../view/dashboard_officer.php");
+                            $_SESSION['message'] = "Welcome back! Check out our latest record summary.";
+                            header("location: ../view/dashboard_officer.php?success=1");
                         }else if($_SESSION['usertype']=="VP"){
                             $_SESSION['usertype']='1';
-                            header("location: ../view/dashboard_officer.php");
+                            $_SESSION['message'] = "Welcome back! Check out our latest record summary.";
+                            header("location: ../view/dashboard_officer.php?success=1");
                         }else if($_SESSION['usertype']=="Treasurer"){
                             $_SESSION['usertype']='1';
-                            header("location: ../view/dashboard_officer.php");
+                            $_SESSION['message'] = "Welcome back! Check out our latest record summary.";
+                            header("location: ../view/dashboard_officer.php?success=1");
                         }else if($_SESSION['usertype']=="Officer"){
                             $_SESSION['usertype']='1';
-                            header("location: ../view/dashboard_officer.php");  
+                            $_SESSION['message'] = "Welcome back! Check out our latest record summary.";
+                            header("location: ../view/dashboard_officer.php?success=1");  
                         }else if($_SESSION['usertype']=="admin"){
                             $_SESSION['usertype']='admin';
-                            header("location: ../view/dashboard.php"); 
+                            $_SESSION['message'] = "Welcome back admin!"; 
+                            header("location: ../view/dashboard.php?success=1"); 
                         }
                 else{  
                     header("location:../view/login.php");  

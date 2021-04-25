@@ -28,7 +28,7 @@
             $row = $result->fetch_array();
             $id = $row['id'];
             $email = $row['email'];
-            $connect->query("UPDATE request SET status='active' AND approval_status='active' WHERE id= '$id';") or die($connect->error());
+            $connect->query("UPDATE request SET status = 'active', approval_status = 'active' WHERE id= '$id';") or die($connect->error());
             try{
                 $mail->isSMTP();       
             	$mail->SMTPAuth = true; 

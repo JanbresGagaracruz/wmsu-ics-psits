@@ -1,9 +1,14 @@
 <?php
     ob_start();
-    include("../include/create_course.php");
+    require("../include/create_yearlvl.php");
+    include("../include/userlogin.php");
     if(!isset($_SESSION)) 
     { 
         session_start(); 
+    } 
+    if($_SESSION['usertype'] != "admin"){
+        header("location: login.php?success=1");
+        $_SESSION['message'] = "You cannot access only admin is allowed!";
     }
     ob_end_flush();
 ?>
@@ -24,17 +29,17 @@
     <link href="../css/basic.css" rel="stylesheet" />
     <link rel="shortcut icon" href="../assets/ics_icon.ico">
 
-    <title>Course | Institute of computer studies</title>
+    <title>Year level | Institute of computer studies</title>
 </head>
 <body>
     <?php
-        include("../view/header.php");
+        include("header.php");
     ?>
         <div id="page-wrapper">
             <div id="page-inner">
                 <div class="row">
                     <div class="col-md-12">
-                        <h2 class="page-head-line" >Course</h2>
+                        <h2 class="page-head-line" >Year level</h2>
                     </div>
                 </div>
                 <center class="center">
@@ -56,31 +61,31 @@
                 </center>
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        Course records
-                        <a data-toggle="modal" data-target="#course_modal" class="btn btn-primary">Create course</span></a>
+                        Year level records
+                        <a data-toggle="modal" data-target="#year_lvl_modal" class="btn btn-primary">Create Year level</span></a>
                     </div>
                     <div class="panel-body">
                         <div class="table-sorting  table-responsive">
                             <table class="table table-striped table-bordered table-hover" id="table">
                                 <thead>
                                     <tr>
-                                        <th scope="col">Course</th>
+                                        <th scope="col">Year</th>
                                         <th scope="col">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php 
-                                        $query = ("SELECT * FROM course");
+                                        $query = ("SELECT * FROM year_lvl");
                                         $result = mysqli_query($connect, $query);
                                         while($row = $result->fetch_assoc()){ 
                                     ?>
                                     <tr>
-                                        <td><?php echo $row['course']; ?></td>
+                                        <td><?php echo $row['year']; ?></td>
                                         <td>
                                             <a name="edit" id="<?php echo $row["id"]; ?>" class="btn btn-info btn-md edit_data"> 
                                                 <span class="fas fa-edit"></span>
                                             </a>
-                                            <a href="../include/create_course.php?delete=<?php echo $row['id'] ?>" class="btn btn-danger btn-md course_delete" id="delete" name="delete">
+                                            <a href="../include/create_yearlvl.php?delete=<?php echo $row['id'] ?>" class="btn btn-danger btn-md course_delete" id="delete" name="delete">
                                                 <span class="fas fa-times"></span>
                                             </a>
                                         </td>
@@ -94,22 +99,22 @@
             </div>
         </div>
     </div>
-    <!-- Modal for course -->
-    <div class="modal fade" id="course_modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Modal for year level -->
+    <div class="modal fade" id="year_lvl_modal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Create Course</h5>
-                    <button type="button" class="close course_close" data-dismiss="modal" aria-label="Close">
+                    <h5 class="modal-title">Add Year level</h5>
+                    <button type="button" class="close year_close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="course.php" method="POST" id="course_form">
+                <form action="year_lvl.php" method="POST" id="year_form">
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="course">Course</label>
-                            <input type="text" class="form-control" name="course" id="course" placeholder="Enter course">
-                            <div id="course_validation"></div>
+                            <label for="year_lvl">Year level</label>
+                            <input type="text" class="form-control" name="year_lvl" id="year_lvl" placeholder="Enter year level" autocomplete="off">
+                            <div id="yearlvl_validation"></div>
                         </div>
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-primary" name="create" id="create">Create</button>
@@ -120,22 +125,22 @@
         </div>
     </div>
 
-    <div class="modal fade" id="edit_course_modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal fade" id="edit_year_lvl_modal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Update Course</h5>
-                    <button type="button" class="close course_close" data-dismiss="modal" aria-label="Close">
+                    <h5 class="modal-title">Update Year level</h5>
+                    <button type="button" class="close year_close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="course.php" method="POST" id="edit_course_form">
+                <form action="year_lvl.php" method="POST" id="edit_year_form">
                     <div class="modal-body">
                         <input type="hidden" class="form-control" id="edit_id" name="edit_id">
                         <div class="form-group">
-                            <label for="course">Course</label>
-                            <input type="text" class="form-control" name="edit_course" id="edit_course" placeholder="Enter course">
-                            <div id="edit_course_validation"></div>
+                            <label for="year_lvl">Year level</label>
+                            <input type="text" class="form-control" name="edit_year_lvl" id="edit_year_lvl" placeholder="Enter year level" autocomplete="off">
+                            <div id="edit_yearlvl_validation"></div>
                         </div>
                         <div class="modal-footer">
                             <input type="submit" class="btn btn-primary" id="Update" name="Update" value="Update"/>
@@ -165,17 +170,17 @@
         $(document).on('click', '.edit_data', function(){  
         var id = $(this).attr("id");  
         $.ajax({  
-            url:"../include/create_course.php",  
+            url:"../include/create_yearlvl.php",  
             method:"POST",  
             data:{id:id},  
             dataType:"json",  
             success:function(data){  
-                $('#edit_course').val(data.course);
+                $('#edit_year_lvl').val(data.year);
                 $('#edit_id').val(data.id);
-                $('#edit_course_modal').modal('show');
+                $('#edit_year_lvl_modal').modal('show');
             }   
         }); 
-        $('#course_modal').on('hidden.bs.modal', function () {
+        $('#year_lvl_modal').on('hidden.bs.modal', function () {
             $(this).find('form').trigger('reset'); 
             });
         }); 

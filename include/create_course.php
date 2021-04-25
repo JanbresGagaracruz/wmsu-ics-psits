@@ -10,10 +10,10 @@
         $course = $_POST['course'];
         $check=$connect->query("INSERT INTO course (course) VALUES ('$course')") or die($connect->error());
         if($check){
-            header('location: ../new/course.php?success=1');
+            header('location: ../view/course.php?success=1');
             $_SESSION['message'] = "You have successfully added a new course.";
         }else{
-            header('location: ../new/course.php?success=2');
+            header('location: ../view/course.php?success=2');
             $_SESSION['message'] = "Something went wrong.";
         }
     }
@@ -30,10 +30,10 @@
         $course=$_POST['edit_course'];
         $check=$connect->query("UPDATE course SET course='$course' WHERE id='$id' ") or die($connect->error());
         if($check){
-            header('location: ../new/course.php?success=1');
+            header('location: ../view/course.php?success=1');
             $_SESSION['message'] = "You have successfully updated course.";
         }else{
-            header('location: ../new/course.php?success=2');
+            header('location: ../view/course.php?success=2');
             $_SESSION['message'] = "Something went wrong.";
         }
     } 
@@ -49,7 +49,7 @@
                 header('location: ../view/course.php?success=1');
                 $_SESSION['message'] = "Course has been deleted.";
             }else{
-                header('location: ../new/course.php?success=2');
+                header('location: ../view/course.php?success=2');
                 $_SESSION['message'] = "Something went wrong.";
             }
         }  

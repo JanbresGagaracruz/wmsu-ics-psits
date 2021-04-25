@@ -61,7 +61,7 @@
         $sql = "INSERT INTO request (student_id, first_name, last_name,middle_name,email,course,year,gender,usertype,password,status,approval_status,assessment_status,payment_status) 
         VALUES ('$student_id','$first_name','$last_name','$middle_name','$email','$course','$year','$gender','$usertype','$password','$status','$approval_status','$assessment_status','$payment_status')";
         mysqli_query($connect, $sql);
-        header('location: ../new/walkin_user.php?success=1');
+        header('location: ../view/walkin_user.php?success=1');
         $_SESSION['message'] = "Successfully created account for walk-in student.";
     }
     ob_end_flush();
