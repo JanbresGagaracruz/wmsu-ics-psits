@@ -31,7 +31,7 @@
                     <a href="fees.php"><i class="fa fa-money-check "></i>Create Fees</a>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-tasks "></i>Manage Scheduled fees</a>
+                    <a href="manage_fees.php"><i class="fa fa-tasks "></i>Manage Scheduled fees</a>
                 </li>
                 <li>
                     <a href="announcement.php"><i class="fa fa-bullhorn "></i>Create Announcement</a>

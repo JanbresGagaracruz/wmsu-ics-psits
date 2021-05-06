@@ -74,7 +74,7 @@
                                     $result = mysqli_query($connect,$sql);
                                     $count = mysqli_num_rows($result);
                                 ?>
-                                <a href="active_users.php">
+                                <a href="active_user.php">
                                     <i class="fa fa-user-circle fa-5x"></i>
                                     <h5>
                                         Active users

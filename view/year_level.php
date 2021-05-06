@@ -109,7 +109,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="year_lvl.php" method="POST" id="year_form">
+                <form action="year_level.php" method="POST" id="year_form">
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="year_lvl">Year level</label>

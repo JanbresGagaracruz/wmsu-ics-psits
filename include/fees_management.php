@@ -11,8 +11,9 @@
         $yr = $_POST['year'];
         $course = $_POST['course'];
         $sem = $_POST['semester'];
-        $lf = $_POST['local_fees'];
-        $result = $connect->query("INSERT INTO manage_fees (school_year, year_lvl, course, semester, local_fees) VALUES ('$sy','$yr','$course','$sem','$lf')") or die($connect->error());
+        $fs = $_POST['fs'];
+        $tp = $_POST['tp'];
+        $result = $connect->query("INSERT INTO manage_fees (school_year, year_lvl, course, semester, local_fees, tp) VALUES ('$sy','$yr','$course','$sem','$fs','$tp')") or die($connect->error());
         if($result){
             header('location: ../view/manage_fees.php?success=1');
             $_SESSION['message'] = "Management of fees has been successfully.";
