@@ -92,7 +92,7 @@
                     <div class="row">				
                     <div class="col-md-4">
                         <div class="main-box mb-orange">
-                                <a href="#">
+                                <a href="officer_studAssessment.php">
                                     <i class="fa  fa-balance-scale fa-5x"></i>
                                     <h5>
                                         Student Assessment

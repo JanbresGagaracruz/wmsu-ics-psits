@@ -1,6 +1,6 @@
 <?php
     ob_start();
-    require("../include/walkin_account.php");
+    require("../include/assessment.php");
     include("../include/userlogin.php");
     if(!isset($_SESSION)) 
     { 
@@ -30,7 +30,7 @@
     <link href="../css/basic.css" rel="stylesheet" />
     <link rel="shortcut icon" href="../assets/ics_icon.ico">
 
-    <title>Create User | Institute of computer studies</title>
+    <title>Student assessment | Institute of computer studies</title>
 </head>
 <body>
     <?php
@@ -40,7 +40,7 @@
             <div id="page-inner">
                 <div class="row">
                     <div class="col-md-12">
-                        <h2 class="page-head-line" >Walk-in registration</h2>
+                        <h2 class="page-head-line" >Associate student fees</h2>
                     </div>
                 </div>
                 <center class="center">
@@ -74,13 +74,13 @@
                                         <th>Full Name</th>
                                         <th>Email</th>
                                         <th>Usertype</th>
-                                        <th>Status</th>
+                                        <th>Course</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php 
-                                        $query = ("SELECT * FROM request WHERE usertype NOT LIKE 'admin' AND approval_status='active' ");
+                                        $query = ("SELECT * FROM request WHERE usertype NOT LIKE 'admin' AND approval_status='active' AND assessment_status='not assessed' ");
                                         $result = mysqli_query($connect, $query);
                                         while($row = $result->fetch_assoc()){ 
                                     ?>
@@ -91,10 +91,10 @@
                                         <td><?php echo $row['last_name']; echo ',';?> <?php echo $row['first_name'];?>  <?php echo $row['middle_name']; ?></td>
                                         <td><?php echo $row['email']; ?></td>
                                         <td><?php echo $row['usertype']; ?></td>
-                                        <td><?php echo $row['status']; ?></td>
+                                        <td><?php echo $row['course']; ?></td>
                                         <td>
-                                            <a type="button" name="view"  id="<?php echo $row["id"]; ?>" class="btn btn-info btn-xs view_data">
-                                                <span class="fas fa-eye fa-2x"></span>
+                                            <a type="button" name="view"  id="<?php echo $row["id"]; ?>" class="btn btn-warning btn-xs get_fee" data-toggle="tooltip" data-placement="top" title="Associate fees">
+                                                <span class="fas fa-balance-scale fa-2x"></span>
                                             </a> 
                                         </td>
                                     </tr>
@@ -107,70 +107,37 @@
             </div>
         </div>
     </div>
-    <!-- Modal for Viewing student information -->
-    <div id="user_detail" class="modal fade">  
-      <div class="modal-dialog">  
-           <div class="modal-content">  
-                <div class="modal-header">  
-                     <button type="button" class="close" data-dismiss="modal">&times;</button>  
-                     <h4 class="modal-title">Active user details</h4>  
-                </div>  
-                <div class="modal-body" id="student_detail">  
-                </div>  
-                <div class="modal-footer">  
-                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
-                </div>  
-           </div>  
-        </div>  
-    </div> 
     <!-- Modal for create account -->
-    <div class="modal fade" id="user" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <div class="modal fade" id="fee_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Add new user</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Assess Student</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" action="walkin_user.php" id="reg">
+                    <form method="POST" action="officer_studentAssessment.php" id="reg">
+                        <input type="hidden" class="form-control" id="id" name="id">  
                         <div class="form-group">
-                            <label for="student_id">Student ID</label>
-                            <input type="text" class="form-control" id="student_id" name="student_id"
-                            autocomplete="off" placeholder="Enter Student ID" required>
-                            <div id="student_validation"></div>
-                        </div>
-                        <div class="form-group">
-                            <label for="fn">First name</label>
-                            <input type="text" class="form-control" id="fn" name="first_name" aria-describedby="firstHelp"
-                            autocomplete="off" placeholder="Enter first name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="mn">Middle name</label>
-                            <input type="text" class="form-control" id="mn" name="middle_name" aria-describedby="middleHelp"
-                            autocomplete="off" placeholder="Enter middle name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="ln">Last name</label>
-                            <input type="text" class="form-control" id="ln"  name="last_name"aria-describedby="nameHelp"
-                            autocomplete="off" placeholder="Enter first name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email address</label>
-                            <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter email"
-                            autocomplete="off" required>
-                            <div id="availability"></div>
+                            <label for="name">Name</label>
+                            <input type="text" class="form-control" id="name" name="name" readonly="readonly">
                         </div>
                         <div class="form-group">
                             <label for="course">Course</label>
-                            <select class="form-control" id="course" name="course" required>
+                            <input type="text" class="form-control" id="course" name="course" readonly="readonly">
+                        </div>
+                        <div class="form-group">
+                            <label for="semester">Semester</label>
+                            <select class="form-control" id="semester" name="semester" required>
                                 <?php
-                                    $result = $connect->query("SELECT * FROM course") or die($connect->error());
+                                    $result = $connect->query("SELECT * FROM semester") or die($connect->error());
                                     while($row = $result->fetch_assoc()):
                                 ?>
-                                    <option value="<?php echo $row['course']; ?>"><?php echo $row["course"]; ?></option>
+                                    <option value="" selected="selected" hidden="hidden">Select Semester</option>
+                                    <option value="<?php echo $row['sem']; ?>"><?php echo $row["sem"]; ?></option>
                                 <?php endwhile; ?>
                             </select>
                         </div>
@@ -181,34 +148,15 @@
                                     $result = $connect->query("SELECT * FROM year_lvl") or die($connect->error());
                                     while($row = $result->fetch_assoc()):
                                 ?>
-                                    <option value="<?php echo $row['year']; ?>"><?php echo $row["year"]; ?></option>
+                                    <option value="" selected="selected" hidden="hidden">Select year level</option>
+                                    <option value="<?php echo $row['id']; ?>"><?php echo $row["year"]; ?></option>
                                 <?php endwhile; ?>
                             </select>
                         </div>
-                        <div class="form-group">
-                            <label for="gender">Gender</label>
-                            <select class="form-control" id="gender"  name="gender"required>
-                                <option value="Male" selected>Male</option>
-                                <option value="Female">Female</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="password">Password</label>
-                            <input type="password" class="form-control" id="password"  name="password" placeholder="Enter password" required>
-                            <label id="password-error" class="error" for="password"></label>
-                        </div>
-                        <div class="form-group">
-                            <label for="usertype">Create account as</label>
-                            <select class="form-control" id="usertype" name="usertype">
-                                <option value="Student" selected>Student</option>
-                                <option value="President">President</option>
-                                <option value="VP">Vice President</option>
-                                <option value="Treasurer">Treasurer</option>
-                                <option value="Officer">Officer</option>
-                            </select>
-                        </div>
+                        <div class="form-group mt-1 mb-1" id="fee_names"></div> <!-- Total fees -->
+                        <div class="form-group" id="total_fees"></div> <!-- Total fees -->
                         <div class="modal-footer">
-                            <button class="btn btn-success" name="register" id="register"type="submit">Sign up</button>
+                            <button class="btn btn-success" name="create" id="create" type="submit">Create</button>
                         </div>
                     </form>
                 </div>
@@ -232,7 +180,46 @@
     <script src="../js/alert-slide.js"></script> 
     <script src="../js/jquery.metisMenu.js"></script>
     <script src="../js/custom1.js"></script>
-    <script src="../js/view_user.js"></script>
-    
+    <script>
+        $(document).on('click', '.get_fee', function(){  
+        var id = $(this).attr("id");   
+        $.ajax({  
+            url:"../include/assessment.php",  
+            method:"POST",  
+            data:{
+                id:id
+            },  
+            dataType:"json",  
+            success:function(data){  
+                $('#name').val(data.full_name);
+                $('#course').val(data.course);
+                $('#id').val(data.id);
+                $('#fee_modal').modal('show');
+            }   
+        }); 
+        $('#fee_modal').on('hidden.bs.modal', function () {
+            $(this).find('form').trigger('reset'); 
+            });
+        }); 
+    </script> 
+    <script>        
+        $(document).ready(function () {
+            //$('#addedModal').modal('show');
+            $("#year").change(function() {
+                $.ajax({
+                    type: "post",
+                    url: "../templates/student_template.php",
+                    data: {
+                        "course": $("#course").val(),
+                        "semester": $("#semester").val(),
+                        "year": $("#year").val(),
+                    },
+                    success: function(data) {
+                        $("#total_fees").html(data);
+                    }
+                });
+            });		
+        });
+    </script>
 </body>
 </html>

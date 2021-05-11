@@ -33,10 +33,10 @@
         $section=$_POST['edit_semester'];
         $check=$connect->query("UPDATE semester SET sem='$section' WHERE id='$id' ") or die($connect->error());
         if($check){
-            header('location: ../view/section.php?success=1');
+            header('location: ../view/semester.php?success=1');
             $_SESSION['message'] = "You have successfully updated semester.";
         }else{
-            header('location: ../view/section.php?success=2');
+            header('location: ../view/semester.php?success=2');
             $_SESSION['message'] = "Something went wrong.";
         }
     } 

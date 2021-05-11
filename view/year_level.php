@@ -134,7 +134,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="year_lvl.php" method="POST" id="edit_year_form">
+                <form action="year_level.php" method="POST" id="edit_year_form">
                     <div class="modal-body">
                         <input type="hidden" class="form-control" id="edit_id" name="edit_id">
                         <div class="form-group">

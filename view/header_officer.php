@@ -28,7 +28,7 @@
                     <a href="officer_walkin.php"><i class="fa fa-user-alt "></i>Create User</a>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-balance-scale "></i>Student assessment</a>
+                    <a href="officer_studAssessment.php"><i class="fa fa-balance-scale "></i>Student assessment</a>
                 </li>
                 <li>
                     <a href="officer_withdraw.php"><i class="fa fa-bank "></i>Create withdraw</a>

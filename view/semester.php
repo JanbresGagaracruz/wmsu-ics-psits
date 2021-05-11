@@ -180,7 +180,7 @@
                 $('#edit_modal').modal('show');
             }   
         }); 
-        $('#section_modal').on('hidden.bs.modal', function () {
+        $('#edit_modal').on('hidden.bs.modal', function () {
             $(this).find('form').trigger('reset'); 
             });
         }); 

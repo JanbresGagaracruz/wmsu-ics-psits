@@ -215,8 +215,8 @@
                 $('#edit_localfees').modal('show');
             }  
         }); 
-        $('#localfees').on('hidden.bs.modal', function () {
-            $(this).find('form').trigger('reset'); 
+        $('#edit_localfees').on('hidden.bs.modal', function () {
+            $(this).find('#edit_local_form').trigger('reset'); 
             });
         }); 
     </script>                               

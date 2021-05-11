@@ -62,7 +62,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         Manage fees records
-                        <a data-toggle="modal" data-target="#localfees" class="btn btn-primary">Create course</span></a>
+                        <a data-toggle="modal" data-target="#localfees" class="btn btn-primary">Associate fees</span></a>
                     </div>
                     <div class="panel-body">
                         <div class="table-sorting  table-responsive">
@@ -74,24 +74,22 @@
                                         <th scope="col">Year level</th>
                                         <th scope="col">Semester</th>
                                         <th scope="col">School fees</th>
-                                        <th scope="col">Amount</th>
-                                        <th scope="col">type</th>
+                                        <th scope="col">Total fees</th>
                                         <th scope="col">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php 
-                                        $result = $connect->query("SELECT * FROM fees RIGHT JOIN manage_fees ON fees.id = manage_fees.local_fees;") or die($connect->error());
+                                        $result = $connect->query("SELECT * FROM year_lvl RIGHT JOIN manage_fees ON year_lvl.id = manage_fees.year_lvl;") or die($connect->error());
                                         while($row = $result->fetch_assoc()){ 
                                     ?>
                                     <tr>
                                         <td><?php echo $row['school_year']; ?></td>
                                         <td><?php echo $row['course']; ?></td>
-                                        <td><?php echo $row['year_lvl']; ?></td>
+                                        <td><?php echo $row['year']; ?></td>
                                         <td><?php echo $row['semester']; ?></td>
-                                        <td><?php echo $row['fee_name']; ?></td>
-                                        <td><?php echo $row['amount']; ?></td>
-                                        <td><?php echo $row['type']; ?></td>
+                                        <td><?php echo $row['fee_names']; ?></td>
+                                        <td><?php echo $row['total_fees']; ?></td>
                                         <td>
                                             <a href="../include/fees_management.php?delete=<?php echo $row['id'] ?>" class="btn btn-danger btn-xs" id="delete" name="delete">
                                                 <span class="fas fa-trash-alt"></span>
@@ -113,8 +111,8 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Manage fees</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <h5 class="modal-title" id="exampleModalLabel">Associate fees</h5>
+                    <button type="button" class="close fees_close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -139,7 +137,7 @@
                                     $result = $connect->query("SELECT * FROM year_lvl") or die($connect->error());
                                     while($row = $result->fetch_assoc()):
                                 ?>
-                                    <option value="<?php echo $row['year']; ?>"><?php echo $row["year"]; ?></option>
+                                    <option value="<?php echo $row['id']; ?>"><?php echo $row["year"]; ?></option>
                                 <?php endwhile; ?>
                             </select>
                         </div>
@@ -165,11 +163,11 @@
                                 <?php endwhile; ?>
                             </select>
                         </div>
-                        <table class="table table-striped table-bordered table-hover" id="table">
+                        <div class="table-sorting  table-responsive">
+                        <table class="table table-striped table-bordered table-hover" id="table1">
                             <thead>
                                 <tr class="p-4">
                                     <th scope="col">Select</th>
-                                    <th scope="col">fee id</th>
                                     <th scope="col">School fees</th>
                                     <th scope="col">Amount</th>
                                     <th scope="col">type</th>
@@ -187,14 +185,14 @@
                                         <label class="custom-control-label" for="check_amount"></label>
                                     </div>
                                     </td>
-                                    <td name="selected_fees"><?php echo $row['id']; ?></td>
-                                    <td><?php echo $row['fee_name']; ?></td>
+                                    <td name="selected_fees"><?php echo $row['fee_name']; ?></td>
                                     <td name="amount"><?php echo $row['amount']; ?></td>
                                     <td><?php echo $row['type']; ?></td>
                                 </tr>
                                 <?php } ?>
                             </tbody>
                         </table>
+                        </div>
                         <div class="form-group">
                             <label for="fs">Fees selected</label>
                             <input type="text" class="form-control" id="fs" name="fs" required readonly="readonly">

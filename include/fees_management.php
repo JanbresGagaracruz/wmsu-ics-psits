@@ -13,7 +13,7 @@
         $sem = $_POST['semester'];
         $fs = $_POST['fs'];
         $tp = $_POST['tp'];
-        $result = $connect->query("INSERT INTO manage_fees (school_year, year_lvl, course, semester, local_fees, tp) VALUES ('$sy','$yr','$course','$sem','$fs','$tp')") or die($connect->error());
+        $result = $connect->query("INSERT INTO manage_fees (school_year, year_lvl, course, semester, fee_names, total_fees) VALUES ('$sy','$yr','$course','$sem','$fs','$tp')") or die($connect->error());
         if($result){
             header('location: ../view/manage_fees.php?success=1');
             $_SESSION['message'] = "Management of fees has been successfully.";

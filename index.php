@@ -88,7 +88,7 @@
             <h5 class="mt-3">Customized your profile</h5>
             <div class="title-border mx-auto mt-3 mb-3"></div>
             <p class="mb-0">
-              You can customized your profile at and track all your transaction.
+              You can check and track all your transaction.
             </p>
           </div>
         </div>

@@ -5,7 +5,6 @@
         session_start(); 
     } 
     include("database.php");
-
     $email = "";
     $usertype = "";
     $first_name = "";
