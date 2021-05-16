@@ -28,7 +28,7 @@
     if(isset($_POST['Update'])){
         $id=$_POST['edit_id'];
         $edit_year_lvl=$_POST['edit_year_lvl'];
-        $check=$connect->query("UPDATE year_lvl SET year='$edit_year_lvl' WHERE id='$id' ") or die($connect->error());
+        $check=$connect->query("UPDATE year_lvl SET year='$edit_year_lvl' WHERE id='$id' ") or die($connect->error);
         if($check){
             header('location: ../view/year_level.php?success=1');
             $_SESSION['message'] = "You have successfully updated semester.";
@@ -40,7 +40,7 @@
     //delete semester
     if(isset($_GET['delete'])){
         $id = $_GET['delete'];
-        $result = $connect->query("SELECT * FROM year_lvl WHERE id = '$id';") or die($connect->error());
+        $result = $connect->query("SELECT * FROM year_lvl WHERE id = '$id';") or die($connect->error);
         if(count($result) == 1){
             $row = $result->fetch_array();
             $id = $row['id'];   

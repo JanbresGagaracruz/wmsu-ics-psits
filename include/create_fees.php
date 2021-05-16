@@ -11,7 +11,7 @@
         $amount=$_POST['amount'];
         $type=$_POST['type'];
         $designation="local fees";
-        $check=$connect->query("INSERT INTO fees (fee_name,amount,type,designation) VALUES ('$fee_name','$amount','$type','$designation')") or die($connect->error());
+        $check=$connect->query("INSERT INTO fees (fee_name,amount,type,designation) VALUES ('$fee_name','$amount','$type','$designation')") or die($connect->error);
         if($check){
             header('location: ../view/fees.php?success=1');
             $_SESSION['message'] = "You have successfully added ".$fee_name. " designation ".$designation.".";
@@ -91,7 +91,7 @@
         $amount=$_POST['edit_amount'];
         $type=$_POST['edit_type'];
         $designation="local fees";
-        $check=$connect->query("UPDATE fees SET fee_name='$fee_name',amount='$amount',type='$type',designation='$designation' WHERE id='$id' ") or die($connect->error());
+        $check=$connect->query("UPDATE fees SET fee_name='$fee_name',amount='$amount',type='$type',designation='$designation' WHERE id='$id' ") or die($connect->error);
         if($check){
             header('location: ../view/fees.php?success=1');
             $_SESSION['message'] = "You have successfully Update ".$fee_name. " designation ".$designation.".";

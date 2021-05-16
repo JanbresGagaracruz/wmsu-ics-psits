@@ -1,7 +1,8 @@
 <?php
     ob_start();
-    require("../include/assessment.php");
+    include("../include/assessment.php");
     include("../include/userlogin.php");
+    //include("../templates/template.php");
     if(!isset($_SESSION)) 
     { 
         session_start(); 
@@ -28,6 +29,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css">
     <link href="../css/bootstrap.css" rel="stylesheet" />
     <link href="../css/basic.css" rel="stylesheet" />
+    <link href="../css/error.css" rel="stylesheet" />
     <link rel="shortcut icon" href="../assets/ics_icon.ico">
 
     <title>Student assessment | Institute of computer studies</title>
@@ -80,7 +82,7 @@
                                 </thead>
                                 <tbody>
                                     <?php 
-                                        $query = ("SELECT * FROM request WHERE usertype NOT LIKE 'admin' AND approval_status='active' AND assessment_status='not assessed' ");
+                                        $query = ("SELECT * FROM request WHERE usertype NOT LIKE 'admin' AND approval_status='active' AND assessment_status='not assessed'");
                                         $result = mysqli_query($connect, $query);
                                         while($row = $result->fetch_assoc()){ 
                                     ?>
@@ -119,7 +121,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" action="officer_studentAssessment.php" id="reg">
+                    <form method="POST" action="officer_studAssessment.php" id="reg">
                         <input type="hidden" class="form-control" id="id" name="id">  
                         <div class="form-group">
                             <label for="name">Name</label>
@@ -154,9 +156,9 @@
                             </select>
                         </div>
                         <div class="form-group mt-1 mb-1" id="fee_names"></div> <!-- Total fees -->
-                        <div class="form-group" id="total_fees"></div> <!-- Total fees -->
+                        <div class="form-group" id="total_fees" ></div> <!-- Total fees -->
                         <div class="modal-footer">
-                            <button class="btn btn-success" name="create" id="create" type="submit">Create</button>
+                            <button class="btn btn-success" name="create" id="create" type="submit">Submit</button>
                         </div>
                     </form>
                 </div>
@@ -199,6 +201,7 @@
         }); 
         $('#fee_modal').on('hidden.bs.modal', function () {
             $(this).find('form').trigger('reset'); 
+            $(this).find('fee_names').trigger('hide'); 
             });
         }); 
     </script> 
@@ -220,6 +223,45 @@
                 });
             });		
         });
+        $( "#reg" ).validate( {
+            rules: {
+                u_payment: {
+                    required: true,
+                    digits: true,
+                    max: function() {
+                        return parseInt($('#tp').val());
+                    },
+                    min:1,
+                }	
+            },
+            errorElement: "em",
+            errorPlacement: function ( error, element ) {
+                error.addClass( "help-block" );
+                element.parents( ".u_val" ).addClass( "has-feedback" );
+    
+                if ( element.prop( "type" ) === "checkbox" ) {
+                    error.insertAfter( element.parent( "label" ) );
+                } else {
+                    error.insertAfter( element );
+                }
+                if ( !element.next( "span" )[ 0 ] ) {
+                    $( "<span class=\'form-control-feedback\'></span>" ).insertAfter( element );
+                }
+            },
+            success: function ( label, element ) {
+                if ( !$( element ).next( "span" )[ 0 ] ) {
+                    $( "<span class=\' form-control-feedback\'></span>" ).insertAfter( $( element ) );
+                }
+            },
+            highlight: function ( element, errorClass, validClass ) {
+                $( element ).parents( ".u_val" ).addClass( "has-error" ).removeClass( "has-success" );
+                $('#create').prop('disabled',true);
+            },
+            unhighlight: function ( element, errorClass, validClass ) {
+                $( element ).parents( ".u_val" ).addClass( "has-success" ).removeClass( "has-error" );
+                $('#create').prop('disabled',false);
+            }
+        } );
     </script>
 </body>
 </html>

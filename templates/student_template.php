@@ -21,13 +21,13 @@
     <?php } else { ?>
     <label for="tp">List of fees to pay</label>
 <?php
-
-    $result = $connect->query("SELECT total_fees, fee_names FROM manage_fees WHERE year_lvl = '$yearId' AND course = '$courseId' AND semester = '$semesterId'") or die($connect->error());
+    $result = $connect->query("SELECT id, total_fees, fee_names FROM manage_fees WHERE year_lvl = '$yearId' AND course = '$courseId' AND semester = '$semesterId'") or die($connect->error());
     while($row = $result->fetch_assoc()):
 ?>
+    <input type="hidden" value="<?php echo $row["id"]; ?>" name="manage_id" id="manage_id" class="form-control">
     <input type="text" value="<?php echo $row["fee_names"]; ?>" name="fn" class="form-control" readonly="readonly">
     <label for="tp" style="margin-top: 1.5rem;">Total payment</label>
-    <input type="number" value="<?php echo $row["total_fees"]; ?>" name="tp" class="form-control" readonly="readonly">
+    <input type="number" value="<?php echo $row["total_fees"]; ?>" name="tp"  id="tp"class="form-control" readonly="readonly">
     <div class="table-sorting  table-responsive" style="margin-top: 1rem;">
         <table class="table table-striped table-bordered table-hover" id="table1">
             <thead>
@@ -60,26 +60,27 @@
         </div>
         <div class="form-group">
             <label for="fs">Fees selected</label>
-            <input type="text" class="form-control" id="fs" name="fs" required readonly="readonly">
+            <input type="text" class="form-control" id="u_fees" name="u_fees" required readonly="readonly">
         </div>
-        <div class="form-group">
+        <div class="form-group u_val">
             <label for="tp">Total payment</label>
-            <input type="number" class="form-control" id="tp" name="tp" required readonly="readonly">
+            <input type="text" class="form-control" id="u_payment" name="u_payment" required readonly="readonly">
         </div>
 <?php endwhile; ?>
 <?php } ?>
 <script src="../js/datable.js"></script>
 <script>
-        $(function() {
-            $(".check_amount").click(function(event) {
-                var total = 0;
-                var name="";
-                $("tbody input[type=checkbox]:checked").each(function() {
-                    total += parseInt($(this).closest('tr').find('td[name=amount]').text().trim());
-                    name += ($(this).closest('tr').find('td[name=selected_fees]').text() + "  ");
-                });
-                $('#tp').val(total);
-                $('#fs').val(name);
+    $(function() {
+        $(".check_amount").click(function(event) {
+            var total = 0;
+            var name="";
+            $("tbody input[type=checkbox]:checked").each(function() {
+                total += parseInt($(this).closest('tr').find('td[name=amount]').text().trim());
+                name += ($(this).closest('tr').find('td[name=selected_fees]').text() + "  ");
             });
+            $('#u_payment').val(total);
+            $('#u_fees').val(name);
+            $('#u_payment').focus();
         });
-    </script> 
+    });
+</script> 

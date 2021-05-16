@@ -42,7 +42,7 @@
     if(isset($_GET['delete'])){
         $id = $_GET['delete'];
 
-        $result = $connect->query("SELECT * FROM withdraw WHERE id = '$id';") or die($connect->error());
+        $result = $connect->query("SELECT * FROM withdraw WHERE id = '$id';") or die($connect->error);
         if(count($result) == 1){
             $row = $result->fetch_array();
             $id = $row['id'];  

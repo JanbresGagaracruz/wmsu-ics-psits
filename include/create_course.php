@@ -8,7 +8,7 @@
     //create a new course
     if(isset($_POST['create'])){ 
         $course = $_POST['course'];
-        $check=$connect->query("INSERT INTO course (course) VALUES ('$course')") or die($connect->error());
+        $check=$connect->query("INSERT INTO course (course) VALUES ('$course')") or die($connect->error);
         if($check){
             header('location: ../view/course.php?success=1');
             $_SESSION['message'] = "You have successfully added a new course.";
@@ -28,7 +28,7 @@
     if(isset($_POST['Update'])){
         $id=$_POST['edit_id'];
         $course=$_POST['edit_course'];
-        $check=$connect->query("UPDATE course SET course='$course' WHERE id='$id' ") or die($connect->error());
+        $check=$connect->query("UPDATE course SET course='$course' WHERE id='$id' ") or die($connect->error);
         if($check){
             header('location: ../view/course.php?success=1');
             $_SESSION['message'] = "You have successfully updated course.";
@@ -40,7 +40,7 @@
     //delete course
     if(isset($_GET['delete'])){
         $id = $_GET['delete'];
-        $result = $connect->query("SELECT * FROM course WHERE id = '$id';") or die($connect->error());
+        $result = $connect->query("SELECT * FROM course WHERE id = '$id';") or die($connect->error);
         if(count($result) == 1){
             $row = $result->fetch_array();
             $id = $row['id'];   

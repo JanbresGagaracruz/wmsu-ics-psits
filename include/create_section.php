@@ -31,7 +31,7 @@
     if(isset($_POST['Update'])){
         $id=$_POST['edit_id'];
         $section=$_POST['edit_section'];
-        $check=$connect->query("UPDATE section SET sec='$section' WHERE id='$id' ") or die($connect->error());
+        $check=$connect->query("UPDATE section SET sec='$section' WHERE id='$id' ") or die($connect->error);
         if($check){
             header('location: ../view/section.php?success=1');
             $_SESSION['message'] = "You have successfully updated section.";
@@ -43,7 +43,7 @@
     //delete semester
     if(isset($_GET['delete'])){
         $id = $_GET['delete'];
-        $result = $connect->query("SELECT * FROM section WHERE id = '$id';") or die($connect->error());
+        $result = $connect->query("SELECT * FROM section WHERE id = '$id';") or die($connect->error);
         if(count($result) == 1){
             $row = $result->fetch_array();
             $id = $row['id'];   
