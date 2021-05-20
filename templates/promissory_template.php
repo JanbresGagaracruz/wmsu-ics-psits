@@ -71,6 +71,14 @@
                 <label for="tp">Payment fee</label>
                 <input type="text" class="form-control" id="u_payment" name="u_payment" required readonly="readonly">
             </div>
+            <div class="form-group">
+                <label for="tp">Reason</label>
+                <textarea type="text" class="form-control" id="reason" name="reason" required style="resize: none;"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="date">Date to pay</label>
+                <input type="date" class="form-control" min="2021-05" name="date_to_pay" required>
+            </div>
         </fieldset>
 <?php endwhile; ?>
 <?php } ?>

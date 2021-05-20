@@ -36,7 +36,7 @@
                     <?php echo $_SESSION['first_name']; ?>
                 </a>
                 <?php endif; ?>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="left: -2rem;">
                     <a class="dropdown-item" href="user_profile.php"><i class="fa fa-id-badge"></i> User Profile</a>
                     <a class="dropdown-item" href="login.php?logout=1"><i class="fa fa-sign-out-alt"></i> Log out</a>
                 </div>

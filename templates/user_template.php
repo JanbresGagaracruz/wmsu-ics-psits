@@ -1,12 +1,11 @@
 <?php 
     ob_start();
-    require("../include/assessment.php");
     include("../include/userlogin.php");
     if(!isset($_SESSION)) 
     { 
         session_start(); 
     } 
-    if($_SESSION['usertype'] != 1){
+    if($_SESSION['usertype'] != 'Student'){
         header("location: login.php?success=1");
         $_SESSION['message'] = "You cannot access this page unless you are a officer!";
     } 
@@ -48,9 +47,9 @@
                 ?>
                 <tr>
                     <td>              
-                        <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input check_amount" name="local_fees">
-                        <label class="custom-control-label" for="check_amount"></label>
+                        <div class="form-check custom-checkbox">
+                        <input type="checkbox" class="form-check-input check_amount" name="local_fees">
+                        <label class="form-check-label" for="check_amount"></label>
                     </div>
                     </td>
                     <td name="selected_fees"><?php echo $row['fee_name']; ?></td>
@@ -65,14 +64,17 @@
             <legend class="scheduler-border">Payment Information</legend>
             <div class="form-group">
                 <label for="fs">Fees selected</label>
-                <input type="text" class="form-control" id="u_fees" name="u_fees" required readonly="readonly">
+                <input type="text" class="form-control" id="item_name" name="item_name" required readonly="readonly">
             </div>
             <div class="form-group u_val">
                 <label for="tp">Payment fee</label>
-                <input type="text" class="form-control" id="u_payment" name="u_payment" required readonly="readonly">
+                <input type="text" class="form-control" id="amount" name="amount" required readonly="readonly">
             </div>
         </fieldset>
+        <input class="form-control" type="submit" name="submit" value="Submit Payment" style="background-color:#FFFF33; color:BLACK;cursor: pointer;"/>
+
 <?php endwhile; ?>
+
 <?php } ?>
 <script src="../js/datable.js"></script>
 <script>
@@ -84,8 +86,8 @@
                 total += parseInt($(this).closest('tr').find('td[name=amount]').text().trim());
                 name += ($(this).closest('tr').find('td[name=selected_fees]').text() + "  ");
             });
-            $('#u_payment').val(total);
-            $('#u_fees').val(name);
+            $('#amount').val(total);
+            $('#item_name').val(name);
             $('#u_payment').focus();
         });
     });

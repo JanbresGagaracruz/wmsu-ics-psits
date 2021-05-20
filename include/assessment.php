@@ -12,20 +12,6 @@
         $row = mysqli_fetch_array($result);  
         echo json_encode($row);  
     }
-/* if(isset($_POST["create"])){
-    $student_id = $_POST['id'];
-    $year_id = $_POST['year'];
-    $semester_id = $_POST['semester'];
-    $manage_id = $_POST['id'];
-    $u_fees = $_POST['u_fees'];
-    $u_payment = $_POST['u_payment'];
-
-    $sql = "INSERT INTO student_assessment (student_id, manage_id, year_id,sem,u_fees,u_payment) 
-    VALUES ('$student_id','$manage_id','$year_id','$semester_id','$u_fees','$u_payment')";
-    mysqli_query($connect, $sql);
-    header('location: ../view/officer_studAssessment.php?success=1');
-    $_SESSION['message'] = "Sucessfully assess! the student may now proceed to the cashier!";
-} */
 
     if(isset($_POST['create'])){ 
         $student_id = $_POST['id'];
@@ -34,9 +20,10 @@
         $semester_id = $_POST['semester'];
         $u_fees = $_POST['u_fees'];
         $u_payment = $_POST['u_payment'];
+        $balance = $_POST['tp'];
 
-        $sql = "INSERT INTO student_assessment (student_id, manage_id, year_id,sem,u_fees,u_payment) 
-        VALUES ('$student_id','$manage_id','$year_id','$semester_id','$u_fees','$u_payment')";
+        $sql = "INSERT INTO student_assessment (student_id, manage_id, year_id,sem,u_fees,u_payment, balance) 
+        VALUES ('$student_id','$manage_id','$year_id','$semester_id','$u_fees','$u_payment','$balance')";
         $assess = mysqli_query($connect, $sql);
         if($assess){
             $update = "UPDATE request SET assessment_status = 'assessed' WHERE id = '$student_id';";

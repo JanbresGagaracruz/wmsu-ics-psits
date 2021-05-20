@@ -1,15 +1,10 @@
 <?php
     ob_start();
-    include("../include/assessment.php");
+    include("../include/cashier.php");
     include("../include/userlogin.php");
-    //include("../templates/template.php");
     if(!isset($_SESSION)) 
     { 
         session_start(); 
-    } 
-    if($_SESSION['usertype'] != 1){
-        header("location: login.php?success=1");
-        $_SESSION['message'] = "You cannot access this page unless you are a officer!";
     } 
     ob_end_flush();
 ?>
@@ -32,7 +27,7 @@
     <link href="../css/error.css" rel="stylesheet" />
     <link rel="shortcut icon" href="../assets/ics_icon.ico">
 
-    <title>Student assessment | Institute of computer studies</title>
+    <title>Cashier | Institute of computer studies</title>
 </head>
 <body>
     <?php
@@ -42,7 +37,7 @@
             <div id="page-inner">
                 <div class="row">
                     <div class="col-md-12">
-                        <h2 class="page-head-line" >Associate student fees</h2>
+                        <h2 class="page-head-line" >Proceed to payment</h2>
                     </div>
                 </div>
                 <center class="center">
@@ -72,31 +67,59 @@
                                 <thead>
                                     <tr>
                                         <th>Full Name</th>
-                                        <th>Email</th>
-                                        <th>Usertype</th>
                                         <th>Course</th>
+                                        <th>year</th>
+                                        <th>Sem</th>
+                                        <th>Selected fees</th>
+                                        <th>Payment</th>
+                                        <th>Balance</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php 
-                                        $query = ("SELECT * FROM request WHERE usertype NOT LIKE 'admin' AND approval_status='active' AND assessment_status='not assessed'");
+                                        $query=("SELECT
+                                        request.id,
+                                        request.course, 
+                                        request.approval_status, 
+                                        CONCAT(last_name, ', ', first_name,' ',middle_name) as full_name,
+                                        manage_fees.total_fees,
+                                        manage_fees.fee_names,
+                                        year_lvl.year,
+                                        sem,
+                                        u_fees,
+                                        u_payment,
+                                        balance,
+                                        student_assessment.id,
+                                        promissory_approval,
+                                        transaction_status
+                                        FROM student_assessment
+                                        JOIN request
+                                            ON request.id = student_assessment.student_id
+                                        JOIN manage_fees
+                                            ON manage_fees.id = student_assessment.manage_id
+                                        JOIN year_lvl
+                                            ON year_lvl.id = student_assessment.year_id;");
+
                                         $result = mysqli_query($connect, $query);
                                         while($row = $result->fetch_assoc()){ 
                                     ?>
-                                    <tr><?php if($row['approval_status'] == 'active'){ ?>
-                                        <?php } ?>
-                                    
-                                        <td><?php echo $row['last_name']; echo ',';?> <?php echo $row['first_name'];?>  <?php echo $row['middle_name']; ?></td>
-                                        <td><?php echo $row['email']; ?></td>
-                                        <td><?php echo $row['usertype']; ?></td>
+                                    <?php if($row['approval_status'] == 'active' && $row['promissory_approval'] == 'approved' && $row['balance'] != 0){ ?>
+                                    <tr>
+                                        <td><?php echo $row['full_name'];?></td>
                                         <td><?php echo $row['course']; ?></td>
+                                        <td><?php echo $row['year']; ?></td>
+                                        <td><?php echo $row['sem']; ?></td>
+                                        <td><?php echo $row['u_fees']; ?></td>
+                                        <td><?php echo $row['u_payment']; ?></td>
+                                        <td><?php echo $row['balance']; ?></td>
                                         <td>
-                                            <a type="button" name="view"  id="<?php echo $row["id"]; ?>" class="btn btn-warning btn-xs get_fee" data-toggle="tooltip" data-placement="top" title="Associate fees">
-                                                <span class="fas fa-balance-scale fa-2x"></span>
+                                            <a type="button" name="view"  id="<?php echo $row["id"]; ?>" class="btn btn-primary btn-xs get_fee" data-toggle="tooltip" data-placement="top" title="Get payment">
+                                                <span class="fa fa-cash-register fa-2x"></span>
                                             </a> 
                                         </td>
                                     </tr>
+                                    <?php } ?>
                                     <?php } ?>
                                 </tbody>
                             </table>
@@ -112,15 +135,15 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Assess Student</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Process payment</h5>
                     <button type="button" class="close get_close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" action="officer_studAssessment.php" id="reg">
+                    <form method="POST" action="officer_cashier.php" id="reg">
                         <fieldset class="scheduler-border">
-                            <legend class="scheduler-border">Student Information</legend>
+                            <legend class="scheduler-border">Student information</legend>
                             <input type="hidden" class="form-control" id="id" name="id">  
                             <div class="form-group">
                                 <label for="name">Name</label>
@@ -131,32 +154,71 @@
                                 <input type="text" class="form-control" id="course" name="course" readonly="readonly">
                             </div>
                             <div class="form-group">
-                                <label for="semester">Semester</label>
-                                <select class="form-control" id="semester" name="semester" required>
-                                    <?php
-                                        $result = $connect->query("SELECT * FROM semester") or die($connect->error());
-                                        while($row = $result->fetch_assoc()):
-                                    ?>
-                                        <option value="" selected="selected" hidden="hidden">Select Semester</option>
-                                        <option value="<?php echo $row['sem']; ?>"><?php echo $row["sem"]; ?></option>
-                                    <?php endwhile; ?>
-                                </select>
+                                <label for="sem">Semester</label>
+                                <input type="text" class="form-control" id="sem" name="sem" readonly="readonly">
                             </div>
                             <div class="form-group">
                                 <label for="year">Year</label>
-                                <select class="form-control" id="year" name="year" required>
-                                    <?php
-                                        $result = $connect->query("SELECT * FROM year_lvl") or die($connect->error());
-                                        while($row = $result->fetch_assoc()):
-                                    ?>
-                                        <option value="" selected="selected" hidden="hidden">Select year level</option>
-                                        <option value="<?php echo $row['id']; ?>"><?php echo $row["year"]; ?></option>
-                                    <?php endwhile; ?>
-                                </select>
+                                <input type="text" class="form-control" id="year" name="year" readonly="readonly">
                             </div>
                         </fieldset>
-                        <div class="form-group mt-1 mb-1" id="fee_names"></div> <!-- Total fees -->
-                        <div class="form-group" id="total_fees" ></div> <!-- Total fees -->
+                        <fieldset class="scheduler-border">
+                            <legend class="scheduler-border">Total payment</legend>
+                            <div class="form-group">
+                                <label for="fee_names">Actual fees</label>
+                                <input type="text" class="form-control" id="fee_names" name="fee_names" readonly="readonly">
+                            </div>
+                            <div class="form-group">
+                                <label for="total_fees">Total Amount to be paid</label>
+                                <input type="text" class="form-control" id="total_fees" name="total_fees" readonly="readonly">
+                            </div>
+                        </fieldset>
+                        <div class="table-sorting  table-responsive" style="margin-top: 1rem;">
+                        <table class="table table-striped table-bordered table-hover" id="table1">
+                            <thead>
+                                <tr class="p-4">
+                                    <th scope="col">Select</th>
+                                    <th scope="col">School fees</th>
+                                    <th scope="col">Amount</th>
+                                    <th scope="col">type</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php 
+                                    $result = $connect->query("SELECT * FROM fees;") or die($connect->error());
+                                    while($row = $result->fetch_assoc()){ 
+                                ?>
+                                <tr>
+                                    <td>              
+                                        <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input check_amount" name="local_fees">
+                                        <label class="custom-control-label" for="check_amount"></label>
+                                    </div>
+                                    </td>
+                                    <td name="selected_fees"><?php echo $row['fee_name']; ?></td>
+                                    <td name="amount"><?php echo $row['amount']; ?></td>
+                                    <td><?php echo $row['type']; ?></td>
+                                </tr>
+                                <?php } ?>
+                            </tbody>
+                        </table>
+                        </div>
+                        <fieldset class="scheduler-border">
+                            <legend class="scheduler-border">Payment Information</legend>
+                            <div class="form-group">
+                                <label for="select_fees">Selected fees</label>
+                                <input type="text" class="form-control" id="select_fees" name="select_fees" readonly="readonly">
+                            </div>
+                            <div class="form-group">
+                                <label for="balance">Student balance</label>
+                                <input type="text" class="form-control" id="balance" name="balance" readonly="readonly">
+                            </div>
+                            <div class="form-group u_val">
+                                <label for="total_payment">Payment fee</label>
+                                <input type="text" class="form-control" id="total_payment" name="total_payment" readonly="readonly">
+                            </div>
+                        </fieldset>
+
                         <div class="modal-footer">
                             <button class="btn btn-success" name="create" id="create" type="submit">Submit</button>
                         </div>
@@ -186,7 +248,7 @@
         $(document).on('click', '.get_fee', function(){  
         var id = $(this).attr("id");   
         $.ajax({  
-            url:"../include/assessment.php",  
+            url:"../include/cashier.php",  
             method:"POST",  
             data:{
                 id:id
@@ -195,40 +257,30 @@
             success:function(data){  
                 $('#name').val(data.full_name);
                 $('#course').val(data.course);
+                $('#year').val(data.year);
+                $('#sem').val(data.sem);
+                $('#fee_names').val(data.fee_names);
+                $('#total_fees').val(data.total_fees);
+                $('#select_fees').val(data.u_fees);
+                $('#total_payment').val(data.u_payment);
+                $('#balance').val(data.balance);
                 $('#id').val(data.id);
                 $('#fee_modal').modal('show');
             }   
         }); 
         $('#fee_modal').on('hidden.bs.modal', function () {
-            $(this).find('form').trigger('reset'); 
-            document.location.reload();
+                $(this).find('form').trigger('reset'); 
+                document.location.reload();
             });
-        }); 
-    </script> 
-    <script>        
-        $(document).ready(function () {
-            $("#year").change(function() {
-                $.ajax({
-                    type: "post",
-                    url: "../templates/student_template.php",
-                    data: {
-                        "course": $("#course").val(),
-                        "semester": $("#semester").val(),
-                        "year": $("#year").val(),
-                    },
-                    success: function(data) {
-                        $("#total_fees").html(data);
-                    }
-                });
-            });		
         });
+        //
         $( "#reg" ).validate( {
             rules: {
-                u_payment: {
+                total_payment: {
                     required: true,
                     digits: true,
                     max: function() {
-                        return parseInt($('#tp').val());
+                        return parseInt($('#balance').val());
                     },
                     min:1,
                 }	
@@ -261,6 +313,19 @@
                 $('#create').prop('disabled',false);
             }
         } );
+    </script> 
+    <script>
+        $(function() {
+            $(".check_amount").click(function(event) {
+                var total = 0;
+                var name="";
+                $("tbody input[type=checkbox]:checked").each(function() {
+                    total += parseInt($(this).closest('tr').find('td[name=amount]').text().trim());
+                    name += ($(this).closest('tr').find('td[name=selected_fees]').text() + "  ");
+                });
+                $('#total_payment').val(total);
+                $('#select_fees').val(name);
+                $('#total_payment').focus();
+            });
+        });
     </script>
-</body>
-</html>

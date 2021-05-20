@@ -119,6 +119,11 @@
                             </div>
                         </div>
                         <div class="col-md-4">
+                            <?php 
+                                $query = ("SELECT * FROM manage_fees");
+                                $result = mysqli_query($connect, $query);
+                                $count = mysqli_num_rows($result);
+                            ?>
                             <div class="main-box mb-orange">
                                 <a href="manage_fees.php">
                                     <i class="fa fa-tasks fa-5x"></i>
@@ -126,16 +131,23 @@
                                         Manage schedule fees
                                     </h5>
                                 </a>
+                                <h1 id="record_data"> <?=$count?></h1>
                             </div>
                         </div>
                         <div class="col-md-4">
+                            <?php 
+                                $query = ("SELECT * FROM student_assessment WHERE promissory_approval = 'pending'");
+                                $result = mysqli_query($connect, $query);
+                                $count = mysqli_num_rows($result);
+                            ?>
                             <div class="main-box mb-orange">
-                                <a href="#">
+                                <a href="promissory_approval.php">
                                     <i class="fa fa-file-text fa-5x"></i>
                                     <h5>
-                                        Promissory
+                                        Promissory approval
                                     </h5>
                                 </a>
+                                <h1 id="record_data"> <?=$count?></h1>
                             </div>
                         </div>               
                     </div>

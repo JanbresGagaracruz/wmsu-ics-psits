@@ -134,7 +134,7 @@
                             <label for="year">Year</label>
                             <select class="custom-select form-control" id="year" name="year">
                                 <?php
-                                    $result = $connect->query("SELECT * FROM year_lvl") or die($connect->error());
+                                    $result = $connect->query("SELECT * FROM year_lvl ORDER BY year ASC") or die($connect->error());
                                     while($row = $result->fetch_assoc()):
                                 ?>
                                     <option value="<?php echo $row['id']; ?>"><?php echo $row["year"]; ?></option>

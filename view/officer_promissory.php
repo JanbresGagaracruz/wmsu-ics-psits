@@ -1,6 +1,6 @@
 <?php
     ob_start();
-    include("../include/assessment.php");
+    include("../include/create_promissory.php");
     include("../include/userlogin.php");
     //include("../templates/template.php");
     if(!isset($_SESSION)) 
@@ -32,7 +32,7 @@
     <link href="../css/error.css" rel="stylesheet" />
     <link rel="shortcut icon" href="../assets/ics_icon.ico">
 
-    <title>Student assessment | Institute of computer studies</title>
+    <title>Student promissory | Institute of computer studies</title>
 </head>
 <body>
     <?php
@@ -42,7 +42,7 @@
             <div id="page-inner">
                 <div class="row">
                     <div class="col-md-12">
-                        <h2 class="page-head-line" >Associate student fees</h2>
+                        <h2 class="page-head-line" >Associate student promissory note</h2>
                     </div>
                 </div>
                 <center class="center">
@@ -112,13 +112,13 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Assess Student</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Create promissory note</h5>
                     <button type="button" class="close get_close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" action="officer_studAssessment.php" id="reg">
+                    <form method="POST" action="officer_promissory.php" id="reg">
                         <fieldset class="scheduler-border">
                             <legend class="scheduler-border">Student Information</legend>
                             <input type="hidden" class="form-control" id="id" name="id">  
@@ -186,7 +186,7 @@
         $(document).on('click', '.get_fee', function(){  
         var id = $(this).attr("id");   
         $.ajax({  
-            url:"../include/assessment.php",  
+            url:"../include/create_promissory.php",  
             method:"POST",  
             data:{
                 id:id
@@ -210,7 +210,7 @@
             $("#year").change(function() {
                 $.ajax({
                     type: "post",
-                    url: "../templates/student_template.php",
+                    url: "../templates/promissory_template.php",
                     data: {
                         "course": $("#course").val(),
                         "semester": $("#semester").val(),

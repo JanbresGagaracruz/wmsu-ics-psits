@@ -54,7 +54,7 @@
                     <div class="row">				
                     <div class="col-md-4">
                             <div class="main-box mb-orange">
-                                <a href="#">
+                                <a href="officer_cashier.php">
                                     <i class="fa  fa-cash-register fa-5x"></i>
                                     <h5>
                                         Cashier
@@ -64,7 +64,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="main-box mb-orange">
-                                <a href="#">
+                                <a href="officer_promissory.php">
                                     <i class="fa  fa-envelope fa-5x"></i>
                                     <h5>
                                         Promissory

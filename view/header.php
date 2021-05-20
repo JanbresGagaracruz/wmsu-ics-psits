@@ -34,6 +34,9 @@
                     <a href="manage_fees.php"><i class="fa fa-tasks "></i>Manage Scheduled fees</a>
                 </li>
                 <li>
+                    <a href="promissory_approval.php"><i class="fa fa-file-text "></i>Promissory approval</a>
+                </li>
+                <li>
                     <a href="announcement.php"><i class="fa fa-bullhorn "></i>Create Announcement</a>
                 </li>
                 <li>

@@ -6,6 +6,9 @@
         }
         else if(!empty($_SESSION['usertype']) && $_SESSION['usertype'] == "1"){
             header("location: dashboard_officer.php");
+        }
+        else if(!empty($_SESSION['usertype']) && $_SESSION['usertype'] == "Student"){
+            header("location: homepage.php");
         }else{}
     ob_end_flush();
 ?>
