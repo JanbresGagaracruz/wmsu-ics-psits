@@ -35,7 +35,7 @@
         include("header.php");
     ?>
             <div id="page-wrapper">
-                <div id="page-inner">
+                <div id="page-inner" class="dash">
                     <div class="row">
                         <div class="col-md-12">
                             <h2 class="page-head-line" >Record Summary</h2>
