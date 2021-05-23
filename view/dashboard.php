@@ -61,8 +61,8 @@
                                 ?>
                                 <a href="account_approval.php">    
                                 <i class="fa fa-users fa-5x"></i>
-                                    <h5>
-                                    Account Approval
+                                    <h5 id="record_data">
+                                        Account Approval
                                     </h5>
                                 </a>
                                 <h1 id="record_data"> <?=$count?></h1>
@@ -77,7 +77,7 @@
                                 ?>
                                 <a href="active_user.php">
                                     <i class="fa fa-user-circle fa-5x"></i>
-                                    <h5>
+                                    <h5 id="record_data">
                                         Active users
                                     </h5>
                                 </a>
@@ -93,7 +93,7 @@
                                         $count = mysqli_num_rows($result);
                                     ?>
                                     <i class="fa fa-user-alt fa-5x"></i>
-                                    <h5>
+                                    <h5 id="record_data">
                                         Add User
                                     </h5>
                                 </a>
@@ -111,7 +111,7 @@
                             <div class="main-box mb-orange">
                                 <a href="fees.php">
                                     <i class="fa fa-money-check fa-5x"></i>
-                                    <h5>
+                                    <h5 id="record_data">
                                         Fees
                                     </h5>
                                 </a>
@@ -127,7 +127,7 @@
                             <div class="main-box mb-orange">
                                 <a href="manage_fees.php">
                                     <i class="fa fa-tasks fa-5x"></i>
-                                    <h5>
+                                    <h5 id="record_data">
                                         Manage schedule fees
                                     </h5>
                                 </a>
@@ -143,7 +143,7 @@
                             <div class="main-box mb-orange">
                                 <a href="promissory_approval.php">
                                     <i class="fa fa-file-text fa-5x"></i>
-                                    <h5>
+                                    <h5 id="record_data">
                                         Promissory approval
                                     </h5>
                                 </a>
@@ -161,7 +161,7 @@
                         <div class="main-box mb-orange">
                                 <a href="withdraw.php">
                                     <i class="fa fa-bank fa-5x"></i>
-                                    <h5>
+                                    <h5 id="record_data">
                                         Withdraw Management
                                     </h5>
                                 </a>
@@ -177,7 +177,7 @@
                             <div class="main-box mb-orange">
                                 <a href="announcement.php">
                                     <i class="fa fa-bullhorn fa-5x"></i>
-                                    <h5>
+                                    <h5 id="record_data">
                                         Announcement
                                     </h5>
                                 </a>
@@ -193,7 +193,7 @@
                             <div class="main-box mb-orange">
                                 <a href="school_year.php">
                                     <i class="fa fa-calendar-alt fa-5x"></i>
-                                    <h5>
+                                    <h5 id="record_data">
                                         School Year
                                     </h5>
                                 </a>
@@ -211,7 +211,7 @@
                             <div class="main-box mb-orange">
                                 <a href="year_lvl.php">
                                     <i class="fa fa-calendar-plus fa-5x"></i>
-                                    <h5>
+                                    <h5 id="record_data">
                                         Year level
                                     </h5>
                                 </a>
@@ -227,7 +227,7 @@
                             <div class="main-box mb-orange">
                                 <a href="course.php">
                                     <i class="fa fa-chalkboard fa-5x"></i>
-                                    <h5>
+                                    <h5 id="record_data">
                                         Course
                                     </h5>
                                 </a>
@@ -243,7 +243,7 @@
                             <div class="main-box mb-orange">
                                 <a href="semester.php">
                                     <i class="fa fa-plus-square fa-5x"></i>
-                                    <h5>
+                                    <h5 id="record_data">
                                         Semester
                                     </h5>
                                 </a>
@@ -261,7 +261,7 @@
                             <div class="main-box mb-orange">
                                 <a href="section.php">
                                     <i class="fa fa-pen-square fa-5x"></i>
-                                    <h5>
+                                    <h5 id="record_data">
                                         Class Section
                                     </h5>
                                 </a>

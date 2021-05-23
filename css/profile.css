@@ -75,13 +75,13 @@ footer .navbar{
     justify-content: center;
     align-items: center;
 }
+
 .user-info{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     font-family: 'Poppins', sans-serif;
-
 } 
 /*notification*/
 .notifications {
@@ -143,6 +143,22 @@ legend.scheduler-border {
     padding: 0 10px;
     border-bottom: none;
 }
+label.error {
+    color: red;
+    font-size: 1rem;
+    display: block;
+}
+input.error {
+    border: 1px dashed red;
+    font-weight: 300;
+    color: red;
+}
+.help-block {
+    display: block;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    color: #a94442!important;
+}
 @media (max-width: 576px) { 
     .d-flex{
         justify-content: center;
@@ -152,6 +168,9 @@ legend.scheduler-border {
       }
     .ics{
         font-size: 12px;
+    }
+    #transact{
+        margin-top: 1rem;
     }
 }
 

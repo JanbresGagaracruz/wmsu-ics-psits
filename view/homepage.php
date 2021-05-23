@@ -6,6 +6,23 @@
         header('location: login.php?success=1');
         $_SESSION['message'] = "Access denied make sure you log in first.";
     }
+    $student_id = $_SESSION['id'];
+    $tat="close";
+    $query = (" SELECT 
+                notification.date,
+                notification.id AS notif_session,
+                student_assessment.reason,
+                request.id AS st
+                FROM notification
+                LEFT OUTER JOIN student_assessment
+                    ON student_assessment.id = notification.assessment_id
+                    LEFT OUTER JOIN request
+                        ON request.id = student_assessment.student_id
+                            WHERE notification.status='$tat' AND request.id = '$student_id' ");
+    $result = mysqli_query($connect, $query);
+    while($row = $result->fetch_assoc()){ 
+        $_SESSION['notification']= $row['notif_session'] ;
+    }
     ob_end_flush();
 ?>
 

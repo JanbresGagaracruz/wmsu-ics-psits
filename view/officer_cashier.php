@@ -67,9 +67,6 @@
                                 <thead>
                                     <tr>
                                         <th>Full Name</th>
-                                        <th>Course</th>
-                                        <th>year</th>
-                                        <th>Sem</th>
                                         <th>Selected fees</th>
                                         <th>Payment</th>
                                         <th>Balance</th>
@@ -107,9 +104,6 @@
                                     <?php if($row['approval_status'] == 'active' && $row['promissory_approval'] == 'approved' && $row['balance'] != 0){ ?>
                                     <tr>
                                         <td><?php echo $row['full_name'];?></td>
-                                        <td><?php echo $row['course']; ?></td>
-                                        <td><?php echo $row['year']; ?></td>
-                                        <td><?php echo $row['sem']; ?></td>
                                         <td><?php echo $row['u_fees']; ?></td>
                                         <td><?php echo $row['u_payment']; ?></td>
                                         <td><?php echo $row['balance']; ?></td>

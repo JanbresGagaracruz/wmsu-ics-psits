@@ -1,12 +1,16 @@
 <?php
     ob_start();
+    if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
     include('../include/userlogin.php');
+    include('../include/create_promissory.php');
     if($_SESSION['usertype'] != 'Student'){
         header('location: login.php?success=1');
         $_SESSION['message'] = "Access denied make sure you log in first.";
     }
     $id = $_SESSION['id'];
-    $paypal_email = 'janbres666@gmail.com';
     ob_end_flush();
 ?>
 <!doctype html>
@@ -25,7 +29,7 @@
     <!--Custom CSS-->
   <link rel="shortcut icon" href="../assets/ics_icon.ico">
   <link rel="stylesheet" href="../css/profile.css">
-  <title>Payment | Institute of Computer Studies</title>
+  <title>Promissory note | Institute of Computer Studies</title>
 </head>
 
 <body>
@@ -33,13 +37,30 @@
 
     <!--top section-->
     <div class="container">
+    <center class="center">
+        <?php if(isset($_SESSION['message']) && $_GET['success'] == 1): ?>    
+            <div class="alert alert-success alert-dismissible mt-2" id="success">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <?php 
+                    echo $_SESSION['message'];  
+                    unset($_SESSION['message']);
+            ?>
+            <?php elseif(isset($_SESSION['message']) && $_GET['success'] == 2): ?>    
+            <div class="alert alert-danger alert-dismissible mt-2" id="success">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <?php 
+                    echo $_SESSION['message'];  
+                    unset($_SESSION['message']);
+            ?>
+        <?php endif ?>
+    </center>
         <div class="row justify-content-center">
             <div class="col-10 pt-3 pb-3">
                 <div class="card top-card">
                     <div class="card-body ">
                         <div class="d-flex">
                             <div class="card-title">
-                                <h2>Student payment</h2>
+                                <h2>Create promissory</h2>
                             </div>
                         </div>
                     </div>
@@ -51,7 +72,7 @@
                                 <div class="col-sm-7 col-md-12">
                                     <div class="card user-profile">
                                         <div class="card-body">
-                                        <form method="POST" action="../include/listener.php" id="paypal_form">
+                                        <form method="POST" action="user_promissory.php" id="promissory">
                                             <fieldset class="scheduler-border">
                                                 <legend class="scheduler-border">Student Information</legend>
                                                 <div class="form-group">
@@ -95,9 +116,6 @@
                                             </fieldset>
                                             <div class="form-group mt-1 mb-1" id="fee_names"></div> <!-- Total fees -->
                                             <div class="form-group" id="total_fees" ></div> <!-- Total fees -->
-                                            <input type="hidden" name="cmd" value="_xclick" />
-                                            <input type="hidden" name="currency_code" value="PHP" />
-                                            <input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynow_LG.gif:NonHostedGuest" />
                                             <?php endwhile; ?>
                                         </form>
                                     </div>
@@ -124,12 +142,14 @@
     <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
     <script src="../js/datable.js"></script>
+    <script src="../js/alert-slide.js" ></script>
+    
     <script>
         $(document).ready(function () {
             $("#year").change(function() {
                 $.ajax({
                     type: "post",
-                    url: "../templates/user_template.php",
+                    url: "../templates/user_promissory_template.php",
                     data: {
                         "course": $("#course").val(),
                         "semester": $("#semester").val(),
@@ -141,16 +161,16 @@
                 });
             });		
         });
-        $( "#paypal_form" ).validate( {
+        $( "#promissory" ).validate( {
             rules: {
-                amount: {
+                u_payment: {
                     required: true,
                     digits: true,
                     max: function() {
                         return parseInt($('#tp').val());
                     },
                     min:1,
-                }	
+                },
             },
             errorElement: "em",
             errorPlacement: function ( error, element ) {

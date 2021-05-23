@@ -1,14 +1,15 @@
 <?php 
     ob_start();
+    require("../include/assessment.php");
     include("../include/userlogin.php");
     if(!isset($_SESSION)) 
     { 
         session_start(); 
     } 
     if($_SESSION['usertype'] != 'Student'){
-        header("location: login.php?success=1");
-        $_SESSION['message'] = "You cannot access this page unless you are a officer!";
-    } 
+        header('location: login.php?success=1');
+        $_SESSION['message'] = "Access denied make sure you log in first.";
+    }
     ob_end_flush();
     $yearId = $_POST['year'];
     $courseId = $_POST['course'];
@@ -64,19 +65,28 @@
             <legend class="scheduler-border">Payment Information</legend>
             <div class="form-group">
                 <label for="fs">Fees selected</label>
-                <input type="text" class="form-control" id="item_name" name="item_name" required readonly="readonly">
+                <input type="text" class="form-control" id="u_fees" name="u_fees" required readonly="readonly">
             </div>
             <div class="form-group u_val">
                 <label for="tp">Payment fee</label>
-                <input type="text" class="form-control" id="amount" name="amount" required readonly="readonly">
+                <input type="text" class="form-control" id="u_payment" name="u_payment" required readonly="readonly">
+            </div>
+            <div class="form-group">
+                <label for="tp">Reason</label>
+                <textarea type="text" class="form-control" id="reason" name="reason" style="resize: none;" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="date">Date to pay</label>
+                <input type="date" class="form-control" min="2021-05-23" name="date_to_pay" required>
             </div>
         </fieldset>
-        <input class="form-control" type="submit" name="submit" value="Submit Payment" style="background-color:#FFFF33; color:BLACK;cursor: pointer;"/>
-
+        <div class="modal-footer">
+            <button class="btn btn-success" name="submit" id="submit" type="submit">Submit</button>
+        </div>
 <?php endwhile; ?>
-
 <?php } ?>
 <script src="../js/datable.js"></script>
+<script src="../js/validation.js" ></script>
 <script>
     $(function() {
         $(".check_amount").click(function(event) {
@@ -86,9 +96,9 @@
                 total += parseInt($(this).closest('tr').find('td[name=amount]').text().trim());
                 name += ($(this).closest('tr').find('td[name=selected_fees]').text() + "  ");
             });
-            $('#amount').val(total);
-            $('#item_name').val(name);
-            $('#amount').focus();
+            $('#u_payment').val(total);
+            $('#u_fees').val(name);
+            $('#u_payment').focus();
         });
     });
 </script> 

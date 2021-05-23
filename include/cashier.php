@@ -74,15 +74,25 @@
         $u_fees = $_POST['select_fees'];
         $transaction_status = 1;
         $bal = max((int)$balance, 0);
-        $check=$connect->query("INSERT INTO payment_transaction (assess_id,balance) VALUES ('$id', '$bal')");
+        $status="close";
+        $paid = "paid";
+        $on = "ongoing";
+        $message= "Payment transaction has been sucessfully.";
+        if($balanace == 0){
+            $check=$connect->query("INSERT INTO payment_transaction (assess_id,balance,payment_status) VALUES ('$id', '$bal', '$paid')");
+        }else{
+            $check=$connect->query("INSERT INTO payment_transaction (assess_id,balance,payment_status) VALUES ('$id', '$bal', '$on')");
+        }
+        
         if($check){
             $update = "UPDATE student_assessment SET balance = '$bal',u_payment = 0, u_fees = CONCAT(u_fees, '$u_fees'), transaction_status = ' $transaction_status'  WHERE id = '$id';";
             mysqli_query($connect, $update);
+            $connect->query("INSERT INTO notification (assessment_id,message,status) VALUES ('$id','$message','$status')");
             header('location: ../view/officer_cashier.php?success=1');
             $_SESSION['message'] = "Payment successfully added!";
         }else{
             header('location: ../view/officer_cashier.php?success=1');
-            $_SESSION['message'] = "Payment successfully added!";
+            $_SESSION['message'] = "Something went wrong!";
         }
     }
     ob_end_flush();

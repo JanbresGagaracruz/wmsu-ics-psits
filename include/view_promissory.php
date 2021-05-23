@@ -56,7 +56,7 @@
                     </tr> 
                     <tr>  
                         <td width="30%"><label>Course</label></td>  
-                        <td width="70%">'.$row["course"].'/td>  
+                        <td width="70%">'.$row["course"].'</td>  
                     </tr>  
                     <tr>  
                         <td width="30%"><label>Email</label></td>  

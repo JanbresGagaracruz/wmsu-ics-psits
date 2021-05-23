@@ -31,10 +31,47 @@
             $update = "UPDATE request SET assessment_status = 'assessed' WHERE id = '$student_id';";
             mysqli_query($connect, $update);
             header('location: ../view/officer_promissory.php?success=1');
-            $_SESSION['message'] = "Sucessfully assess! the student may now proceed to the cashier!";
+            $_SESSION['message'] = "Sucessfully send a promissory note! Please wait for the approval an emaill will be send to you.";
         }else{
-            header('location: ../view/officer_promissory.php?success=1');
+            header('location: ../view/officer_promissory.php?success=2');
             $_SESSION['message'] = "Something went wrong!";
+        }
+    }
+    if(isset($_POST['submit'])){ 
+        $student_id = $_SESSION['id'];
+        $manage_id = $_POST['manage_id'];
+        $year_id = $_POST['year'];
+        $semester_id = $_POST['semester'];
+        $u_fees = $_POST['u_fees'];
+        $u_payment = $_POST['u_payment'];
+        $balance = $_POST['tp'];
+        $reason = $_POST['reason'];
+        $date = $_POST['date_to_pay'];
+        $approval = "pending";
+        $t=1;
+
+        $query = ("SELECT * FROM student_assessment;");
+        $result = mysqli_query($connect, $query);
+        while($row = $result->fetch_assoc()){
+            if($row['student_id'] == "$student_id" && $row['promissory_approval'] == "$approval"){
+                header('location: ../view/user_promissory.php?success=2');
+                $_SESSION['message'] = "You have recently send a promissory ticket, please wait for the further approval.";
+                $t=0;
+            }
+        }
+        if($t == 1){
+            $sql = "INSERT INTO student_assessment (student_id, manage_id, year_id,sem,u_fees,u_payment, balance, reason, date_to_pay, promissory_approval) 
+            VALUES ('$student_id','$manage_id','$year_id','$semester_id','$u_fees','$u_payment','$balance', '$reason', '$date', '$approval')";
+            $assess = mysqli_query($connect, $sql);
+            if($assess){
+                $update = "UPDATE request SET assessment_status = 'assessed' WHERE id = '$student_id';";
+                mysqli_query($connect, $update);
+                header('location: ../view/user_promissory.php?success=1');
+                $_SESSION['message'] = "Sucessfully send a promissory note! Please wait for the approval an emaill will be send to you.";
+            }else{
+                header('location: ../view/user_promissory.php?success=2');
+                $_SESSION['message'] = "Something went wrong!";
+            }
         }
     }
 
@@ -54,7 +91,7 @@
         $id = $_GET['accept'];
         $email = $_GET['accept'];
         $result = $connect->query("SELECT
-        request.id,
+        request.id AS uid,
         request.course, 
         request.email, 
         request.approval_status, 
@@ -84,8 +121,11 @@
             $row = $result->fetch_array();
             $id = $row['id'];
             $email = $row['email'];
+            $status="close";
+            $message= "Your promissory request has been accepted.";
             $connect->query("UPDATE student_assessment SET promissory_approval = 'approved' WHERE id= '$id';");
-            try{
+            $connect->query("INSERT INTO notification (assessment_id,message,status) VALUES ('$id','$message','$status')");
+/*             try{
                 $mail->isSMTP();       
             	$mail->SMTPAuth = true; 
 	            $mail->SMTPSecure = 'tls'; 
@@ -106,7 +146,7 @@
                 $mail->send();
             }catch(Exception $e){
                 echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-            }
+            } */
             header('location: ../view/promissory_approval.php?success=1');
             $_SESSION['message'] = "Student promissory has been accepted!";
             
@@ -120,6 +160,7 @@
         if(mysqli_num_rows($result) == 1){
             $row = $result->fetch_array();
             $id = $row['id'];   
+            $email = $row['email'];
             $connect->query("DELETE FROM student_assessment WHERE id= '$id';");
             try{
                 $mail->isSMTP();                                           

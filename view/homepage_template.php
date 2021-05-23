@@ -20,13 +20,27 @@
                 <i class="fa fa-money-bill"></i> Payment
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#"><i class="fa fa-credit-card"></i> Payment</a>
-                    <a class="dropdown-item" href="#"><i class="fa fa-id-card"></i> Promissory</a>
+                    <a class="dropdown-item" href="user_payment.php"><i class="fa fa-credit-card"></i> Payment</a>
+                    <a class="dropdown-item" href="user_promissory.php"><i class="fa fa-id-card"></i> Promissory</a>
                 </div>
                 
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#" id="bell"><i class="fa fa-bell"></i> Notification</a>
+                <?php 
+                    $id = $_SESSION['id'];
+                    $view = 0;
+                    $sql = "SELECT * 
+                    FROM notification 
+                    LEFT JOIN student_assessment 
+                        ON student_assessment.id = notification.assessment_id 
+                            LEFT OUTER JOIN request
+                                ON request.id = student_assessment.student_id
+                        WHERE notification.viewed = '$view' AND request.id = '$id'; 
+                    ";
+                    $result = mysqli_query($connect,$sql);
+                    $count = mysqli_num_rows($result);
+                ?>
+                <a class="nav-link notif" href="user_notif.php?check" id="bell"><i class="fa fa-bell"></i> Notification <span class="badge badge-warning"><?=$count?></span></a>
             </li>
             <li class="nav-item dropdown">
                 <?php if($_SESSION['first_name']): ?>
@@ -36,7 +50,7 @@
                     <?php echo $_SESSION['first_name']; ?>
                 </a>
                 <?php endif; ?>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="left: -2rem;">
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="left: -3.5rem;">
                     <a class="dropdown-item" href="user_profile.php"><i class="fa fa-id-badge"></i> User Profile</a>
                     <a class="dropdown-item" href="login.php?logout=1"><i class="fa fa-sign-out-alt"></i> Log out</a>
                 </div>

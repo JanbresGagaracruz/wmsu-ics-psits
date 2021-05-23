@@ -35,7 +35,7 @@
         include("header_officer.php");
     ?>
             <div id="page-wrapper">
-                <div id="page-inner">
+                <div id="page-inner" class="dash">
                     <div class="row">
                         <div class="col-md-12">
                             <h2 class="page-head-line" >Record Summary</h2>
@@ -55,21 +55,33 @@
                     <div class="col-md-4">
                             <div class="main-box mb-orange">
                                 <a href="officer_cashier.php">
+                                    <?php 
+                                        $query = ("SELECT * FROM payment_transaction");
+                                        $result = mysqli_query($connect, $query);
+                                        $count = mysqli_num_rows($result);
+                                    ?>
                                     <i class="fa  fa-cash-register fa-5x"></i>
-                                    <h5>
+                                    <h5 id="record_data">
                                         Cashier
                                     </h5>
                                 </a>
+                                <h1 id="record_data"> <?=$count?></h1>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="main-box mb-orange">
                                 <a href="officer_promissory.php">
+                                    <?php 
+                                        $query = ("SELECT * FROM student_assessment");
+                                        $result = mysqli_query($connect, $query);
+                                        $count = mysqli_num_rows($result);
+                                    ?>
                                     <i class="fa  fa-envelope fa-5x"></i>
-                                    <h5>
+                                    <h5 id="record_data">
                                         Promissory
                                     </h5>
                                 </a>
+                                <h1 id="record_data"> <?=$count?></h1>
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -81,7 +93,7 @@
                                         $count = mysqli_num_rows($result);
                                     ?>
                                     <i class="fa fa-user-alt fa-5x"></i>
-                                    <h5>
+                                    <h5 id="record_data">
                                         Add User
                                     </h5>
                                 </a>
@@ -93,11 +105,17 @@
                     <div class="col-md-4">
                         <div class="main-box mb-orange">
                                 <a href="officer_studAssessment.php">
+                                    <?php 
+                                        $query = ("SELECT * FROM student_assessment");
+                                        $result = mysqli_query($connect, $query);
+                                        $count = mysqli_num_rows($result);
+                                    ?>
                                     <i class="fa  fa-balance-scale fa-5x"></i>
-                                    <h5>
+                                    <h5 id="record_data">
                                         Student Assessment
                                     </h5>
                                 </a>
+                                <h1 id="record_data"> <?=$count?></h1>
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -109,7 +127,7 @@
                         <div class="main-box mb-orange">
                                 <a href="officer_withdraw.php">
                                     <i class="fa fa-bank fa-5x"></i>
-                                    <h5>
+                                    <h5 id="record_data">
                                         Withdraw Management
                                     </h5>
                                 </a>
@@ -125,7 +143,7 @@
                             <div class="main-box mb-orange">
                                 <a href="officer_announcement.php">
                                     <i class="fa fa-bullhorn fa-5x"></i>
-                                    <h5>
+                                    <h5 id="record_data">
                                         Announcement
                                     </h5>
                                 </a>

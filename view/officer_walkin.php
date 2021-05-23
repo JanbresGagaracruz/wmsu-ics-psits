@@ -1,6 +1,6 @@
 <?php
     ob_start();
-    require("../include/walkin_account.php");
+    require("../include/off_walkin_account.php");
     include("../include/userlogin.php");
     if(!isset($_SESSION)) 
     { 
@@ -130,7 +130,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Add new user</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close get_close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -171,17 +171,6 @@
                                     while($row = $result->fetch_assoc()):
                                 ?>
                                     <option value="<?php echo $row['course']; ?>"><?php echo $row["course"]; ?></option>
-                                <?php endwhile; ?>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="year">Year</label>
-                            <select class="form-control" id="year" name="year" required>
-                                <?php
-                                    $result = $connect->query("SELECT * FROM year_lvl") or die($connect->error());
-                                    while($row = $result->fetch_assoc()):
-                                ?>
-                                    <option value="<?php echo $row['year']; ?>"><?php echo $row["year"]; ?></option>
                                 <?php endwhile; ?>
                             </select>
                         </div>

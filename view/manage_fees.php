@@ -238,6 +238,42 @@
                 $('#fs').val(name);
             });
         });
+        $( "#manage_form" ).validate( {
+            rules: {
+                tp: {
+                    required: true,
+                    digits: true,
+                    min:1,
+                },	
+            },
+            errorElement: "em",
+            errorPlacement: function ( error, element ) {
+                error.addClass( "help-block" );
+                element.parents( ".u_val" ).addClass( "has-feedback" );
+    
+                if ( element.prop( "type" ) === "checkbox" ) {
+                    error.insertAfter( element.parent( "label" ) );
+                } else {
+                    error.insertAfter( element );
+                }
+                if ( !element.next( "span" )[ 0 ] ) {
+                    $( "<span class=\'form-control-feedback\'></span>" ).insertAfter( element );
+                }
+            },
+            success: function ( label, element ) {
+                if ( !$( element ).next( "span" )[ 0 ] ) {
+                    $( "<span class=\' form-control-feedback\'></span>" ).insertAfter( $( element ) );
+                }
+            },
+            highlight: function ( element, errorClass, validClass ) {
+                $( element ).parents( ".u_val" ).addClass( "has-error" ).removeClass( "has-success" );
+                $('#submit').prop('disabled',true);
+            },
+            unhighlight: function ( element, errorClass, validClass ) {
+                $( element ).parents( ".u_val" ).addClass( "has-success" ).removeClass( "has-error" );
+                $('#submit').prop('disabled',false);
+            }
+        } );
     </script> 
 </body>
 </html>

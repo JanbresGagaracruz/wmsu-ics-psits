@@ -4,8 +4,7 @@
     { 
         session_start(); 
     } 
-    //create a request account verification
-    include("database.php");
+    include('database.php');
 
     //Live validation to check whether email is existing or not
     if(isset($_POST['email_add']))
@@ -53,19 +52,15 @@
         $gender = $_POST['gender'];
         $usertype = $_POST['usertype'];
         $password = $_POST['password'];
-        $status = "inactive";
-        $approval_status = "inactive";
+        $status = "active";
+        $approval_status = "active";
         $assessment_status="not assessed";
 
         $sql = "INSERT INTO request (student_id, first_name, last_name,middle_name,email,course,gender,usertype,password,status,approval_status,assessment_status) 
         VALUES ('$student_id','$first_name','$last_name','$middle_name','$email','$course','$gender','$usertype','$password','$status','$approval_status','$assessment_status')";
-        $check = mysqli_query($connect, $sql);
-        if($check){
-            header('location: ../view/registration.php?success=1');
-            $_SESSION['message'] = "Your account request is now pending for approval. Please wait for confirmation. Thank you. <a href='../view/login.php'>Login instead?</a>";
-        }
+        mysqli_query($connect, $sql);
+        header('location: ../view/officer_walkin.php?success=1');
+        $_SESSION['message'] = "Successfully created account for walk-in student.";
     }
     ob_end_flush();
 ?>
-
-

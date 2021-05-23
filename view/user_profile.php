@@ -42,12 +42,12 @@
                     </div>
                 </div>
                 <section id="region-main">
-                    <div class="card">
+                    <div class="card profile" style="background-color: #f3f3f3;">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-sm-7 col-md-12">
                                     <div class="card user-profile">
-                                        <div class="card-body">
+                                        <div class="card-body" style="box-shadow: hsl(0deg 0% 80%) 0 0 16px;">
                                             <div class="card-user-profile">
                                                 <img src="../assets/user_profile.png" class="user-img">
                                             </div>
@@ -59,133 +59,37 @@
                                                     while($row = $result->fetch_assoc()){ 
                                                 ?>
                                                     <strong><h3><?php echo $row['email']; ?></h1></strong>
-                                                    <small>Name: <?php echo $row['first_name']; ?> <?php echo $row['last_name']; ?> <?php echo $row['middle_name']; ?></small>
-                                                    <small>Course: <?php echo $row['course']; ?></small>
                                                 <?php } ?>
-                                                <button class="btn btn-primary" data-toggle="modal"data-target="#yearlvl"><i class="fas fa-edit"></i> Update profile</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                
-                                <div class="col-sm-12 col-md-12 mt-3">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <ul class="nav nav-tabs">
-                                                <li class="nav-item">
-                                                    <a class="nav-link active" data-toggle="tab" href="#history" role="tab"
-                                                        aria-controls="history" aria-selected="true"><strong>Payment History</strong></a>
-                                                </li>
-                                            </ul>
-                                            <div class="tab-content" id="mypublic-tab">
-                                                <div class="tab-pane fade active show" id="history" role="tabpanel"
-                                                    aria-labelledby="paymenthistory-tab">
-                                                    <div id="course-9" class="card mt-1">
-                                                        <div class="card-body row">
-                                                            <table id="table" class="table table-hover table-responsive">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th scope="col">School Year</th>
-                                                                        <th scope="col">StudentID</th>
-                                                                        <th scope="col">First name</th>
-                                                                        <th scope="col">Middle name</th>
-                                                                        <th scope="col">Last name</th>
-                                                                        <th scope="col">Course</th>
-                                                                        <th scope="col">Section</th>
-                                                                        <th scope="col">Year level</th>
-                                                                        <th scope="col">Semester</th>
-                                                                        <th scope="col">School fees</th>
-                                                                        <th scope="col">Total payment</th>
-                                                                        <th scope="col">Payment type</th>
-                                                                        <th scope="col">Amount</th>
-                                                                        <th scope="col">Current balance</th>
-                                                                        <th scope="col">Payment Status</th>
-                                                                        <th scope="col">Date</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <tr>
-                                                                        <td>2020-2021</td>
-                                                                        <td>BG201803394</td>
-                                                                        <td>Janbres</td>
-                                                                        <td>Molino</td>
-                                                                        <td>Gagaracruz</td>
-                                                                        <td>Computer Science</td>
-                                                                        <td>B</td>
-                                                                        <td>1</td>
-                                                                        <td>1</td>
-                                                                        <td>ICS FEST, University Digest</td>
-                                                                        <td>280</td>
-                                                                        <td>Full</td>
-                                                                        <td>280</td>
-                                                                        <td>0</td>
-                                                                        <td>PAID</td>
-                                                                        <td>1/23/2021</td>
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                            </div>
+                            <div class="row mt-4">
+                                <div class="col-sm-7 col-md-6">
+                                    <div class="card user-profile">
+                                        <div class="card-body" style="box-shadow: hsl(0deg 0% 80%) 0 0 16px;">
+                                         <h5>Student Information</h5>
+                                            <?php
+                                                $student_id = $_SESSION['id'];
+                                                $query = ("SELECT * FROM request WHERE id = '$student_id' ");
+                                                $result = mysqli_query($connect, $query);
+                                                while($row = $result->fetch_assoc()){ 
+                                            ?>
+                                                <small>Student id: <?php echo $row['student_id']; ?></small><br>
+                                                <small>Name: <?php echo $row['first_name']; ?> <?php echo $row['last_name']; ?> <?php echo $row['middle_name']; ?></small><br>
+                                                <small>Course: <?php echo $row['course']; ?></small>
+                                            <?php } ?>
                                         </div>
                                     </div>
-                                    <!--Promissory note-->
-                                    <div class="card">
+                                </div>
+                                <div class="col-sm-7 col-md-6">
+                                    <div class="card user-profile" style="box-shadow: hsl(0deg 0% 80%) 0 0 16px;" id="transact">
                                         <div class="card-body">
-                                            <ul class="nav nav-tabs">
-                                                <li class="nav-item">
-                                                    <a class="nav-link active" data-toggle="tab" href="#history" role="tab"
-                                                        aria-controls="history" aria-selected="true"><strong>Promissory History</strong></a>
-                                                </li>
-                                            </ul>
-                                            <div class="tab-content" id="mypublic-tab">
-                                                <div class="tab-pane fade active show" id="history" role="tabpanel"
-                                                    aria-labelledby="paymenthistory-tab">
-                                                    <div id="course-9" class="card mt-1">
-                                                        <div class="card-body row">
-                                                            <table id="table" class="table table-hover table-responsive">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th scope="col">School Year</th>
-                                                                        <th scope="col">StudentID</th>
-                                                                        <th scope="col">First name</th>
-                                                                        <th scope="col">Middle name</th>
-                                                                        <th scope="col">Last name</th>
-                                                                        <th scope="col">Course</th>
-                                                                        <th scope="col">Year level</th>
-                                                                        <th scope="col">Semester</th>
-                                                                        <th scope="col">School fees</th>
-                                                                        <th scope="col">Total payment</th>
-                                                                        <th scope="col">Reason</th>
-                                                                        <th scope="col">Current date</th>
-                                                                        <th scope="col">Date to pay</th>
-                                                                        <th scope="col">Payment Status</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <tr>
-                                                                        <td>2020-2021</td>
-                                                                        <td>BG201803394</td>
-                                                                        <td>Janbres</td>
-                                                                        <td>Molino</td>
-                                                                        <td>Gagaracruz</td>
-                                                                        <td>Computer Science</td>
-                                                                        <td>1</td>
-                                                                        <td>1</td>
-                                                                        <td>ICS FEST, University Digest</td>
-                                                                        <td>280</td>
-                                                                        <td>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</td>
-                                                                        <td>1/23/2021</td>
-                                                                        <td>2/23/2021</td>
-                                                                        <td>ONGOING</td>
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                        <h5>Transaction Information</h5>
+                                            <a href="payment_history.php">View payment history</a>
+                                            <br>
+                                            <a href="#">View promissory history</a>
                                         </div>
                                     </div>
                                 </div>
@@ -194,44 +98,9 @@
                     </div>
                 </section>
             </div>
-        </div>                                       
+        </div>    
+    </div>                                    
         <!--END-->
-
-        <div class="modal fade" id="yearlvl" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Update details</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="form-group">
-                            <div class="form-group">
-                                <label for="contact">Contact number</label>
-                                <input type="text" class="form-control" id="contact" name="contact" aria-describedby="contact"
-                                    placeholder="Enter contact number">
-                            </div>
-                            <div class="form-group">
-                                <label for="bio">Bio</label>
-                                <input type="text" class="form-control" id="bio" name="bio" aria-describedby="bio"
-                                    placeholder="Enter bio">
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary" data-dismiss="modal">Save</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    </div>
-
-
 
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
