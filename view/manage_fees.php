@@ -69,7 +69,7 @@
                             <table class="table table-striped table-bordered table-hover" id="table">
                                 <thead>
                                     <tr class="p-4">
-                                        <th scope="col">School Year</th>
+                                        <th scope="col">Session</th>
                                         <th scope="col">Course</th>
                                         <th scope="col">Year level</th>
                                         <th scope="col">Semester</th>
@@ -80,11 +80,16 @@
                                 </thead>
                                 <tbody>
                                     <?php 
-                                        $result = $connect->query("SELECT * FROM year_lvl RIGHT JOIN manage_fees ON year_lvl.id = manage_fees.year_lvl;") or die($connect->error());
+                                        $result = $connect->query("SELECT * FROM manage_fees
+                                                                        LEFT OUTER JOIN year_lvl 
+                                                                            ON year_lvl.id = manage_fees.year_lvl
+                                                                            LEFT OUTER JOIN year
+                                                                                ON year.id = manage_fees.school_year
+                                                                            ;") or die($connect->error());
                                         while($row = $result->fetch_assoc()){ 
                                     ?>
                                     <tr>
-                                        <td><?php echo $row['school_year']; ?></td>
+                                        <td><?php echo $row['date']; ?></td>
                                         <td><?php echo $row['course']; ?></td>
                                         <td><?php echo $row['year']; ?></td>
                                         <td><?php echo $row['semester']; ?></td>
@@ -126,7 +131,7 @@
                                     $result = $connect->query("SELECT * FROM year WHERE status ='$status';") or die($connect->error());
                                     while($row = $result->fetch_assoc()):
                                 ?>
-                                <option value="<?php echo $row['date']; ?>"><?php echo $row["date"]; ?></option>
+                                <option value="<?php echo $row['id']; ?>"><?php echo $row["date"]; ?></option>
                                 <?php endwhile; ?>
                             </select>
                         </div>

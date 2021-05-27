@@ -22,7 +22,7 @@
                     <a href="officer_cashier.php"><i class="fa fa-cash-register "></i>Cashier</a>
                 </li>
                 <li>
-                    <a href="officer_promissory.php"><i class="fa fa-envelope "></i>Promissory</a>
+                    <a href="officer_promissory.php"><i class="fa fa-envelope "></i>Create Promissory</a>
                 </li>
                 <li>
                     <a href="officer_walkin.php"><i class="fa fa-user-alt "></i>Create User</a>

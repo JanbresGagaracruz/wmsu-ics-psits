@@ -75,19 +75,40 @@
         $transaction_status = 1;
         $bal = max((int)$balance, 0);
         $status="close";
+        $viewed=0;
+        $t=0;
         $paid = "paid";
         $on = "ongoing";
+        $not = "not assessed";
         $message= "Payment transaction has been sucessfully.";
-        if($balanace == 0){
+        if($balance == $t){
             $check=$connect->query("INSERT INTO payment_transaction (assess_id,balance,payment_status) VALUES ('$id', '$bal', '$paid')");
         }else{
             $check=$connect->query("INSERT INTO payment_transaction (assess_id,balance,payment_status) VALUES ('$id', '$bal', '$on')");
         }
         
         if($check){
-            $update = "UPDATE student_assessment SET balance = '$bal',u_payment = 0, u_fees = CONCAT(u_fees, '$u_fees'), transaction_status = ' $transaction_status'  WHERE id = '$id';";
+            $update = "UPDATE student_assessment SET balance = '$balance',u_payment = 0, u_fees = CONCAT(u_fees, '$u_fees'), transaction_status = ' $transaction_status'  WHERE id = '$id';";
             mysqli_query($connect, $update);
-            $connect->query("INSERT INTO notification (assessment_id,message,status) VALUES ('$id','$message','$status')");
+            $connect->query("INSERT INTO notification (assessment_id,message,status,viewed) VALUES ('$id','$message','$status','$viewed')");
+            
+            $setter = ("SELECT 
+                        request.id,
+                        request.assessment_status,
+                        student_assessment.balance,
+                        student_assessment.student_id AS stud
+                        FROM student_assessment
+                        LEFT OUTER JOIN request
+                            ON request.id = student_assessment.student_id 
+                            WHERE student_assessment.id = '$id'
+                        ;");
+            $result = mysqli_query($connect, $setter);
+            while($row = $result->fetch_assoc()){
+                $ui = $row['id'];
+                if($row['balance'] == $t){
+                    $connect->query("UPDATE request SET assessment_status = '$not' WHERE id='$ui' ");
+                }
+            }
             header('location: ../view/officer_cashier.php?success=1');
             $_SESSION['message'] = "Payment successfully added!";
         }else{

@@ -51,7 +51,7 @@
         $email = $_POST['email'];
         $course = $_POST['course'];
         $gender = $_POST['gender'];
-        $usertype = $_POST['usertype'];
+        $usertype = "Student";
         $password = $_POST['password'];
         $status = "inactive";
         $approval_status = "inactive";

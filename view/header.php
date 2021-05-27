@@ -19,43 +19,37 @@
                     <a  href="./dashboard.php"><i class="fas fa-tachometer-alt "></i>Dashboard</a>
                 </li>
                 <li>
-                    <a href="account_approval.php"><i class="fa fa-users "></i>Account Approval</a>
+                    <a href="fees.php"><i class="fa fa-money-check "></i>Fees</a>
                 </li>
                 <li>
-                    <a href="active_user.php"><i class="fa fa-user-circle "></i>Active Users</a>
-                </li>
-                <li>
-                    <a href="walkin_user.php"><i class="fa fa-user-alt "></i>Create User</a>
-                </li>
-                <li>
-                    <a href="fees.php"><i class="fa fa-money-check "></i>Create Fees</a>
-                </li>
-                <li>
-                    <a href="manage_fees.php"><i class="fa fa-tasks "></i>Manage Scheduled fees</a>
+                    <a href="manage_fees.php"><i class="fa fa-tasks "></i>Scheduled fees</a>
                 </li>
                 <li>
                     <a href="promissory_approval.php"><i class="fa fa-file-text "></i>Promissory approval</a>
                 </li>
                 <li>
-                    <a href="announcement.php"><i class="fa fa-bullhorn "></i>Create Announcement</a>
+                    <a href="school_year.php"><i class="fa fa-calendar-alt "></i>School year</a>
                 </li>
                 <li>
-                    <a href="school_year.php"><i class="fa fa-calendar-alt "></i>Create School year</a>
+                    <a href="year_level.php"><i class="fa fa-calendar-plus "></i>Year level</a>
                 </li>
                 <li>
-                    <a href="year_level.php"><i class="fa fa-calendar-plus "></i>Create Year level</a>
+                    <a href="course.php"><i class="fa fa-chalkboard "></i>Course</a>
                 </li>
                 <li>
-                    <a href="course.php"><i class="fa fa-chalkboard "></i>Create Course</a>
+                    <a href="semester.php"><i class="fa fa-plus-square "></i>Semester</a>
                 </li>
                 <li>
-                    <a href="semester.php"><i class="fa fa-plus-square "></i>Create Semester</a>
+                    <a href="account_approval.php"><i class="fa fa-users "></i>Account Approval</a>
                 </li>
                 <li>
-                    <a href="section.php"><i class="fa fa-pen-square "></i>Create Section</a>
+                    <a href="announcement.php"><i class="fa fa-bullhorn "></i>Announcement</a>
                 </li>
                 <li>
-                    <a href="withdraw.php"><i class="fa fa-bank "></i>Create withdraw</a>
+                    <a href="walkin_user.php"><i class="fa fa-user-alt "></i>User</a>
+                </li>
+                <li>
+                    <a href="withdraw.php"><i class="fa fa-bank "></i>Withdraw</a>
                 </li>
                 <li>
                     <a href="login.php?logout=1"><i class="fa fa-power-off "></i>Logout</a>

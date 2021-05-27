@@ -95,16 +95,6 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="usertype">Create account as</label>
-                        <select class="custom-select" id="usertype" name="usertype" required>
-                            <option value="Student" selected>Student</option>
-                            <option value="President">President</option>
-                            <option value="VP">Vice President</option>
-                            <option value="Treasurer">Treasurer</option>
-                            <option value="Officer">Officer</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
                         <label for="pass">Password</label>
                         <div class="input-group" id="pass">
                             <input type="password" class="form-control"  name="password" id="password"

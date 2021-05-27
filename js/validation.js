@@ -287,15 +287,15 @@ $(document).ready(function () {
         minlength: 11,
       },
       first_name: {
-        minlength: 3,
+        minlength: 2,
         maxlength: 20,
       },
       last_name: {
-        minlength: 3,
+        minlength: 2,
         maxlength: 20,
       },
       middle_name: {
-        minlength: 3,
+        minlength: 2,
         maxlength: 20,
       },
       password: {

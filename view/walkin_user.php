@@ -95,6 +95,12 @@
                                             <a type="button" name="view"  id="<?php echo $row["id"]; ?>" class="btn btn-info btn-xs view_data">
                                                 <span class="fas fa-eye fa-2x"></span>
                                             </a> 
+                                            <a href="../include/active_account.php?stat_on=<?php echo $row['id'] ?>" class="btn btn-primary btn-xs" id="stat_on" name="stat_on">
+                                                <span class="fas fa-toggle-on fa-2x"></span>
+                                            </a>
+                                            <a href="../include/active_account.php?stat_off=<?php echo $row['id'] ?>" class="btn btn-danger btn-xs" id="stat_off" name="stat_off">
+                                                <span class="fas fa-toggle-off fa-2x"></span>
+                                            </a>
                                         </td>
                                     </tr>
                                     <?php } ?>

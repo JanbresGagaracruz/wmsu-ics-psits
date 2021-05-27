@@ -72,8 +72,6 @@
                                         <th scope="col">School fees</th>
                                         <th scope="col">Amount</th>
                                         <th scope="col">Type</th>
-                                        <th scope="col">Designation</th>
-                                        <th scope="col">Time added</th>
                                         <th scope="col">Action</th>
                                     </tr>
                                 </thead>
@@ -87,8 +85,6 @@
                                         <td><?php echo $row['fee_name']; ?></td>
                                         <td><?php echo $row['amount']; ?></td>
                                         <td><?php echo $row['type']; ?></td>
-                                        <td><?php echo $row['designation']; ?></td>
-                                        <td><?php echo $row['added_time']; ?></td>
                                         <td>
                                             <a href="../include/create_fees.php?delete=<?php echo $row['id'] ?>" class="btn btn-danger btn-xs" id="delete" name="delete">
                                                 <span class="fas fa-trash-alt"></span>

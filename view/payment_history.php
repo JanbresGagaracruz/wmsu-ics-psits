@@ -73,7 +73,7 @@
                                                                 year_lvl.year,
                                                                 sem,
                                                                 payment_transaction.payment_status,
-                                                                student_assessment.balance,
+                                                                payment_transaction.balance,
                                                                 manage_fees.total_fees
                                                                 FROM payment_transaction
                                                                 LEFT OUTER  JOIN student_assessment

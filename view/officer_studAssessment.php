@@ -2,7 +2,6 @@
     ob_start();
     include("../include/assessment.php");
     include("../include/userlogin.php");
-    //include("../templates/template.php");
     if(!isset($_SESSION)) 
     { 
         session_start(); 
@@ -29,7 +28,6 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css">
     <link href="../css/bootstrap.css" rel="stylesheet" />
     <link href="../css/basic.css" rel="stylesheet" />
-    <link href="../css/error.css" rel="stylesheet" />
     <link rel="shortcut icon" href="../assets/ics_icon.ico">
 
     <title>Student assessment | Institute of computer studies</title>
@@ -146,7 +144,7 @@
                                 <label for="year">Year</label>
                                 <select class="form-control" id="year" name="year" required>
                                     <?php
-                                        $result = $connect->query("SELECT * FROM year_lvl") or die($connect->error());
+                                        $result = $connect->query("SELECT * FROM year_lvl ORDER BY year ASC") or die($connect->error());
                                         while($row = $result->fetch_assoc()):
                                     ?>
                                         <option value="" selected="selected" hidden="hidden">Select year level</option>
@@ -202,7 +200,7 @@
         $('#fee_modal').on('hidden.bs.modal', function () {
             $(this).find('form').trigger('reset'); 
             document.location.reload();
-            });
+        });
         }); 
     </script> 
     <script>        

@@ -56,7 +56,8 @@
                             <div class="main-box mb-orange">
                                 <a href="officer_cashier.php">
                                     <?php 
-                                        $query = ("SELECT * FROM payment_transaction");
+                                        $z = 0;
+                                        $query = ("SELECT * FROM payment_transaction WHERE balance NOT LIKE '$z'");
                                         $result = mysqli_query($connect, $query);
                                         $count = mysqli_num_rows($result);
                                     ?>
@@ -72,13 +73,13 @@
                             <div class="main-box mb-orange">
                                 <a href="officer_promissory.php">
                                     <?php 
-                                        $query = ("SELECT * FROM student_assessment");
+                                        $query = ("SELECT * FROM request WHERE assessment_status = 'not assessed';");
                                         $result = mysqli_query($connect, $query);
                                         $count = mysqli_num_rows($result);
                                     ?>
                                     <i class="fa  fa-envelope fa-5x"></i>
                                     <h5 id="record_data">
-                                        Promissory
+                                        Create Promissory
                                     </h5>
                                 </a>
                                 <h1 id="record_data"> <?=$count?></h1>
@@ -106,7 +107,7 @@
                         <div class="main-box mb-orange">
                                 <a href="officer_studAssessment.php">
                                     <?php 
-                                        $query = ("SELECT * FROM student_assessment");
+                                        $query = ("SELECT * FROM request WHERE assessment_status = 'not assessed'");
                                         $result = mysqli_query($connect, $query);
                                         $count = mysqli_num_rows($result);
                                     ?>

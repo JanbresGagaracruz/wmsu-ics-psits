@@ -76,7 +76,7 @@
                                 </thead>
                                 <tbody>
                                     <?php 
-                                        $query = ("SELECT * FROM year");
+                                        $query = ("SELECT * FROM year ORDER BY date ASC");
                                         $result = mysqli_query($connect, $query);
                                         while($row = $result->fetch_assoc()){ 
                                     ?>
@@ -118,12 +118,12 @@
                 <form action="school_year.php" method="POST" id="school_form">
                     <div class="modal-body">
                         <div class="input-group input-daterange">
-                            <input type="month" class="form-control" min="2021-03"name="current" required>
+                            <input type="text" class="form-control" name="current" id="current" >
                             <div class="input-group-addon">to</div>
-                            <input type="month" class="form-control" min="2021-03"name="end" required>
+                            <input type="text" class="form-control" name="end" id="end" >
                             <div id="school_validation"></div>
                         </div>
-                        <input type="hidden" value="closed">
+                        <input type="hidden" value="close" name="status">
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-primary" name="save">Create</button>
                         </div>
@@ -148,5 +148,43 @@
     <script src="../js/jquery.metisMenu.js"></script>
     <script src="../js/custom1.js"></script>
     <script src="../js/validation.js"></script>
+    <script>
+        $(document).ready(function () {
+        $("#school_form").validate({
+            rules: {
+            current: {
+                maxlength: 4,
+                minlength: 4,
+                number: true,
+                required: true,
+            },
+            end: {
+                maxlength: 4,
+                minlength: 4,
+                number: true,
+                required: true,
+            },
+            },
+            highlight: function (element) {
+            $(element).closest(".form-group input").addClass("text-danger");
+            },
+            unhighlight: function (element) {
+            $(element).closest(".form-group input").removeClass("text-danger");
+            },
+            errorElement: "small",
+            errorClass: "help-block text-danger",
+            errorPlacement: function (error, element) {
+            if (element.parent(".input-group").length) {
+                error.insertAfter(element.parent());
+            } else {
+                error.insertAfter(element);
+            }
+            },
+        });
+        $('#school_form').on('hidden.bs.modal', function () {
+            $(this).find('form').trigger('reset'); 
+        });
+        });
+    </script>
 </body>
 </html>

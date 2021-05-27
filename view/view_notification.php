@@ -9,6 +9,23 @@
         header('location: login.php?success=1');
         $_SESSION['message'] = "Access denied make sure you log in first.";
     }
+    $student_id = $_SESSION['id'];
+    $tat="close";
+    $query = (" SELECT 
+                notification.date,
+                notification.id AS notif_session,
+                student_assessment.reason,
+                request.id AS st
+                FROM notification
+                LEFT OUTER JOIN student_assessment
+                    ON student_assessment.id = notification.assessment_id
+                    LEFT OUTER JOIN request
+                        ON request.id = student_assessment.student_id
+                            WHERE notification.status='$tat' AND request.id = '$student_id' ");
+    $result = mysqli_query($connect, $query);
+    while($row = $result->fetch_assoc()){ 
+        $_SESSION['notification']= $row['notif_session'] ;
+    }
     if(isset($_GET['viewed']) && !empty($_SESSION['notification'])){
         $read = "open";
         $id=$_SESSION['notification'];
@@ -56,6 +73,7 @@
                             <div class="row">
                                 <div class="col-sm-7 col-md-12">
                                     <?php
+                                        $la = $_SESSION['notification'];
                                         $notif = $_GET['viewed'];
                                         $output = ''; 
                                         $student_id = $_SESSION['id'];
@@ -63,6 +81,7 @@
                                         $tat="close";
                                         $query = (" SELECT 
                                                     notification.message,
+                                                    notification.id,
                                                     notification.date,
                                                     student_assessment.sem,
                                                     manage_fees.fee_names,
@@ -82,12 +101,13 @@
                                                                     ON payment_transaction.assess_id = student_assessment.id
                                                                     LEFT OUTER JOIN manage_fees
                                                                         ON manage_fees.id = student_assessment.manage_id
-                                                                WHERE notification.id ='$notif' AND request.id = '$student_id' ");
+                                                                        WHERE notification.id ='$la' AND request.id = '$student_id' ");
                                         $output .= '  
                                         <div class="table-responsive">  
                                             <table class="table table-bordered table-hover">'; 
                                         $result = mysqli_query($connect, $query);
                                         while($row = $result->fetch_assoc()){ 
+                                            if($row['id'] == $la){
                                         $output .= '  
                                             <tr>  
                                                 <td width="30%"><label>Date and time</label></td>  
@@ -126,6 +146,7 @@
                                                 <td width="70%">'.$row["payment_status"].'</td>  
                                             </tr>
                                             '; 
+                                            }
                                     ?>
                                                 
                                     <?php } 
