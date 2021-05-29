@@ -21,10 +21,11 @@
         $u_fees = $_POST['u_fees'];
         $u_payment = $_POST['u_payment'];
         $balance = $_POST['tp'];
+        $session = $_POST['s_year'];
         $stat= "approved";
 
-        $sql = "INSERT INTO student_assessment (student_id, manage_id, year_id,sem,u_fees,u_payment, balance,promissory_approval) 
-        VALUES ('$student_id','$manage_id','$year_id','$semester_id','$u_fees','$u_payment','$balance','$stat')";
+        $sql = "INSERT INTO student_assessment (student_id, school_year, manage_id, year_id,sem,u_fees,u_payment, balance,promissory_approval) 
+        VALUES ('$student_id','$session','$manage_id','$year_id','$semester_id','$u_fees','$u_payment','$balance','$stat')";
         $assess = mysqli_query($connect, $sql);
         if($assess){
             $update = "UPDATE request SET assessment_status = 'assessed' WHERE id = '$student_id';";

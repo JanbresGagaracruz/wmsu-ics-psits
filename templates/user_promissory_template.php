@@ -17,7 +17,7 @@
 ?>
     <?php
     if (mysqli_num_rows($connect->query("SELECT total_fees, fee_names FROM manage_fees WHERE year_lvl = '$yearId' AND course = '$courseId' AND semester = '$semesterId';")) == 0) { ?>
-        <?php echo "<script>alert('No listed fees for $courseId in $semesterId - semester');</script>";?>
+        <?php echo "<script>swal('No scheduled fees!', 'No record of fees!', 'warning');</script>";?>
     <?php } else { ?>
         <div class="table-sorting  table-responsive" style="margin-top: 1rem;">
         <table class="table table-striped table-bordered table-hover" id="table1">
@@ -80,7 +80,7 @@
             <input type="date" class="form-control" min="2021-05-23" name="date_to_pay" required>
         </div>
     </fieldset>
-    <div class="modal-footer">
+    <div class="modal-footer">      
         <button class="btn btn-success" name="submit" id="submit" type="submit">Submit</button>
     </div>
 <?php endwhile; ?>

@@ -62,7 +62,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         Manage fees records
-                        <a data-toggle="modal" data-target="#localfees" class="btn btn-primary">Associate fees</span></a>
+                        <a data-toggle="modal" data-target="#localfees" class="btn btn-primary">Manage fees</span></a>
                     </div>
                     <div class="panel-body">
                         <div class="table-sorting  table-responsive">
@@ -80,12 +80,20 @@
                                 </thead>
                                 <tbody>
                                     <?php 
-                                        $result = $connect->query("SELECT * FROM manage_fees
+                                        $result = $connect->query("SELECT 
+                                                                    manage_fees.course,
+                                                                    manage_fees.semester,
+                                                                    manage_fees.fee_names,
+                                                                    manage_fees.total_fees,
+                                                                    manage_fees.id AS mf_id,
+                                                                    year.date,
+                                                                    year_lvl.year
+                                                                    FROM manage_fees
                                                                         LEFT OUTER JOIN year_lvl 
                                                                             ON year_lvl.id = manage_fees.year_lvl
                                                                             LEFT OUTER JOIN year
                                                                                 ON year.id = manage_fees.school_year
-                                                                            ;") or die($connect->error());
+                                                                            ;") or die($connect->error);
                                         while($row = $result->fetch_assoc()){ 
                                     ?>
                                     <tr>
@@ -94,9 +102,9 @@
                                         <td><?php echo $row['year']; ?></td>
                                         <td><?php echo $row['semester']; ?></td>
                                         <td><?php echo $row['fee_names']; ?></td>
-                                        <td><?php echo $row['total_fees']; ?></td>
+                                        <td class="text-right"><?php echo $row['total_fees']; ?></td>
                                         <td>
-                                            <a href="../include/fees_management.php?delete=<?php echo $row['id'] ?>" class="btn btn-danger btn-xs" id="delete" name="delete">
+                                            <a href="../include/fees_management.php?delete=<?php echo $row['mf_id'] ?>" class="btn btn-danger btn-xs" id="delete" name="delete">
                                                 <span class="fas fa-trash-alt"></span>
                                             </a>
                                         </td>
@@ -125,10 +133,10 @@
                     <form method="POST" action="manage_fees.php" id="manage_form">
                         <div class="form-group">
                             <label for="school_year">School Year</label>
-                            <select class="custom-select form-control" id="school_year" name="school_year">
+                            <select class="custom-select form-control" id="school_year" name="school_year" readonly="readonly">
                                 <?php
                                     $status="open";
-                                    $result = $connect->query("SELECT * FROM year WHERE status ='$status';") or die($connect->error());
+                                    $result = $connect->query("SELECT * FROM year WHERE status ='$status';") or die($connect->error);
                                     while($row = $result->fetch_assoc()):
                                 ?>
                                 <option value="<?php echo $row['id']; ?>"><?php echo $row["date"]; ?></option>
@@ -139,7 +147,7 @@
                             <label for="year">Year</label>
                             <select class="custom-select form-control" id="year" name="year">
                                 <?php
-                                    $result = $connect->query("SELECT * FROM year_lvl ORDER BY year ASC") or die($connect->error());
+                                    $result = $connect->query("SELECT * FROM year_lvl ORDER BY year ASC") or die($connect->error);
                                     while($row = $result->fetch_assoc()):
                                 ?>
                                     <option value="<?php echo $row['id']; ?>"><?php echo $row["year"]; ?></option>
@@ -150,7 +158,7 @@
                             <label for="course">Course</label>
                             <select class="custom-select form-control" id="course" name="course">
                                 <?php
-                                    $result = $connect->query("SELECT * FROM course") or die($connect->error());
+                                    $result = $connect->query("SELECT * FROM course") or die($connect->error);
                                     while($row = $result->fetch_assoc()):
                                 ?>
                                     <option value="<?php echo $row['course']; ?>"><?php echo $row["course"]; ?></option>
@@ -161,51 +169,59 @@
                             <label for="semester">Semester</label>
                             <select class="custom-select form-control" id="semester" name="semester">
                                 <?php
-                                    $result = $connect->query("SELECT * FROM semester") or die($connect->error());
+                                    $result = $connect->query("SELECT * FROM semester") or die($connect->error);
                                     while($row = $result->fetch_assoc()):
                                 ?>
                                     <option value="<?php echo $row['sem']; ?>"><?php echo $row["sem"]; ?></option>
                                 <?php endwhile; ?>
                             </select>
                         </div>
-                        <div class="table-sorting  table-responsive">
-                        <table class="table table-striped table-bordered table-hover" id="table1">
-                            <thead>
-                                <tr class="p-4">
-                                    <th scope="col">Select</th>
-                                    <th scope="col">School fees</th>
-                                    <th scope="col">Amount</th>
-                                    <th scope="col">type</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php 
-                                    $result = $connect->query("SELECT * FROM fees;") or die($connect->error());
-                                    while($row = $result->fetch_assoc()){ 
-                                ?>
-                                <tr>
-                                    <td>              
-                                        <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input check_amount" name="local_fees">
-                                        <label class="custom-control-label" for="check_amount"></label>
-                                    </div>
-                                    </td>
-                                    <td name="selected_fees"><?php echo $row['fee_name']; ?></td>
-                                    <td name="amount"><?php echo $row['amount']; ?></td>
-                                    <td><?php echo $row['type']; ?></td>
-                                </tr>
-                                <?php } ?>
-                            </tbody>
-                        </table>
-                        </div>
-                        <div class="form-group">
-                            <label for="fs">Fees selected</label>
-                            <input type="text" class="form-control" id="fs" name="fs" required readonly="readonly">
-                        </div>
-                        <div class="form-group">
-                            <label for="tp">Total payment</label>
-                            <input type="number" class="form-control" id="tp" name="tp" required readonly="readonly">
-                        </div>
+                        <fieldset class="scheduler-border">
+                            <legend class="scheduler-border">List of fees</legend>
+                            <div class="table-sorting  table-responsive">
+                            <table class="table table-striped table-bordered table-hover" id="table">
+                                <thead>
+                                    <tr class="p-4">
+                                        <th scope="col">     
+                                            <input type="checkbox" class="custom-control-input" id="checkall">
+                                        </th>
+                                        <th scope="col">School fees</th>
+                                        <th scope="col"  class="text-right">Amount</th>
+                                        <th scope="col">type</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php 
+                                        $result = $connect->query("SELECT * FROM fees;") or die($connect->error);
+                                        while($row = $result->fetch_assoc()){ 
+                                    ?>
+                                    <tr>
+                                        <td>              
+                                            <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input check_amount" name="local_fees">
+                                            <label class="custom-control-label" for="check_amount"></label>
+                                        </div>
+                                        </td>
+                                        <td name="selected_fees"><?php echo $row['fee_name']; ?></td>
+                                        <td name="amount"  class="text-right"><?php echo $row['amount']; ?></td>
+                                        <td><?php echo $row['type']; ?></td>
+                                    </tr>
+                                    <?php } ?>
+                                </tbody>
+                            </table>
+                            </div>
+                        </fieldset>
+                        <fieldset class="scheduler-border">
+                            <legend class="scheduler-border">Total payment</legend>
+                            <div class="form-group">
+                                <label for="fs">Fees selected</label>
+                                <input type="text" class="form-control" id="fs" name="fs" required readonly="readonly">
+                            </div>
+                            <div class="form-group">
+                                <label for="tp">Total payment</label>
+                                <input type="number" class="form-control text-right" id="tp" name="tp" required readonly="readonly">
+                            </div>
+                        </fieldset>
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-primary" name="submit">Create</button>
                         </div>
@@ -232,6 +248,17 @@
     <script src="../js/validation.js"></script>
     <script>
         $(function() {
+            $('#checkall').change(function () {
+                $('.check_amount').prop('checked',this.checked);
+                var total = 0;
+                var name="";
+                $("tbody input[type=checkbox]:checked").each(function() {
+                    total += parseInt($(this).closest('tr').find('td[name=amount]').text().trim());
+                    name += ($(this).closest('tr').find('td[name=selected_fees]').text() + "  ");
+                });
+                $('#tp').val(total);
+                $('#fs').val(name);
+            });
             $(".check_amount").click(function(event) {
                 var total = 0;
                 var name="";

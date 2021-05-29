@@ -31,8 +31,7 @@
         }
 
     }
-
-    //delete semester
+    
     if(isset($_GET['delete'])){
         $id = $_GET['delete'];
         $result = $connect->query("SELECT * FROM manage_fees WHERE id = '$id';");
@@ -44,7 +43,7 @@
                 header('location: ../view/manage_fees.php?success=1');
                 $_SESSION['message'] = "Deleted successfully.";
             }else{
-                header('location: ../view/manage_fees.php?success=1');
+                header('location: ../view/manage_fees.php?success=2');
                 $_SESSION['message'] = "Something went wrong.";
             }
         }  

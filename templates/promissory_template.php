@@ -17,38 +17,41 @@
 ?>
     <?php
     if (mysqli_num_rows($connect->query("SELECT total_fees, fee_names FROM manage_fees WHERE year_lvl = '$yearId' AND course = '$courseId' AND semester = '$semesterId';")) == 0) { ?>
-        <?php echo "<script>alert('No listed fees for $courseId in $semesterId - semester');</script>";?>
+        <?php echo "<script>swal('No scheduled fees!', 'No record of fees!', 'warning');</script>";?>
     <?php } else { ?>
-        <div class="table-sorting  table-responsive" style="margin-top: 1rem;">
-        <table class="table table-striped table-bordered table-hover" id="table1">
-            <thead>
-                <tr class="p-4">
-                    <th scope="col">Select</th>
-                    <th scope="col">School fees</th>
-                    <th scope="col">Amount</th>
-                    <th scope="col">type</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php 
-                    $result = $connect->query("SELECT * FROM fees;") or die($connect->error());
-                    while($row = $result->fetch_assoc()){ 
-                ?>
-                <tr>
-                    <td>              
-                        <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input check_amount" name="local_fees">
-                        <label class="custom-control-label" for="check_amount"></label>
-                    </div>
-                    </td>
-                    <td name="selected_fees"><?php echo $row['fee_name']; ?></td>
-                    <td name="amount"><?php echo $row['amount']; ?></td>
-                    <td><?php echo $row['type']; ?></td>
-                </tr>
-                <?php } ?>
-            </tbody>
-        </table>
-        </div>
+        <fieldset class="scheduler-border">
+           <legend class="scheduler-border">List of fees</legend>
+            <div class="table-sorting  table-responsive" style="margin-top: 1rem;">
+            <table class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr class="p-4">
+                        <th scope="col">Select</th>
+                        <th scope="col">School fees</th>
+                        <th scope="col" class="text=right">Amount</th>
+                        <th scope="col">type</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php 
+                        $result = $connect->query("SELECT * FROM fees;") or die($connect->error());
+                        while($row = $result->fetch_assoc()){ 
+                    ?>
+                    <tr>
+                        <td>              
+                            <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input check_amount" name="local_fees">
+                            <label class="custom-control-label" for="check_amount"></label>
+                        </div>
+                        </td>
+                        <td name="selected_fees"><?php echo $row['fee_name']; ?></td>
+                        <td name="amount" class="text=right"><?php echo $row['amount']; ?></td>
+                        <td><?php echo $row['type']; ?></td>
+                    </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
+            </div>
+        </fieldset>
         <fieldset class="scheduler-border">
         <legend class="scheduler-border">Total payment</legend>
     <label for="tp">Actual fees</label>
@@ -59,7 +62,7 @@
     <input type="hidden" value="<?php echo $row["id"]; ?>" name="manage_id" id="manage_id" class="form-control">
     <input type="text" value="<?php echo $row["fee_names"]; ?>" name="fn" class="form-control" readonly="readonly">
     <label for="tp" style="margin-top: 1.5rem;">Total Amount to be Paid</label>
-    <input type="number" value="<?php echo $row["total_fees"]; ?>" name="tp"  id="tp"class="form-control" readonly="readonly">
+    <input type="number" value="<?php echo $row["total_fees"]; ?>" name="tp"  id="tp"class="form-control text-right" readonly="readonly">
     </fieldset>
         <fieldset class="scheduler-border">
             <legend class="scheduler-border">Payment Information</legend>
@@ -69,7 +72,7 @@
             </div>
             <div class="form-group u_val">
                 <label for="tp">Payment fee</label>
-                <input type="text" class="form-control" id="u_payment" name="u_payment" required readonly="readonly">
+                <input type="text" class="form-control text-right" id="u_payment" name="u_payment" required readonly="readonly">
             </div>
             <div class="form-group">
                 <label for="tp">Reason</label>
