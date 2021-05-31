@@ -12,137 +12,135 @@
     }
     ob_end_flush();
 ?>
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
         integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
         integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
-    <!--Custom CSS-->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css">
+    <link href="../css/bootstrap.css" rel="stylesheet" />
+    <link href="../css/basic.css" rel="stylesheet" />
     <link rel="shortcut icon" href="../assets/ics_icon.ico">
-    <link rel="stylesheet" href="../css/multi.css">
 
-    <title>ADMIN | Institute of Computer Studies</title>
-
+    <title>Create User | Institute of computer studies</title>
 </head>
 <body>
-    <?php require('admin_template.php'); ?>
-    <!--Create alert message-->
-    <div class="container">
-        <?php if(isset($_SESSION['message'])&& $_GET['success'] == 1): ?>   
-            <div class="alert alert-success alert-dismissible mt-2" id="success">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-            <?php 
-                echo $_SESSION['message'];  
-                unset($_SESSION['message']);
-            ?>
-        <?php endif ?>
-    </div>
-    <!--end of alert message-->
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-12 pt-3 pb-3">
-                <div class="card top-card">
-                    <div class="card-body ">
-                        <div class="d-flex">
-                            <div class="card-title">
-                                <h2>Create account</h2>
-                            </div>
+    <?php
+        include("header.php");
+    ?>
+        <div id="page-wrapper">
+            <div id="page-inner">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2 class="page-head-line" >Walk-in registration</h2>
+                    </div>
+                </div>
+                <center class="center">
+                    <?php if(isset($_SESSION['message']) && $_GET['success'] == 1): ?>    
+                        <div class="alert alert-success alert-dismissible mt-2" id="success">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <?php 
+                                echo $_SESSION['message'];  
+                                unset($_SESSION['message']);
+                        ?>
+                        <?php elseif(isset($_SESSION['message']) && $_GET['success'] == 2): ?>    
+                        <div class="alert alert-danger alert-dismissible mt-2" id="success">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <?php 
+                                echo $_SESSION['message'];  
+                                unset($_SESSION['message']);
+                        ?>
+                    <?php endif ?>
+                </center>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Students information
+                        <a data-toggle="modal" data-target="#user" class="btn btn-primary">Create Account</span></a>
+                    </div>
+                    <div class="panel-body">
+                        <div class="table-sorting  table-responsive">
+                            <table class="table table-striped table-bordered table-hover" id="table">
+                                <thead>
+                                    <tr>
+                                        <th>Student ID</th>
+                                        <th>Full Name</th>
+                                        <th>Email</th>
+                                        <th>Usertype</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php 
+                                        $query = ("SELECT * FROM request WHERE usertype NOT LIKE 'admin' AND approval_status='active' ");
+                                        $result = mysqli_query($connect, $query);
+                                        while($row = $result->fetch_assoc()){ 
+                                    ?>
+                                    <tr><?php if($row['approval_status'] == 'active'){ ?>
+                                        <?php } ?>
+                                    
+                                        <td><?php echo $row['student_id']; ?></td>
+                                        <td><?php echo $row['last_name']; echo ',';?> <?php echo $row['first_name'];?>  <?php echo $row['middle_name']; ?></td>
+                                        <td><?php echo $row['email']; ?></td>
+                                        <td><?php echo $row['usertype']; ?></td>
+                                        <td><?php echo $row['status']; ?></td>
+                                        <td>
+                                            <a type="button" name="view"  id="<?php echo $row["id"]; ?>" class="btn btn-info btn-xs view_data">
+                                                <span class="fas fa-eye fa-2x"></span>
+                                            </a> 
+                                            <a href="../include/active_account.php?stat_on=<?php echo $row['id'] ?>" class="btn btn-primary btn-xs" id="stat_on" name="stat_on">
+                                                <span class="fas fa-toggle-on fa-2x"></span>
+                                            </a>
+                                            <a href="../include/active_account.php?stat_off=<?php echo $row['id'] ?>" class="btn btn-danger btn-xs" id="stat_off" name="stat_off">
+                                                <span class="fas fa-toggle-off fa-2x"></span>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <?php } ?>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
-                <section id="region-main">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-sm-10 col-md-12">
-                                    <div class="card user-profile">
-                                        <div class="card-body">
-                                            <form>
-                                                <div id="regMenu" class="animate__animated animate__fadeInDown">
-                                                    <div class="form-group">
-                                                        <h4>Create  account for walk-in student</h4>
-                                                    </div>
-                                                    <button type="button" class="btn btn-primary  mb-2"
-                                                        data-toggle="modal" data-target="#user">
-                                                        Add User
-                                                    </button>
-                                                    <div class="table_wrapper">
-                                                        <table id="table" class="table table-hover table-responsive">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th scope="col">Student ID</th>
-                                                                    <th scope="col">First name</th>
-                                                                    <th scope="col">Middle name</th>
-                                                                    <th scope="col">Last name</th>
-                                                                    <th scope="col">Course</th>
-                                                                    <th scope="col">Year</th>
-                                                                    <th scope="col">Gender</th>
-                                                                    <th scope="col">User Type</th>
-                                                                    <th scope="col">Assessment status</th>
-                                                                    <th scope="col">Payment status</th>
-                                                                    <th scope="col">Date added</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <?php 
-                                                                    $query = ("SELECT * FROM request WHERE status='check' AND usertype NOT LIKE 'admin';");
-                                                                    $result = mysqli_query($connect, $query);
-                                                                    while($row = $result->fetch_assoc()){ 
-                                                                ?>
-                                                                <tr><?php if($row['status'] == 'check'){ ?>
-                                                                    <?php } ?>
-                                                                    <td><?php echo $row['student_id']; ?></td>
-                                                                    <td><?php echo $row['first_name']; ?></td>
-                                                                    <td><?php echo $row['last_name']; ?></td>
-                                                                    <td><?php echo $row['middle_name']; ?></td>
-                                                                    <td><?php echo $row['course']; ?></td>
-                                                                    <td><?php echo $row['year']; ?></td>
-                                                                    <td><?php echo $row['gender']; ?></td>
-                                                                    <td><?php echo $row['usertype']; ?></td>
-                                                                    <td><?php echo $row['assessment_status']; ?></td>
-                                                                    <td><?php echo $row['payment_status']; ?></td>
-                                                                    <td><?php echo $row['date']; ?></td>
-                                                                </tr>
-                                                                <?php } ?>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <!--END-->
             </div>
         </div>
     </div>
+    <!-- Modal for Viewing student information -->
+    <div id="user_detail" class="modal fade">  
+      <div class="modal-dialog">  
+           <div class="modal-content">  
+                <div class="modal-header">  
+                     <button type="button" class="close" data-dismiss="modal">&times;</button>  
+                     <h4 class="modal-title">Active user details</h4>  
+                </div>  
+                <div class="modal-body" id="student_detail">  
+                </div>  
+                <div class="modal-footer">  
+                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
+                </div>  
+           </div>  
+        </div>  
+    </div> 
+    <!-- Modal for create account -->
     <div class="modal fade" id="user" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Add new user</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close get_close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" action="walkin_user.php">
+                    <form method="POST" action="walkin_user.php" id="reg">
                         <div class="form-group">
                             <label for="student_id">Student ID</label>
                             <input type="text" class="form-control" id="student_id" name="student_id"
@@ -172,7 +170,7 @@
                         </div>
                         <div class="form-group">
                             <label for="course">Course</label>
-                            <select class="custom-select" id="course" name="course" required>
+                            <select class="form-control" id="course" name="course" required>
                                 <?php
                                     $result = $connect->query("SELECT * FROM course") or die($connect->error());
                                     while($row = $result->fetch_assoc()):
@@ -182,19 +180,8 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="year">Year</label>
-                            <select class="custom-select" id="year" name="year" required>
-                                <?php
-                                    $result = $connect->query("SELECT * FROM year_lvl") or die($connect->error());
-                                    while($row = $result->fetch_assoc()):
-                                ?>
-                                    <option value="<?php echo $row['year']; ?>"><?php echo $row["year"]; ?></option>
-                                <?php endwhile; ?>
-                            </select>
-                        </div>
-                        <div class="form-group">
                             <label for="gender">Gender</label>
-                            <select class="custom-select" id="gender"  name="gender"required>
+                            <select class="form-control" id="gender"  name="gender"required>
                                 <option value="Male" selected>Male</option>
                                 <option value="Female">Female</option>
                             </select>
@@ -206,7 +193,7 @@
                         </div>
                         <div class="form-group">
                             <label for="usertype">Create account as</label>
-                            <select class="custom-select" id="usertype" name="usertype">
+                            <select class="form-control" id="usertype" name="usertype">
                                 <option value="Student" selected>Student</option>
                                 <option value="President">President</option>
                                 <option value="VP">Vice President</option>
@@ -221,26 +208,25 @@
                 </div>
             </div>
         </div>
+    </div>    
+    <!-- footer -->                                
+    <div id="footer">
+       <strong>WMSU ICS PSITS COLLECTION 2020</strong>
     </div>
+     
 
-
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
-    </script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
-    </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
+    <!--Custom js-->
+    <script src="../js/bootstrap.js"></script>
     <script src="../js/datable.js"></script>
-    <script src="../js/validation.js"></script>
-    <script src="../js/alert-slide.js"></script>   
+    <script src="../js/validation.js"></script>    
+    <script src="../js/alert-slide.js"></script> 
+    <script src="../js/jquery.metisMenu.js"></script>
+    <script src="../js/custom1.js"></script>
+    <script src="../js/view_user.js"></script>
+    
 </body>
-
 </html>

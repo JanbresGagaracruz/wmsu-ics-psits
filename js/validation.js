@@ -59,10 +59,30 @@ $(document).ready(function () {
       });
     }
   });
+
+  $("#edit_course").blur(function () {
+    var edit_course = $("#edit_course").val();
+    if (edit_course == "") {
+      $("#edit_course_validation").html("");
+      $("#Update").prop("disabled", false);
+    } else {
+      $.ajax({
+        url: "../include/create_course.php",
+        method: "POST",
+        data: {
+          edit_course: edit_course,
+        },
+        datatype: "text",
+        success: function (html) {
+          $("#edit_course_validation").html(html);
+        },
+      });
+    }
+  });
   //Check the availability of semester id
   $("#semester").blur(function () {
-    var semester_id = $("#semester").val();
-    if (semester_id == "") {
+    var semester = $("#semester").val();
+    if (semester == "") {
       $("#semester_validation").html("");
       $("#create").prop("disabled", false);
     } else {
@@ -70,11 +90,30 @@ $(document).ready(function () {
         url: "../include/create_sem.php",
         method: "POST",
         data: {
-          course_check: course_id,
+          semester: semester,
         },
         datatype: "text",
         success: function (html) {
           $("#semester_validation").html(html);
+        },
+      });
+    }
+  });
+  $("#edit_semester").blur(function () {
+    var edit_semester = $("#edit_semester").val();
+    if (edit_semester == "") {
+      $("#edit_semester_validation").html("");
+      $("#Update").prop("disabled", false);
+    } else {
+      $.ajax({
+        url: "../include/create_sem.php",
+        method: "POST",
+        data: {
+          edit_semester: edit_semester,
+        },
+        datatype: "text",
+        success: function (html) {
+          $("#edit_semester_validation").html(html);
         },
       });
     }
@@ -99,6 +138,25 @@ $(document).ready(function () {
       });
     }
   });
+  $("#edit_year_lvl").blur(function () {
+    var edit_year_lvl = $("#edit_year_lvl").val();
+    if (edit_year_lvl == "") {
+      $("#edit_yearlvl_validation").html("");
+      $("#Update").prop("disabled", false);
+    } else {
+      $.ajax({
+        url: "../include/create_yearlvl.php",
+        method: "POST",
+        data: {
+          edit_year_lvl: edit_year_lvl
+        },
+        datatype: "text",
+        success: function (html) {
+          $("#edit_yearlvl_validation").html(html);
+        },
+      });
+    }
+  });
   //Check the availability of section id
   $("#section").blur(function () {
     var section = $("#section").val();
@@ -115,6 +173,25 @@ $(document).ready(function () {
         datatype: "text",
         success: function (html) {
           $("#section_validation").html(html);
+        },
+      });
+    }
+  });
+  $("#edit_section").blur(function () {
+    var edit_section = $("#edit_section").val();
+    if (edit_section == "") {
+      $("#edit_section_validation").html("");
+      $("#Update").prop("disabled", false);
+    } else {
+      $.ajax({
+        url: "../include/create_section.php",
+        method: "POST",
+        data: {
+          edit_section: edit_section,
+        },
+        datatype: "text",
+        success: function (html) {
+          $("#edit_section_validation").html(html);
         },
       });
     }
@@ -181,6 +258,26 @@ $("#fee_name").blur(function () {
     });
   }
 });
+//Check the availability of edit fee name
+$("#edit_fee_name").blur(function () {
+  var edit_fee_name = $("#edit_fee_name").val();
+  if (edit_fee_name == "") {
+    $("#edit_fee_validation").html("");
+    $("#Update").prop("disabled", false);
+  } else {
+    $.ajax({
+      url: "../include/create_fees.php",
+      method: "POST",
+      data: {
+        edit_fee_name: edit_fee_name,
+      },
+      datatype: "text",
+      success: function (html) {
+        $("#edit_fee_validation").html(html);
+      },
+    });
+  }
+});
 
 //registration restriction input
 $(document).ready(function () {
@@ -190,15 +287,15 @@ $(document).ready(function () {
         minlength: 11,
       },
       first_name: {
-        minlength: 3,
+        minlength: 2,
         maxlength: 20,
       },
       last_name: {
-        minlength: 3,
+        minlength: 2,
         maxlength: 20,
       },
       middle_name: {
-        minlength: 3,
+        minlength: 2,
         maxlength: 20,
       },
       password: {
@@ -239,13 +336,13 @@ $(document).ready(function () {
     rules: {
       name: {
         minlength: 5,
-        maxlength: 20,
+        maxlength: 15,
       },
     },
     messages: {
       name: {
         minlength: "File name should be at least 5 characters.",
-        maxlength: "File name maximum character is 20.",
+        maxlength: "File name maximum character is 15.",
       },
     },
   });
@@ -257,6 +354,27 @@ $(document).ready(function () {
       course: {
         minlength: 10,
         maxlength: 50,
+      },
+      edit_course: {
+        minlength: 10,
+        maxlength: 50,
+      },
+    },
+    messages: {
+      course: {
+        minlength: "Course name should be at least 10 characters.",
+        maxlength: "Course name maximum character is 50.",
+      },
+    },
+  });
+});
+$(document).ready(function () {
+  $("#edit_course_form").validate({
+    rules: {
+      edit_course: {
+        minlength: 10,
+        maxlength: 50,
+        required: true
       },
     },
     messages: {
@@ -293,11 +411,41 @@ $(document).ready(function () {
     },
   });
 });
+$(document).ready(function () {
+  $("#edit_section_form").validate({
+    rules: {
+      edit_section: {
+        maxlength: 1,
+        required: true
+      },
+    },
+    highlight: function (element) {
+      $(element).closest(".form-group input").addClass("text-danger");
+    },
+    unhighlight: function (element) {
+      $(element).closest(".form-group input").removeClass("text-danger");
+    },
+    errorElement: "small",
+    errorClass: "help-block text-danger",
+    errorPlacement: function (error, element) {
+      if (element.parent(".input-group").length) {
+        error.insertAfter(element.parent());
+      } else {
+        error.insertAfter(element);
+      }
+    },
+  });
+});
 //semester restriction input
 $(document).ready(function () {
   $("#semester_form").validate({
     rules: {
       semester: {
+        maxlength: 1,
+        number: true,
+        required: true,
+      },
+      edit_semester: {
         maxlength: 1,
         number: true,
         required: true,
@@ -348,17 +496,11 @@ $(document).ready(function () {
     },
   });
 });
-
-//local fees restriction input
 $(document).ready(function () {
-  $("#local_form").validate({
+  $("#edit_year_form").validate({
     rules: {
-      fee_name: {
-        maxlength: 30,
-        required: true,
-      },
-      amount: {
-        maxlength: 5,
+      edit_year_lvl: {
+        maxlength: 1,
         number: true,
         required: true,
       },
@@ -381,9 +523,9 @@ $(document).ready(function () {
   });
 });
 
-//university fee restriction input
+//local fees restriction input
 $(document).ready(function () {
-  $("#university_form").validate({
+  $("#local_form").validate({
     rules: {
       fee_name: {
         maxlength: 30,
@@ -394,6 +536,47 @@ $(document).ready(function () {
         number: true,
         required: true,
       },
+      edit_fee_name: {
+        maxlength: 30,
+        required: true,
+      },
+      edit_amount: {
+        maxlength: 5,
+        number: true,
+        required: true,
+      },
+
+    },
+    highlight: function (element) {
+      $(element).closest(".form-group input").addClass("text-danger");
+    },
+    unhighlight: function (element) {
+      $(element).closest(".form-group input").removeClass("text-danger");
+    },
+    errorElement: "small",
+    errorClass: "help-block text-danger",
+    errorPlacement: function (error, element) {
+      if (element.parent(".input-group").length) {
+        error.insertAfter(element.parent());
+      } else {
+        error.insertAfter(element);
+      }
+    },
+  });
+});
+$(document).ready(function () {
+  $("#edit_local_form").validate({
+    rules: {
+      edit_fee_name: {
+        maxlength: 30,
+        required: true,
+      },
+      edit_amount: {
+        maxlength: 5,
+        number: true,
+        required: true,
+      },
+
     },
     highlight: function (element) {
       $(element).closest(".form-group input").addClass("text-danger");

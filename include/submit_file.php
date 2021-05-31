@@ -40,15 +40,15 @@
                     header('location: ../view/announcement.php?success=1');
                     $_SESSION['message'] = "The file ".$fileName. " has been uploaded successfully.";
                 }else{
-                    header('location: ../view/announcement.php?success=1');
+                    header('location: ../view/announcement.php?success=2');
                     $_SESSION['message'] = "File upload failed, please try again."; 
                 } 
             }else{
-                header('location: ../view/announcement.php?success=1');
+                header('location: ../view/announcement.php?success=2');
                 $_SESSION['message'] = "Sorry, there was an error uploading your file.";  
             }
         }else{
-            header('location: ../view/announcement.php?success=1');
+            header('location: ../view/announcement.php?success=2');
             $_SESSION['message'] = 'Sorry, only PDF file is allowed to upload.';
         }
     }
@@ -57,7 +57,7 @@
     if(isset($_GET['delete'])){
         $id = $_GET['delete'];
 
-        $result = $connect->query("SELECT * FROM file_upload WHERE id = '$id';") or die($connect->error());
+        $result = $connect->query("SELECT * FROM file_upload WHERE id = '$id';") or die($connect->error);
         if(count($result) == 1){
             $row = $result->fetch_array();
             $id = $row['id'];  
@@ -76,7 +76,7 @@
                     $_SESSION['message'] = "Successfully deleted.";
                 }
             }else{
-                header('location: ../view/announcement.php?success=1');
+                header('location: ../view/announcement.php?success=2');
                 $_SESSION['message'] = "Something went wrong.";
             }
         }  

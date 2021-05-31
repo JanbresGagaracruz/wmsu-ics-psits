@@ -88,31 +88,10 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="year">Year</label>
-                        <select class="custom-select" id="year" name="year" required>
-                            <?php
-                                $result = $connect->query("SELECT * FROM year_lvl") or die($connect->error());
-                                while($row = $result->fetch_assoc()):
-                            ?>
-                                <option value="<?php echo $row['year']; ?>"><?php echo $row["year"]; ?></option>
-                            <?php endwhile; ?>
-                        </select>
-                    </div>
-                    <div class="form-group">
                         <label for="gender">Gender</label>
                         <select class="custom-select" id="gender"  name="gender"required>
                             <option value="Male" selected>Male</option>
                             <option value="Female">Female</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="usertype">Create account as</label>
-                        <select class="custom-select" id="usertype" name="usertype" required>
-                            <option value="Student" selected>Student</option>
-                            <option value="President">President</option>
-                            <option value="VP">Vice President</option>
-                            <option value="Treasurer">Treasurer</option>
-                            <option value="Officer">Officer</option>
                         </select>
                     </div>
                     <div class="form-group">

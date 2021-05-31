@@ -6,36 +6,35 @@
     } 
     include('database.php');
 
-    if(isset($_POST["create"]) && !empty($_FILES["file"]["name"])){
-        $transaction = $_POST['transaction'];
-        $amount = $_POST['amount'];
-        $date = $_POST['date'];
-        $name = $_POST['name'];
+    if(isset($_POST["create"])){
+        if(!empty($_FILES["file"]["name"])) { 
+            $transaction = $_POST['transaction'];
+            $amount = $_POST['amount'];
+            $date = $_POST['date'];
+            $name = $_POST['name'];
+            
+            $fileName = basename($_FILES["file"]["name"]);
+            $fileType = pathinfo($fileName,PATHINFO_EXTENSION);
+            $Upload_type = array('jpg','png','jpeg','gif');
 
-        $targetDir = "../img_file/";
-        $Upload_type = array('jpg','png');
-        $fileName = basename($_FILES["file"]["name"]);
-        $path = $targetDir . $fileName;
-        $fileType = pathinfo($path,PATHINFO_EXTENSION);
-
-        if(in_array($fileType, $Upload_type )){
-            //moving the pdf file to the upload folder
-            if(move_uploaded_file($_FILES["file"]["tmp_name"], $path)){
-                $insert = $connect->query("INSERT INTO withdraw (transaction,amount,date,name,img) VALUES ('".$transaction."','".$amount."','".$date."','".$name."','".$fileName."')");
+            if(in_array($fileType, $Upload_type )){
+                $image = $_FILES['file']['tmp_name']; 
+                $imgContent = addslashes(file_get_contents($image));
+                $insert = $connect->query("INSERT INTO withdraw (transaction,amount,date,name,img) VALUES ('".$transaction."','".$amount."','".$date."','".$name."','".$imgContent."')");
                 if($insert){
                     header('location: ../view/withdraw.php?success=1');
                     $_SESSION['message'] = "You successfully added a new record.";
                 }else{
-                    header('location: ../view/withdraw.php?success=1');
+                    header('location: ../view/withdraw.php?success=2');
                     $_SESSION['message'] = "File upload failed, please try again."; 
                 } 
             }else{
-                header('location: ../view/withdraw.php?success=1');
-                $_SESSION['message'] = "Sorry, there was an error uploading your file.";  
+                header('location: ../view/withdraw.php?success=2');
+                $_SESSION['message'] = 'Sorry, only jpg and png image is allowed to upload.';
             }
         }else{
-            header('location: ../view/withdraw.php?success=1');
-            $_SESSION['message'] = 'Sorry, only jpg and png image is allowed to upload.';
+            header('location: ../view/withdraw.php?success=2');
+            $_SESSION['message'] = 'Please, select an image file to upload';
         }
     }
 
@@ -43,7 +42,7 @@
     if(isset($_GET['delete'])){
         $id = $_GET['delete'];
 
-        $result = $connect->query("SELECT * FROM withdraw WHERE id = '$id';") or die($connect->error());
+        $result = $connect->query("SELECT * FROM withdraw WHERE id = '$id';") or die($connect->error);
         if(count($result) == 1){
             $row = $result->fetch_array();
             $id = $row['id'];  
@@ -62,10 +61,47 @@
                     $_SESSION['message'] = "Successfully deleted.";
                 }
             }else{
-                header('location: ../view/withdraw.php?success=1');
+                header('location: ../view/withdraw.php?success=2');
                 $_SESSION['message'] = "Something went wrong.";
             }
         }  
     }
+    //view withdraw details
+    if(isset($_POST["id"]))  
+    {  
+        $output = '';  
+        $query = "SELECT * FROM withdraw WHERE id = '".$_POST["id"]."'";  
+        $result = mysqli_query($connect, $query);  
+        $output .= '  
+        <div class="table-responsive">  
+            <table class="table table-bordered">';  
+        while($row = mysqli_fetch_array($result))  
+        {  
+            $output .= '  
+                    <img src="data:image/jpeg;charset=utf8;base64,'.base64_encode($row['img'] ).'" height="300" width="500"/>
+                    <tr>  
+                        <td width="30%"><label>Transaction</label></td>  
+                        <td width="70%">'.$row["transaction"].'</td>  
+                    </tr>  
+                    <tr>  
+                        <td width="30%"><label>Amount</label></td>  
+                        <td width="70%">'.$row["amount"].'</td>  
+                    </tr>    
+                    <tr>  
+                        <td width="30%"><label>Date</label></td>  
+                        <td width="70%">'.$row["date"].'</td>  
+                    </tr>
+                    <tr>  
+                        <td width="30%"><label>Withdraw by</label></td>  
+                        <td width="70%">'.$row["name"].'</td>  
+                    </tr> 
+                    ';  
+        }  
+        $output .= "
+            </table>
+        </div>";  
+        echo $output;  
+    }
+
     ob_end_flush();
 ?>

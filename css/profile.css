@@ -75,13 +75,13 @@ footer .navbar{
     justify-content: center;
     align-items: center;
 }
+
 .user-info{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     font-family: 'Poppins', sans-serif;
-
 } 
 /*notification*/
 .notifications {
@@ -128,6 +128,37 @@ footer .navbar{
     color: #aaa;
     font-size: 12px
   }
+  fieldset.scheduler-border {
+    border: 1px groove #ddd !important;
+    padding: 0 1.4em 1.4em 1.4em !important;
+    margin: 0 0 1.5em 0 !important;
+    -webkit-box-shadow: 0px 0px 0px 0px #000;
+    box-shadow: 0px 0px 0px 0px #000;
+}
+legend.scheduler-border {
+    font-size: 1.2em !important;
+    font-weight: bold !important;
+    text-align: left !important;
+    width: auto;
+    padding: 0 10px;
+    border-bottom: none;
+}
+label.error {
+    color: red;
+    font-size: 1rem;
+    display: block;
+}
+input.error {
+    border: 1px dashed red;
+    font-weight: 300;
+    color: red;
+}
+.help-block {
+    display: block;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    color: #a94442!important;
+}
 @media (max-width: 576px) { 
     .d-flex{
         justify-content: center;
@@ -137,6 +168,9 @@ footer .navbar{
       }
     .ics{
         font-size: 12px;
+    }
+    #transact{
+        margin-top: 1rem;
     }
 }
 

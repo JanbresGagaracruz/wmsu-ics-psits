@@ -1,5 +1,16 @@
 <?php
-    include("../include/userlogin.php");
+    ob_start();
+        include("../include/userlogin.php");
+        if(!empty($_SESSION['usertype']) && $_SESSION['usertype'] == "admin"){
+            header("location: dashboard.php");
+        }
+        else if(!empty($_SESSION['usertype']) && $_SESSION['usertype'] == "1"){
+            header("location: dashboard_officer.php");
+        }
+        else if(!empty($_SESSION['usertype']) && $_SESSION['usertype'] == "Student"){
+            header("location: homepage.php");
+        }else{}
+    ob_end_flush();
 ?>
 
 <!DOCTYPE html>

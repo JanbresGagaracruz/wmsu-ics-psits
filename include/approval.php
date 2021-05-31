@@ -23,12 +23,12 @@
     if(isset($_GET['accept'])){
         $id = $_GET['accept'];
         $email = $_GET['accept'];
-        $result = $connect->query("SELECT * FROM request WHERE id = '$id';") or die($connect->error());
+        $result = $connect->query("SELECT * FROM request WHERE id = '$id';") or die($connect->error);
         if(mysqli_num_rows($result) == 1){
             $row = $result->fetch_array();
             $id = $row['id'];
             $email = $row['email'];
-            $connect->query("UPDATE request SET status='check' WHERE id= '$id';") or die($connect->error());
+            $connect->query("UPDATE request SET status = 'active', approval_status = 'active' WHERE id= '$id';") or die($connect->error);
             try{
                 $mail->isSMTP();       
             	$mail->SMTPAuth = true; 
@@ -59,7 +59,7 @@
     //decline account approval
     if(isset($_GET['decline'])){
         $id = $_GET['decline'];
-        $result = $connect->query("SELECT * FROM request WHERE id = '$id';") or die($connect->error());
+        $result = $connect->query("SELECT * FROM request WHERE id = '$id';") or die($connect->error);
         if(mysqli_num_rows($result) == 1){
             $row = $result->fetch_array();
             $id = $row['id'];   

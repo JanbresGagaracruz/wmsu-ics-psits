@@ -5,14 +5,13 @@
         session_start(); 
     } 
     include("database.php");
-
     $email = "";
     $usertype = "";
     $first_name = "";
-    $status="check";
+    $status="active";
     if(isset($_POST['login'])){
-        $email=$_POST['email'];
-        $password=$_POST['password'];
+        $email = mysqli_real_escape_string($connect,$_POST['email']);
+        $password= mysqli_real_escape_string($connect,$_POST['password']);
         $sql = "SELECT * FROM request WHERE email='$email' AND password='$password' AND status='$status';";
         $result=mysqli_query($connect, $sql);
             if($email == "" && $password == ""){
@@ -28,21 +27,26 @@
                     if($_SESSION['usertype']=="Student"){
                         $_SESSION['usertype']='Student';
                         header("location: ../view/homepage.php");
-                        }else if($_SESSION['usertype']=="President"){
+                        }else if($_SESSION['usertype']=="President?success=1"){
                             $_SESSION['usertype']='1';
-                            header("location: ../view/dashboard_officer.php");
+                            $_SESSION['message'] = "Welcome back! Check out our latest record summary.";
+                            header("location: ../view/dashboard_officer.php?success=1");
                         }else if($_SESSION['usertype']=="VP"){
                             $_SESSION['usertype']='1';
-                            header("location: ../view/dashboard_officer.php");
+                            $_SESSION['message'] = "Welcome back! Check out our latest record summary.";
+                            header("location: ../view/dashboard_officer.php?success=1");
                         }else if($_SESSION['usertype']=="Treasurer"){
                             $_SESSION['usertype']='1';
-                            header("location: ../view/dashboard_officer.php");
+                            $_SESSION['message'] = "Welcome back! Check out our latest record summary.";
+                            header("location: ../view/dashboard_officer.php?success=1");
                         }else if($_SESSION['usertype']=="Officer"){
                             $_SESSION['usertype']='1';
-                            header("location: ../view/dashboard_officer.php");  
+                            $_SESSION['message'] = "Welcome back! Check out our latest record summary.";
+                            header("location: ../view/dashboard_officer.php?success=1");  
                         }else if($_SESSION['usertype']=="admin"){
                             $_SESSION['usertype']='admin';
-                            header("location: ../view/dashboard.php"); 
+                            $_SESSION['message'] = "Welcome back admin!"; 
+                            header("location: ../view/dashboard.php?success=1"); 
                         }
                 else{  
                     header("location:../view/login.php");  

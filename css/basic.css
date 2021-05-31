@@ -1,0 +1,325 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap');
+*{
+    padding: 0;
+    margin: 0;
+}
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height:25px;
+}
+
+#wrapper {
+    width: 100%;
+    background: #43A047;
+}
+
+#page-wrapper {
+    padding: 15px 15px;
+    min-height: 600px;
+    background: #F3F3F3;
+}
+
+#page-inner {
+    width: 100%;
+    margin: 10px 20px 10px 0px;
+    background-color: #fff;
+    padding: 10px;
+    min-height: 1200px;
+}
+.dash{
+    width: 100%;
+    margin: 10px 20px 10px 0px;
+   background-color: #F3F3F3!important; 
+    padding: 10px;
+    min-height: 1200px;
+}
+
+.page-head-line {
+    font-size: 30px;
+    color: #000;
+    font-weight: 800;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #77aa77;
+    margin-bottom: 10px;
+}
+
+
+.navbar-cls-top .navbar-brand {
+    color: #fff;
+    background: #202020;
+    width: 260px;
+    text-align: center;
+    height: 75px;
+    font-size: 20px;
+    letter-spacing: 1px;
+    font-weight: 900;
+    padding-top: 25px;
+    text-transform:uppercase;
+}
+
+.header-right {
+    color: #fff;
+    padding: 15px 50px 5px 50px;
+    float: right;
+    font-size: 16px;
+}
+
+
+/* ul ul a {
+    font-size:0.9em !important;
+    padding-left:30px !important;
+    background:#1b1d24;
+}
+ul li a:hover {
+    color: #262933;
+    background: #fff;
+}  */
+
+.nav-second-level li,
+.nav-third-level li {
+    border-bottom: none !important;
+}
+
+.nav-second-level li a {
+    padding-left: 37px;
+}
+
+.nav-third-level li a {
+    padding-left: 55px;
+}
+
+.sidebar-collapse, .sidebar-collapse .nav{
+    background: none;
+}
+
+.sidebar-collapse .nav {
+    padding: 0;
+}
+
+.sidebar-collapse .nav  > li > a {
+    color: #fff;
+    background: #43A047;
+    text-shadow: none;
+    padding: 15px 40px;
+    /* border-bottom: 1px solid #fff; */
+}
+
+
+.sidebar-collapse > .nav > li > a {
+    padding: 15px 10px;
+}
+
+.sidebar-collapse .nav  > li > a:hover,
+.sidebar-collapse .nav  > li > a:focus {
+    background: #368a3a;
+    outline: 0;
+}
+
+.nav-second-level > li:last-child > a:after,
+.nav-third-level > li:last-child > a:after {
+    height: 50%;
+}
+
+.nav-third-level > li > a:after,
+.nav-third-level > li > a:before {
+    left: 40px;
+}
+.navbar-side {
+    border: none;
+    background-color: #43A047;
+}
+.navbar-cls-top {
+    background: #43A047;
+    border-bottom: none;
+}
+.navbar-toggle{
+    margin-top: 0;
+}
+.navbar-toggle:hover{
+    background-color: #1b7a1f;
+}
+.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+    background-color: #3eaa43;
+}
+.navbar-default .navbar-toggle {
+    border-color: #fff;
+}
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: #FFF;
+}
+.nav > li > a > i {
+    margin-right: 10px;
+}
+.navbar span{
+    vertical-align: middle;
+    font-family: 'Poppins', sans-serif;
+        color: #fff;      
+}
+.navbar div img{
+    height: 50px;
+    width: 50px;
+}
+.navbar-text{
+    margin-left: .7rem;
+    color: #fff!important;
+}
+.main-box {
+    text-align:left;
+    padding:20px;
+    border-radius:5px;
+    -moz-border-radius:5px ;
+    -webkit-border-radius:5px;
+    margin-bottom:40px;
+}
+.main-box a,.main-box a:hover {
+    color:#fff;
+    text-decoration:none;
+
+}
+.mb-orange{
+    display: flex;
+    box-shadow: hsl(0deg 0% 80%) 0 0 16px;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 5px;
+    justify-content: space-between;
+ }
+
+.main-box h5 {
+    font-size:16px;
+    font-weight:800;
+}
+.fa-2x{
+    color: #ffffff;
+}
+.fa-5x{
+    color: #77aa77;
+}
+th, td { white-space: nowrap; }
+div.dataTables_wrapper {
+    margin: 0 auto;
+}
+.alert{
+    text-align: left;
+}
+.modal-header .active_user{
+    margin-top: 1px;
+}
+.modal-header .withdraw{
+    margin-top: 1px;
+}
+.modal-header .account{
+    margin-top: 1px;
+}
+.modal-header .announce_close{
+    margin-top: -20px;
+}
+.modal-header .school_close{
+    margin-top: -20px;
+}
+.modal-header .year_close{
+    margin-top: -20px;
+}
+.modal-header .course_close{
+    margin-top: -20px;
+}
+.modal-header .semester_close{
+    margin-top: -20px;
+}
+.modal-header .section_close{
+    margin-top: -20px;
+}
+.modal-header .fees_close{
+    margin-top: -20px;
+}
+.modal-header .withdraw_close{
+    margin-top: -20px;
+}
+.modal-header .fees_close{
+    margin-top: -20px;
+}
+.modal-header .get_close{
+    margin-top: -20px;
+}
+
+fieldset.scheduler-border {
+    border: 1px groove #ddd !important;
+    padding: 0 1.4em 1.4em 1.4em !important;
+    margin: 0 0 1.5em 0 !important;
+    -webkit-box-shadow: 0px 0px 0px 0px #000;
+    box-shadow: 0px 0px 0px 0px #000;
+}
+legend.scheduler-border {
+    font-size: 1.2em !important;
+    font-weight: bold !important;
+    text-align: left !important;
+    width: auto;
+    padding: 0 10px;
+    border-bottom: none;
+}
+#record_data{
+    color: #77aa77;
+}
+label.error {
+    color: red;
+    font-size: 1rem;
+    display: block;
+}
+input.error {
+    border: 1px dashed red;
+    font-weight: 300;
+    color: red;
+}
+.help-block {
+    display: block;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    color: #a94442!important;
+}
+.panel-heading {
+    display: flex;
+    padding: 10px 15px;
+    border-bottom: 1px solid transparent;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    justify-content: space-between;
+}
+#footer {
+    background-color:#43A047;
+    padding:20px 40px;
+    text-align: right;
+    font-size:12px;
+    color:#ffffff;
+}
+
+
+@media (min-width:768px) {
+    #page-wrapper {
+        margin: 0 0 0 260px;
+        padding: 15px 30px;
+        min-height: 1200px;
+    }
+    .navbar-side {
+        z-index: 1;
+        position: absolute;
+        width: 260px;
+    }
+    .navbar {
+        border-radius: 0px;
+    }
+}
+
+@media (max-width: 575.98px) { 
+    #footer{
+        text-align: center;
+    }
+    .navbar-header{
+        margin-top: 1rem;
+    }
+    .panel-body{
+        padding: 0.7rem;
+    }
+    .fa-2x{
+        font-size: 1em;
+    }
+}

@@ -1,9 +1,9 @@
 <?php 
 
 $localhost = "localhost";
-$username = "root";
-$password = "";
-$dbname = "psits_system";
+$username = "u179407683_collection";
+$password = "Katalepsy123";
+$dbname = "u179407683_psits";
 /* 
 $username = "root";
 $password = "";
