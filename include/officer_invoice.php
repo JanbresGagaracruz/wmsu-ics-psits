@@ -215,7 +215,7 @@
         $content .= '</table>';  
         $obj_pdf->writeHTML($content);
 
-        $obj_pdf->Output('StudentReport.pdf', 'I');
+        $obj_pdf->Output('StudentReport.pdf', 'D');
     }
     //
     if(isset($_POST["all_record"]))  
@@ -259,7 +259,7 @@
         $content .= '</table>';  
         $obj_pdf->writeHTML($content);
 
-        $obj_pdf->Output('StudentReport.pdf', 'I');
+        $obj_pdf->Output('StudentReport.pdf', 'D');
     }
     //
 ?>
