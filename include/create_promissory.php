@@ -129,7 +129,7 @@
             $message= "Your promissory request has been accepted.";
             $connect->query("UPDATE student_assessment SET promissory_approval = 'approved' WHERE id= '$id';");
             $connect->query("INSERT INTO notification (assessment_id,message,status,viewed,type) VALUES ('$id','$message','$status','$viewed','$type')");
-/*             try{
+            try{
                 $mail->isSMTP();       
             	$mail->SMTPAuth = true; 
 	            $mail->SMTPSecure = 'tls'; 
@@ -150,7 +150,7 @@
                 $mail->send();
             }catch(Exception $e){
                 echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-            } */
+            }
             header('location: ../view/promissory_approval.php?success=1');
             $_SESSION['message'] = "Student promissory has been accepted!";
             
@@ -201,7 +201,7 @@
             if($check){
                 $connect->query("DELETE FROM student_assessment WHERE id= '$id';");
             }
-/*             try{
+            try{
                 $mail->isSMTP();                                           
                 $mail->Host       = Host;                     
                 $mail->SMTPAuth   = true;                            
@@ -219,7 +219,7 @@
                 $mail->send();
             }catch(Exception $e){
                 echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-            } */
+            }
             header('location: ../view/promissory_approval.php?success=1');
             $_SESSION['message'] = "Student promissory been declined";
         }
