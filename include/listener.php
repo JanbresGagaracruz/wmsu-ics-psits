@@ -7,18 +7,18 @@ $enableSandbox = true;
 // Database settings. Change these for your database configuration.
 $dbConfig = [
 	'host' => 'localhost',
-	'username' => 'root',
-	'password' => '',
-	'name' => 'create_payment'
+	'username' => 'u179407683_collection',
+	'password' => 'Katalepsy123',
+	'name' => 'u179407683_psits'
 ];
 
 // PayPal settings. Change these to your account details and the relevant URLs
 // for your site.
 $paypalConfig = [
-	'email' => 'janbres666@gmail.com'/* ,
-	'return_url' => 'http://example.com/payment-successful.html',
-	'cancel_url' => 'http://example.com/payment-cancelled.html',
-	'notify_url' => 'http://example.com/payments.php' */
+	'email' => 'janbres666@gmail.com',
+	'return_url' => 'https://wmsu-psits-collection.online/view/user_payment.php',
+	/* 'cancel_url' => 'http://example.com/payment-cancelled.html', */
+	'notify_url' => 'https://wmsu-psits-collection.online/view/user_payment.php'
 ];
 
 $paypalUrl = $enableSandbox ? 'https://www.sandbox.paypal.com/cgi-bin/webscr' : 'https://www.paypal.com/cgi-bin/webscr';
@@ -44,10 +44,10 @@ if (!isset($_POST["txn_id"]) && !isset($_POST["txn_type"])) {
 	// Set the PayPal account.
 	$data['business'] = $paypalConfig['email'];
 
-/* 	// Set the PayPal return addresses.
+	// Set the PayPal return addresses.
 	$data['return'] = stripslashes($paypalConfig['return_url']);
-	$data['cancel_return'] = stripslashes($paypalConfig['cancel_url']);
-	$data['notify_url'] = stripslashes($paypalConfig['notify_url']); */
+	/* $data['cancel_return'] = stripslashes($paypalConfig['cancel_url']); */
+	$data['notify_url'] = stripslashes($paypalConfig['notify_url']); 
 
 	// Set the details about the product being purchased, including the amount
 	// and currency so that these aren't overridden by the form data.
@@ -55,28 +55,21 @@ if (!isset($_POST["txn_id"]) && !isset($_POST["txn_type"])) {
 	$data['amount'] = $_POST['amount'];
 	$data['currency_code'] = 'PHP';
 
-	// Add any custom fields for the query string.
-	//$data['custom'] = USERID;
 
-	// Build the query string from the data.
 	$queryString = http_build_query($data);
 
-	// Redirect to paypal IPN
 	header('location:' . $paypalUrl . '?' . $queryString);
 	exit();
 
 } else {
-	// Handle the PayPal response.
 
-	// Create a connection to the database.
 	$db = new mysqli($dbConfig['host'], $dbConfig['username'], $dbConfig['password'], $dbConfig['name']);
 
-	// Assign posted variables to local data array.
 	$data = [
 		'item_name' => $_POST['item_name'],
 		'item_number' => $_POST['item_number'],
 		'payment_status' => $_POST['payment_status'],
-		'payment_amount' => $_POST['mc_gross'],
+		'payment_amount' => $_POST['amount'],
 		'payment_currency' => $_POST['mc_currency'],
 		'txn_id' => $_POST['txn_id'],
 		'receiver_email' => $_POST['receiver_email'],
@@ -84,12 +77,8 @@ if (!isset($_POST["txn_id"]) && !isset($_POST["txn_type"])) {
 		'custom' => $_POST['custom'],
 	];
 
-	// We need to verify the transaction comes from PayPal and check we've not
-	// already processed the transaction before adding the payment to our
-	// database.
 	if (verifyTransaction($_POST) && checkTxnid($data['txn_id'])) {
 		if (addPayment($data) !== false) {
-			// Payment successfully added.
 		}
 	}
 }

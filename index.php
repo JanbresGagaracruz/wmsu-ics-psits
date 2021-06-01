@@ -85,7 +85,7 @@
         <div class="col-lg-4">
           <div class="work-box text-center mt-4 mb-4 p-4">
             <div class="work-icon m-2"><img src="assets/Profile_data.svg"></div>
-            <h5 class="mt-3">Customized your profile</h5>
+            <h5 class="mt-3">Check all of the transaction</h5>
             <div class="title-border mx-auto mt-3 mb-3"></div>
             <p class="mb-0">
               You can check and track all your transaction.
