@@ -164,39 +164,42 @@
                             </div>
                             <div class="form-group">
                                 <label for="total_fees">Total Amount to be paid</label>
-                                <input type="text" class="form-control" id="total_fees" name="total_fees" readonly="readonly">
+                                <input type="text" class="form-control text-right" id="total_fees" name="total_fees" readonly="readonly">
                             </div>
                         </fieldset>
-                        <div class="table-sorting  table-responsive" style="margin-top: 1rem;">
-                        <table class="table table-striped table-bordered table-hover" id="table1">
-                            <thead>
-                                <tr class="p-4">
-                                    <th scope="col">Select</th>
-                                    <th scope="col">School fees</th>
-                                    <th scope="col">Amount</th>
-                                    <th scope="col">type</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php 
-                                    $result = $connect->query("SELECT * FROM fees;") or die($connect->error());
-                                    while($row = $result->fetch_assoc()){ 
-                                ?>
-                                <tr>
-                                    <td>              
-                                        <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input check_amount" name="local_fees">
-                                        <label class="custom-control-label" for="check_amount"></label>
-                                    </div>
-                                    </td>
-                                    <td name="selected_fees"><?php echo $row['fee_name']; ?></td>
-                                    <td name="amount"><?php echo $row['amount']; ?></td>
-                                    <td><?php echo $row['type']; ?></td>
-                                </tr>
-                                <?php } ?>
-                            </tbody>
-                        </table>
-                        </div>
+                        <fieldset class="scheduler-border">
+                            <legend class="scheduler-border">List of fees</legend>
+                            <div class="table-sorting  table-responsive" style="margin-top: 1rem;">
+                            <table class="table table-striped table-bordered table-hover">
+                                <thead>
+                                    <tr class="p-4">
+                                        <th scope="col">Select</th>
+                                        <th scope="col">School fees</th>
+                                        <th scope="col">Amount</th>
+                                        <th scope="col">type</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php 
+                                        $result = $connect->query("SELECT * FROM fees;") or die($connect->error());
+                                        while($row = $result->fetch_assoc()){ 
+                                    ?>
+                                    <tr>
+                                        <td>              
+                                            <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input check_amount" name="local_fees">
+                                            <label class="custom-control-label" for="check_amount"></label>
+                                        </div>
+                                        </td>
+                                        <td name="selected_fees"><?php echo $row['fee_name']; ?></td>
+                                        <td name="amount" class="text-right"><?php echo $row['amount']; ?></td>
+                                        <td><?php echo $row['type']; ?></td>
+                                    </tr>
+                                    <?php } ?>
+                                </tbody>
+                            </table>
+                            </div>
+                        </fieldset>
                         <fieldset class="scheduler-border">
                             <legend class="scheduler-border">Payment Information</legend>
                             <div class="form-group">
@@ -205,11 +208,11 @@
                             </div>
                             <div class="form-group">
                                 <label for="balance">Student balance</label>
-                                <input type="text" class="form-control" id="balance" name="balance" readonly="readonly">
+                                <input type="text" class="form-control text-right" id="balance" name="balance" readonly="readonly">
                             </div>
                             <div class="form-group u_val">
                                 <label for="total_payment">Payment fee</label>
-                                <input type="text" class="form-control" id="total_payment" name="total_payment" readonly="readonly">
+                                <input type="text" class="form-control text-right" id="total_payment" name="total_payment" readonly="readonly">
                             </div>
                         </fieldset>
 

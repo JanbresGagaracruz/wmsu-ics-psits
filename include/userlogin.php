@@ -27,10 +27,10 @@
                     if($_SESSION['usertype']=="Student"){
                         $_SESSION['usertype']='Student';
                         header("location: ../view/homepage.php");
-                        }else if($_SESSION['usertype']=="President?success=1"){
-                            $_SESSION['usertype']='1';
-                            $_SESSION['message'] = "Welcome back! Check out our latest record summary.";
-                            header("location: ../view/dashboard_officer.php?success=1");
+                        }else if($_SESSION['usertype']=="President"){
+                            $_SESSION['usertype']='admin';
+                            $_SESSION['message'] = "Welcome back President! Check out our latest record.";
+                            header("location: ../view/dashboard.php?success=1"); 
                         }else if($_SESSION['usertype']=="VP"){
                             $_SESSION['usertype']='1';
                             $_SESSION['message'] = "Welcome back! Check out our latest record summary.";
@@ -45,7 +45,7 @@
                             header("location: ../view/dashboard_officer.php?success=1");  
                         }else if($_SESSION['usertype']=="admin"){
                             $_SESSION['usertype']='admin';
-                            $_SESSION['message'] = "Welcome back admin!"; 
+                            $_SESSION['message'] = "Welcome back Admin! Check our latest record."; 
                             header("location: ../view/dashboard.php?success=1"); 
                         }
                 else{  

@@ -308,15 +308,15 @@ $(document).ready(function () {
         minlength: "Student id should be at least 11 characters.",
       },
       first_name: {
-        minlength: "First name should be at least 3 characters.",
+        minlength: "First name should be at least 2 characters.",
         maxlength: "First name maximum character is 20.",
       },
       last_name: {
-        minlength: "Last name should be at least 3 characters.",
+        minlength: "Last name should be at least 2 characters.",
         maxlength: "Last name maximum character is 20.",
       },
       middle_name: {
-        minlength: "Middle name should be at least 3 characters.",
+        minlength: "Middle name should be at least 2 characters.",
         maxlength: "Middle name maximum character is 20.",
       },
       email: {
@@ -352,17 +352,17 @@ $(document).ready(function () {
   $("#course_form").validate({
     rules: {
       course: {
-        minlength: 10,
+        minlength: 2,
         maxlength: 50,
       },
       edit_course: {
-        minlength: 10,
+        minlength: 2,
         maxlength: 50,
       },
     },
     messages: {
       course: {
-        minlength: "Course name should be at least 10 characters.",
+        minlength: "Course name should be at least 2 characters.",
         maxlength: "Course name maximum character is 50.",
       },
     },
@@ -372,14 +372,14 @@ $(document).ready(function () {
   $("#edit_course_form").validate({
     rules: {
       edit_course: {
-        minlength: 10,
+        minlength: 2,
         maxlength: 50,
         required: true
       },
     },
     messages: {
       course: {
-        minlength: "Course name should be at least 10 characters.",
+        minlength: "Course name should be at least 2 characters.",
         maxlength: "Course name maximum character is 50.",
       },
     },

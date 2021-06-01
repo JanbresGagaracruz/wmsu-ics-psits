@@ -135,7 +135,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" action="walkin_user.php" id="reg">
+                    <form method="POST" action="officer_walkin.php" id="reg">
                         <div class="form-group">
                             <label for="student_id">Student ID</label>
                             <input type="text" class="form-control" id="student_id" name="student_id"
@@ -185,16 +185,6 @@
                             <label for="password">Password</label>
                             <input type="password" class="form-control" id="password"  name="password" placeholder="Enter password" required>
                             <label id="password-error" class="error" for="password"></label>
-                        </div>
-                        <div class="form-group">
-                            <label for="usertype">Create account as</label>
-                            <select class="form-control" id="usertype" name="usertype">
-                                <option value="Student" selected>Student</option>
-                                <option value="President">President</option>
-                                <option value="VP">Vice President</option>
-                                <option value="Treasurer">Treasurer</option>
-                                <option value="Officer">Officer</option>
-                            </select>
                         </div>
                         <div class="modal-footer">
                             <button class="btn btn-success" name="register" id="register"type="submit">Sign up</button>

@@ -1,10 +1,15 @@
 <?php
     ob_start();
+    include("../include/userlogin.php");
+    include('database.php');
     if(!isset($_SESSION)) 
     { 
         session_start(); 
     } 
-    include('database.php');
+    if($_SESSION['usertype'] != 1){
+        header("location: login.php?success=1");
+        $_SESSION['message'] = "You cannot access this page unless you are a officer!";
+    } 
 
     if(isset($_POST["create"])){
         if(!empty($_FILES["file"]["name"])) { 
@@ -22,18 +27,18 @@
                 $imgContent = addslashes(file_get_contents($image));
                 $insert = $connect->query("INSERT INTO withdraw (transaction,amount,date,name,img) VALUES ('".$transaction."','".$amount."','".$date."','".$name."','".$imgContent."')");
                 if($insert){
-                    header('location: ../view/withdraw.php?success=1');
+                    header('location: ../view/officer_withdraw.php?success=1');
                     $_SESSION['message'] = "You successfully added a new record.";
                 }else{
-                    header('location: ../view/withdraw.php?success=2');
+                    header('location: ../view/officer_withdraw.php?success=2');
                     $_SESSION['message'] = "File upload failed, please try again."; 
                 } 
             }else{
-                header('location: ../view/withdraw.php?success=2');
+                header('location: ../view/officer_withdraw.php?success=2');
                 $_SESSION['message'] = 'Sorry, only jpg and png image is allowed to upload.';
             }
         }else{
-            header('location: ../view/withdraw.php?success=2');
+            header('location: ../view/officer_withdraw.php?success=2');
             $_SESSION['message'] = 'Please, select an image file to upload';
         }
     }
@@ -54,14 +59,14 @@
             if($check){
                 //check if the file path does exist and delete from upload folder
                 if(!unlink($targetFilePath)){
-                    header('location: ../view/withdraw.php?success=1');
+                    header('location: ../view/officer_withdraw.php?success=1');
                     $_SESSION['message'] = "Successfully deleted.";
                 }else{
-                    header('location: ../view/withdraw.php?success=1');
+                    header('location: ../view/officer_withdraw.php?success=1');
                     $_SESSION['message'] = "Successfully deleted.";
                 }
             }else{
-                header('location: ../view/withdraw.php?success=2');
+                header('location: ../view/officer_withdraw.php?success=2');
                 $_SESSION['message'] = "Something went wrong.";
             }
         }  
@@ -80,7 +85,7 @@
             $output .= '  
                     <img src="data:image/jpeg;charset=utf8;base64,'.base64_encode($row['img'] ).'" height="300" width="500"/>
                     <tr>  
-                        <td width="30%"><label>Transaction</label></td>  
+                        <td width="30%"><label>Transaction #</label></td>  
                         <td width="70%">'.$row["transaction"].'</td>  
                     </tr>  
                     <tr>  

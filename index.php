@@ -19,7 +19,7 @@
   <!--navbar-->
   <nav class="navbar navbar-expand-lg sticky-top scroll" id="topnav">
     <div class="title">
-      <a href="landing.php"><img src="assets/ics.png" alt="icslogo" class="landing">Institute of Computer
+      <a href="index.php"><img src="assets/ics.png" alt="icslogo" class="landing">Institute of Computer
         Studies</a>
     </div>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
@@ -100,17 +100,19 @@
     <div class="footer-basic">
       <footer>
         <div class="social">
-          <a href="https://www.facebook.com/WMSU-PSITS-110195532363061">
+          <a href="https://www.facebook.com/WMSU-PSITS-110195532363061" data-toggle="tooltip" title="PSITS Facebook Page">
             <i class="icon ion-social-facebook"></i>
           </a>
-          <a href="https://ics-website-604e4.firebaseapp.com/">
+          <a href="https://ics-website-604e4.firebaseapp.com/" data-toggle="tooltip" title="ICS Official Website">
             <i class="icon ion-social-chrome"></i>
           </a>
-
+          <a href="https://github.com/JanbresGagaracruz/wmsu-ics-psits/tree/pre-test" data-toggle="tooltip" title="GitHub Repository">
+            <i class="icon ion-social-github-outline"></i>
+          </a>
         </div>
         <ul class="list-inline">
-          <li class="list-inline-item"><a href="#">Home</a></li>
-          <li class="list-inline-item"><a href="#" data-toggle="modal" data-target="#about">About</a></li>
+          <li class="list-inline-item"><a href="index.php">Home</a></li>
+          <li class="list-inline-item"><a href="view/about.php">About</a></li>
         </ul>
         <p class="copyright">PIXELS COMPANY © 2020</p>
       </footer>

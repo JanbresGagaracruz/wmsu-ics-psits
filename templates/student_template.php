@@ -53,17 +53,17 @@
             </table>
             </div>
         </fieldset>
-        <fieldset class="scheduler-border">
+    <fieldset class="scheduler-border">
         <legend class="scheduler-border">Total payment</legend>
-    <label for="tp">Actual fees</label>
+        <label for="tp">Actual fees</label>
 <?php
     $result = $connect->query("SELECT id, total_fees, fee_names FROM manage_fees WHERE year_lvl = '$yearId' AND course = '$courseId' AND semester = '$semesterId'") or die($connect->error());
     while($row = $result->fetch_assoc()):
 ?>
-    <input type="hidden" value="<?php echo $row["id"]; ?>" name="manage_id" id="manage_id" class="form-control">
-    <input type="text" value="<?php echo $row["fee_names"]; ?>" name="fn" id="fn" class="form-control" readonly="readonly">
-    <label for="tp" style="margin-top: 1.5rem;">Total Amount to be Paid</label>
-    <input type="number" value="<?php echo $row["total_fees"]; ?>" name="tp"  id="tp"class="form-control text-right" readonly="readonly">
+        <input type="hidden" value="<?php echo $row["id"]; ?>" name="manage_id" id="manage_id" class="form-control">
+        <input type="text" value="<?php echo $row["fee_names"]; ?>" name="fn" id="fn" class="form-control" readonly="readonly" >
+        <label for="tp" style="margin-top: 1.5rem;">Total Amount to be Paid</label>
+        <input type="number" value="<?php echo $row["total_fees"]; ?>" name="tp"  id="tp"class="form-control text-right" readonly="readonly" style="font-weight: bold;">
     </fieldset>
     <fieldset class="scheduler-border">
         <legend class="scheduler-border">Payment Information</legend>
@@ -73,7 +73,7 @@
         </div>
         <div class="form-group u_val">
             <label for="tp">Payment fee</label>
-            <input type="text" class="form-control text-right" id="u_payment" name="u_payment" required readonly="readonly">
+            <input type="text" class="form-control text-right" id="u_payment" name="u_payment" required readonly="readonly" style="font-weight: bold;">
         </div>
     </fieldset>
 <?php endwhile; ?>

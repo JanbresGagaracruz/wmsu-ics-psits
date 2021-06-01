@@ -70,6 +70,7 @@
     }
     if(isset($_POST["create"])){
         $id = $_POST['id'];
+        $payment = $_POST['total_payment'];
         $balance = $_POST['balance'] - $_POST['total_payment'];
         $u_fees = $_POST['select_fees'];
         $transaction_status = 1;
@@ -80,17 +81,18 @@
         $paid = "paid";
         $on = "ongoing";
         $not = "not assessed";
+        $type = "Walkin Payment";
         $message= "Payment transaction has been sucessfully.";
         if($balance == $t){
-            $check=$connect->query("INSERT INTO payment_transaction (assess_id,balance,payment_status) VALUES ('$id', '$bal', '$paid')");
+            $check=$connect->query("INSERT INTO payment_transaction (assess_id,payment,balance,payment_status) VALUES ('$id','$payment','$bal', '$paid')");
         }else{
-            $check=$connect->query("INSERT INTO payment_transaction (assess_id,balance,payment_status) VALUES ('$id', '$bal', '$on')");
+            $check=$connect->query("INSERT INTO payment_transaction (assess_id,payment,balance,payment_status) VALUES ('$id','$payment','$bal', '$on')");
         }
         
         if($check){
             $update = "UPDATE student_assessment SET balance = '$balance',u_payment = 0, u_fees = CONCAT(u_fees, '$u_fees'), transaction_status = ' $transaction_status'  WHERE id = '$id';";
             mysqli_query($connect, $update);
-            $connect->query("INSERT INTO notification (assessment_id,message,status,viewed) VALUES ('$id','$message','$status','$viewed')");
+            $connect->query("INSERT INTO notification (assessment_id,message,status,viewed,type) VALUES ('$id','$message','$status','$viewed','$type')");
             
             $setter = ("SELECT 
                         request.id,

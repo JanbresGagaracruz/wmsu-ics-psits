@@ -8,6 +8,7 @@
     }
     $student_id = $_SESSION['id'];
     $tat="close";
+    $v = 0;
     $query = (" SELECT 
                 notification.date,
                 notification.id AS notif_session,
@@ -18,7 +19,7 @@
                     ON student_assessment.id = notification.assessment_id
                     LEFT OUTER JOIN request
                         ON request.id = student_assessment.student_id
-                            WHERE notification.status='$tat' AND request.id = '$student_id' ");
+                            WHERE notification.status='$tat' AND request.id = '$student_id' AND notification.viewed='$v'; ");
     $result = mysqli_query($connect, $query);
     while($row = $result->fetch_assoc()){ 
         $_SESSION['notification']= $row['notif_session'] ;

@@ -1,10 +1,15 @@
 <?php
     ob_start();
+    include("../include/userlogin.php");
+    include('database.php');
     if(!isset($_SESSION)) 
     { 
         session_start(); 
     } 
-    include('database.php');
+    if($_SESSION['usertype'] != 1){
+        header("location: login.php?success=1");
+        $_SESSION['message'] = "You cannot access this page unless you are a officer!";
+    } 
 
     //Live validation to check whether email is existing or not
     if(isset($_POST['email_add']))
@@ -50,7 +55,7 @@
         $email = $_POST['email'];
         $course = $_POST['course'];
         $gender = $_POST['gender'];
-        $usertype = $_POST['usertype'];
+        $usertype = "Student";
         $password = $_POST['password'];
         $status = "active";
         $approval_status = "active";

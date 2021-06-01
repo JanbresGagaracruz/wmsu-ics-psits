@@ -10,26 +10,36 @@
         $_SESSION['message'] = "Access denied make sure you log in first.";
     }
     $student_id = $_SESSION['id'];
-    $tat="close";
-    $query = (" SELECT 
-                notification.date,
-                notification.id AS notif_session,
-                student_assessment.reason,
-                request.id AS st
-                FROM notification
-                LEFT OUTER JOIN student_assessment
-                    ON student_assessment.id = notification.assessment_id
-                    LEFT OUTER JOIN request
-                        ON request.id = student_assessment.student_id
-                            WHERE notification.status='$tat' AND request.id = '$student_id' ");
-    $result = mysqli_query($connect, $query);
-    while($row = $result->fetch_assoc()){ 
-        $sid= $row['notif_session'] ;
-    }
+
     if(isset($_GET['check']) && !empty($_SESSION['notification'])){
+        $tat="close";
         $read = 1;
-        $id=$_SESSION['notification'];
-        $update = $connect->query("UPDATE notification SET viewed='$read' WHERE id = '$id'");
+        $id=$_GET['check'];
+        $noti = array();
+        $noti =  $_SESSION['notification'];
+        $projects = array();
+        $query = (" SELECT 
+                    notification.date,
+                    notification.viewed,
+                    notification.id AS notif_session,
+                    student_assessment.reason,
+                    request.id AS st
+                    FROM notification
+                    LEFT OUTER JOIN student_assessment
+                        ON student_assessment.id = notification.assessment_id
+                        LEFT OUTER JOIN request
+                            ON request.id = student_assessment.student_id
+                                WHERE notification.status='$tat' AND request.id = '$student_id' ");
+        $result = mysqli_query($connect, $query);
+        while($row = $result->fetch_assoc()){ 
+            if($row['viewed'] == 0){
+                $projects[] = $row['notif_session'];
+            }
+            foreach ($projects as $noti)
+            {
+                $connect->query("UPDATE notification SET viewed='$read' WHERE id LIKE '$noti';")or die($connect->error);
+            }
+        }
     }
     ob_end_flush();
 ?>
@@ -93,11 +103,13 @@
                                 <strong class="mb-1">Notification (<?=$count?>)</strong>
                                     <?php
                                         $student_id = $_SESSION['id'];
+                                        $type = "Walkin Payment";
                                         $c = 1;
                                         $tat="close";
                                         $query = (" SELECT 
                                                     notification.id AS notif,
                                                     notification.date,
+                                                    notification.type ty,
                                                     notification.message AS content,
                                                     notification.id AS notif_session,
                                                     student_assessment.reason,
@@ -114,9 +126,14 @@
                                         <div class="card mb-1">
                                         <div class="card-body" style="box-shadow: hsl(0deg 0% 80%) 0 0 16px;">
                                             <div class="user-info">
-                                                <small>Content: <?php echo $row['content']; ?></small><br>
-                                                <small>Date <?php echo $row['date']; ?></small><br>
+                                                <h5  style="font-weight: bold;"><?php echo $row['ty']; ?></h1><br>
+                                                <small  style="font-weight: bold;">Content: <?php echo $row['content']; ?></small><br>
+                                                <small  style="font-weight: bold;">Date <?php echo $row['date']; ?></small><br>
+                                                <?php if($row['ty'] == "$type"){ ?>
                                                 <a href="view_notification.php?viewed=<?php echo $row['notif']?>">View notification</a>
+                                                <?php } else{ ?>   
+                                                <a href="view_promissory.php?viewed=<?php echo $row['notif']?>">View notification</a>
+                                                <?php }?>      
                                             </div>
                                             </div>
                                         </div>

@@ -29,7 +29,7 @@
                 $result = $connect->query("SELECT * FROM year") or die($connect->error);
                 while($row = $result->fetch_assoc()){
                     if($row['status'] == "$open"){
-                        $connect->query("UPDATE year SET status='closed' WHERE date NOT LIKE '$year'")or die($connect->error);
+                        $connect->query("UPDATE year SET status='close' WHERE date NOT LIKE '$year'")or die($connect->error);
                         header('location: ../view/school_year.php?success=1');
                         $_SESSION['message'] = "All the opened school year has been closed except the newly added!";
                     }
@@ -43,12 +43,19 @@
     //setting school year of active
     if(isset($_GET['stat_on'])){
         $id = $_GET['stat_on'];
+        $open ="open";
         $result = $connect->query("SELECT * FROM year WHERE id = '$id';") or die($connect->error);
         if(count($result) == 1){
             $row = $result->fetch_array();
             $id = $row['id'];
             $check = $connect->query("UPDATE year SET status='open' WHERE id='$id'")or die($connect->error);
             if($check){
+                $res = $connect->query("SELECT * FROM year WHERE id = '$id';") or die($connect->error);
+                while($row = $res->fetch_assoc()){
+                    if($row['status'] == "$open"){
+                        $connect->query("UPDATE year SET status='close' WHERE id NOT LIKE '$id'")or die($connect->error);
+                    }
+                }
                 header('location: ../view/school_year.php?success=1');
                 $_SESSION['message'] = "School year has successfully opened.";
             }else{

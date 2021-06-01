@@ -54,22 +54,6 @@
                     <div class="row">				
                         <div class="col-md-4">
                             <?php 
-                                $query = ("SELECT * FROM fees");
-                                $result = mysqli_query($connect, $query);
-                                $count = mysqli_num_rows($result);
-                            ?>
-                            <div class="main-box mb-orange">
-                                <a href="fees.php">
-                                    <i class="fa fa-money-check fa-5x"></i>
-                                    <h5 id="record_data">
-                                        Fees
-                                    </h5>
-                                </a>
-                                <h1 id="record_data"> <?=$count?></h1>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <?php 
                                 $query = ("SELECT * FROM manage_fees");
                                 $result = mysqli_query($connect, $query);
                                 $count = mysqli_num_rows($result);
@@ -82,6 +66,16 @@
                                     </h5>
                                 </a>
                                 <h1 id="record_data"> <?=$count?></h1>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="main-box mb-orange">
+                                <a href="report.php">
+                                <i class="fas fa-chart-bar fa-5x"></i>
+                                    <h5 id="record_data">
+                                        Payment reports
+                                    </h5>
+                                </a>
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -101,7 +95,23 @@
                             </div>
                         </div>   
                     </div>
-                    <div class="row">	
+                    <div class="row">
+                        <div class="col-md-4">
+                            <?php 
+                                $query = ("SELECT * FROM fees");
+                                $result = mysqli_query($connect, $query);
+                                $count = mysqli_num_rows($result);
+                            ?>
+                            <div class="main-box mb-orange">
+                                <a href="fees.php">
+                                    <i class="fa fa-money-check fa-5x"></i>
+                                    <h5 id="record_data">
+                                        Fees
+                                    </h5>
+                                </a>
+                                <h1 id="record_data"> <?=$count?></h1>
+                            </div>
+                        </div>	
                         <div class="col-md-4">
                             <?php 
                                 $query = ("SELECT * FROM year");
@@ -134,22 +144,6 @@
                                 <h1 id="record_data"> <?=$count?></h1>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <?php 
-                                $query = ("SELECT * FROM course");
-                                $result = mysqli_query($connect, $query);
-                                $count = mysqli_num_rows($result);
-                            ?>
-                            <div class="main-box mb-orange">
-                                <a href="course.php">
-                                    <i class="fa fa-chalkboard fa-5x"></i>
-                                    <h5 id="record_data">
-                                        Course
-                                    </h5>
-                                </a>
-                                <h1 id="record_data"> <?=$count?></h1>
-                            </div>
-                        </div>
                     </div>
                     <div class="row">
                         <div class="col-md-4">
@@ -167,23 +161,23 @@
                                 </a>
                                 <h1 id="record_data"> <?=$count?></h1>
                             </div>
-                        </div>  				
-                        <div class="col-md-4">			
+                        </div>
+                        <div class="col-md-4">
+                            <?php 
+                                $query = ("SELECT * FROM course");
+                                $result = mysqli_query($connect, $query);
+                                $count = mysqli_num_rows($result);
+                            ?>
                             <div class="main-box mb-orange">
-                                <?php 
-                                    $sql = 'SELECT * FROM request WHERE approval_status="inactive"';
-                                    $result = mysqli_query($connect,$sql);
-                                    $count = mysqli_num_rows($result);
-                                ?>
-                                <a href="account_approval.php">    
-                                <i class="fa fa-users fa-5x"></i>
+                                <a href="course.php">
+                                    <i class="fa fa-chalkboard fa-5x"></i>
                                     <h5 id="record_data">
-                                        Account Approval
+                                        Course
                                     </h5>
                                 </a>
                                 <h1 id="record_data"> <?=$count?></h1>
                             </div>
-                        </div>
+                        </div> 
                         <div class="col-md-4">
                             <?php 
                                 $query = ("SELECT * FROM file_upload");
@@ -199,7 +193,7 @@
                                 </a>
                                 <h1 id="record_data"> <?=$count?></h1>
                             </div>
-                        </div>
+                        </div> 				
                     </div>
                     <div class="row">				
                         <div class="col-md-4">
@@ -218,6 +212,22 @@
                                 <h1 id="record_data"> <?=$count?></h1>
                             </div>
                         </div>  
+                        <div class="col-md-4">			
+                            <div class="main-box mb-orange">
+                                <?php 
+                                    $sql = 'SELECT * FROM request WHERE approval_status="inactive"';
+                                    $result = mysqli_query($connect,$sql);
+                                    $count = mysqli_num_rows($result);
+                                ?>
+                                <a href="account_approval.php">    
+                                <i class="fa fa-users fa-5x"></i>
+                                    <h5 id="record_data">
+                                        Account Approval
+                                    </h5>
+                                </a>
+                                <h1 id="record_data"> <?=$count?></h1>
+                            </div>
+                        </div>
                         <div class="col-md-4">
                         <?php 
                             $query = ("SELECT * FROM withdraw");

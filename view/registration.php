@@ -49,35 +49,36 @@
                         <h4>Registration</h4>
                         <small id="note">Your account will be verified by the admin</small>
                     </div>
+                    <label for="student_id" class="ml-5" style="font-weight: bold;">Student ID</label>
                     <div class="form-group">
-                        <label for="student_id">Student ID</label>
                         <input type="text" class="form-control" id="student_id" name="student_id"
                         autocomplete="off" placeholder="Enter Student ID" required>
                         <div id="student_validation"></div>
                     </div>
+                    <label for="fn" class="ml-5" style="font-weight: bold;">First name</label>
                     <div class="form-group">
-                        <label for="fn">First name</label>
                         <input type="text" class="form-control" id="fn" name="first_name" aria-describedby="firstHelp"
                         autocomplete="off" placeholder="Enter first name" required>
                     </div>
+                    <label for="mn" class="ml-5" style="font-weight: bold;">Middle name</label>
                     <div class="form-group">
-                        <label for="mn">Middle name</label>
                         <input type="text" class="form-control" id="mn" name="middle_name" aria-describedby="middleHelp"
                         autocomplete="off" placeholder="Enter middle name" required>
                     </div>
+                    <label for="ln" class="ml-5" style="font-weight: bold;">Last name</label>
+
                     <div class="form-group">
-                        <label for="ln">Last name</label>
                         <input type="text" class="form-control" id="ln"  name="last_name"aria-describedby="nameHelp"
                         autocomplete="off" placeholder="Enter last name" required>
                     </div>
+                    <label for="email" class="ml-5" style="font-weight: bold;">Email address</label>
                     <div class="form-group">
-                        <label for="email">Email address</label>
                         <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter email"
                         autocomplete="off" required>
                         <div id="availability"></div>
                     </div>
+                    <label for="course" class="ml-5" style="font-weight: bold;">Course</label>
                     <div class="form-group">
-                        <label for="course">Course</label>
                         <select class="custom-select" id="course" name="course" required>
                             <?php
                                 $result = $connect->query("SELECT * FROM course") or die($connect->error());
@@ -87,15 +88,15 @@
                             <?php endwhile; ?>
                         </select>
                     </div>
+                    <label for="gender" class="ml-5" style="font-weight: bold;">Gender</label>
                     <div class="form-group">
-                        <label for="gender">Gender</label>
                         <select class="custom-select" id="gender"  name="gender"required>
                             <option value="Male" selected>Male</option>
                             <option value="Female">Female</option>
                         </select>
                     </div>
+                    <label for="pass" class="ml-5" style="font-weight: bold;">Password</label>
                     <div class="form-group">
-                        <label for="pass">Password</label>
                         <div class="input-group" id="pass">
                             <input type="password" class="form-control"  name="password" id="password"
                                 placeholder="Enter password" required>

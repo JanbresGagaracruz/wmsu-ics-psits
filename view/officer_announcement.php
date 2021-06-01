@@ -1,6 +1,6 @@
 <?php
     ob_start();
-    include('../include/submit_file.php');
+    include('../include/submit_files.php');
     include("../include/userlogin.php");
     if(!isset($_SESSION)) 
     { 
@@ -85,7 +85,7 @@
                                         <td><?php echo $row['name']; ?></td>
                                         <td><?php echo $row['file_name']; ?></td>
                                         <td>
-                                            <a href="../include/submit_file.php?delete=<?php echo $row['id'] ?>" class="btn btn-danger btn-xs" id="delete" name="delete">
+                                            <a href="../include/submit_files.php?delete=<?php echo $row['id'] ?>" class="btn btn-danger btn-xs" id="delete" name="delete">
                                                 <span class="fas fa-trash-alt"></span>
                                             </a>
                                         </td>
@@ -110,7 +110,7 @@
                 <span aria-hidden="true">&times;</span>
             </button>
             </div>
-            <form action="announcement.php" method="post" enctype="multipart/form-data" id="announce_form">
+            <form action="officer_announcement.php" method="post" enctype="multipart/form-data" id="announce_form">
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="name">File name</label>
@@ -125,7 +125,6 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary submitBtn" name="submit">Submit</button>
                 </div>
             </form>

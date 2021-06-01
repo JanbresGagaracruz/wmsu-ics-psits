@@ -19,13 +19,16 @@
                     <a  href="./dashboard.php"><i class="fas fa-tachometer-alt "></i>Dashboard</a>
                 </li>
                 <li>
-                    <a href="fees.php"><i class="fa fa-money-check "></i>Fees</a>
-                </li>
-                <li>
                     <a href="manage_fees.php"><i class="fa fa-tasks "></i>Scheduled fees</a>
                 </li>
                 <li>
+                    <a href="report.php"><i class="fas fa-chart-bar "></i>Report</a>
+                </li>
+                <li>
                     <a href="promissory_approval.php"><i class="fa fa-file-text "></i>Promissory approval</a>
+                </li>
+                <li>
+                    <a href="fees.php"><i class="fa fa-money-check "></i>Fees</a>
                 </li>
                 <li>
                     <a href="school_year.php"><i class="fa fa-calendar-alt "></i>School year</a>
@@ -51,6 +54,7 @@
                 <li>
                     <a href="withdraw.php"><i class="fa fa-bank "></i>Withdraw</a>
                 </li>
+
                 <li>
                     <a href="login.php?logout=1"><i class="fa fa-power-off "></i>Logout</a>
                 </li>

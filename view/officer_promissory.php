@@ -120,15 +120,28 @@
                 <div class="modal-body">
                     <form method="POST" action="officer_promissory.php" id="reg">
                         <fieldset class="scheduler-border">
+                            <legend class="scheduler-border">School Session</legend>
+                            <div class="form-group">
+                                <select class="form-control" id="s_year" name="s_year" readonly="readonly" style="font-weight: bold;">
+                                    <?php
+                                        $result = $connect->query("SELECT * FROM year WHERE status = 'open';") or die($connect->error());
+                                        while($row = $result->fetch_assoc()):
+                                    ?>
+                                        <option value="<?php echo $row['id']; ?>"><?php echo $row["date"]; ?></option>
+                                    <?php endwhile; ?>
+                                </select>
+                            </div>
+                        </fieldset>
+                        <fieldset class="scheduler-border">
                             <legend class="scheduler-border">Student Information</legend>
                             <input type="hidden" class="form-control" id="id" name="id">  
                             <div class="form-group">
                                 <label for="name">Name</label>
-                                <input type="text" class="form-control" id="name" name="name" readonly="readonly">
+                                <input type="text" class="form-control" id="name" name="name" readonly="readonly" style="font-weight: bold;">
                             </div>
                             <div class="form-group">
                                 <label for="course">Course</label>
-                                <input type="text" class="form-control" id="course" name="course" readonly="readonly">
+                                <input type="text" class="form-control" id="course" name="course" readonly="readonly" style="font-weight: bold;">
                             </div>
                             <div class="form-group">
                                 <label for="semester">Semester</label>
@@ -146,7 +159,7 @@
                                 <label for="year">Year</label>
                                 <select class="form-control" id="year" name="year" required>
                                     <?php
-                                        $result = $connect->query("SELECT * FROM year_lvl") or die($connect->error());
+                                        $result = $connect->query("SELECT * FROM year_lvl ORDER BY year ASC") or die($connect->error());
                                         while($row = $result->fetch_assoc()):
                                     ?>
                                         <option value="" selected="selected" hidden="hidden">Select year level</option>
@@ -173,6 +186,7 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
     <!--Custom js-->
@@ -215,6 +229,7 @@
                         "course": $("#course").val(),
                         "semester": $("#semester").val(),
                         "year": $("#year").val(),
+                        "s_year": $("#s_year").val(),
                     },
                     success: function(data) {
                         $("#total_fees").html(data);

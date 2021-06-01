@@ -1,14 +1,15 @@
 <?php 
 
-$localhost = "localhost";
+/* $localhost = "localhost";
 $username = "u179407683_collection";
 $password = "Katalepsy123";
-$dbname = "u179407683_psits";
-/* 
+$dbname = "u179407683_psits"; */
+
+$localhost = "localhost";
 $username = "root";
 $password = "";
 $dbname = "psits_system";
- */
+
 // create connection
 $connect = new mysqli($localhost, $username, $password, $dbname);
 

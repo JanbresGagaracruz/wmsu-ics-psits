@@ -53,6 +53,19 @@
                                         <div class="card-body">
                                         <form method="POST" action="../include/listener.php" id="paypal_form">
                                             <fieldset class="scheduler-border">
+                                                <legend class="scheduler-border">School Session</legend>
+                                                <div class="form-group">
+                                                    <select class="form-control" id="s_year" name="s_year" readonly="readonly" style="font-weight: bold;">
+                                                        <?php
+                                                            $result = $connect->query("SELECT * FROM year WHERE status = 'open';") or die($connect->error());
+                                                            while($row = $result->fetch_assoc()):
+                                                        ?>
+                                                            <option value="<?php echo $row['id']; ?>"><?php echo $row["date"]; ?></option>
+                                                        <?php endwhile; ?>
+                                                    </select>
+                                                </div>
+                                            </fieldset>
+                                            <fieldset class="scheduler-border">
                                                 <legend class="scheduler-border">Student Information</legend>
                                                 <div class="form-group">
                                                     <label for="name">Name</label>
@@ -61,11 +74,11 @@
                                                     while($row = $result->fetch_assoc()):
                                                 ?>
                                                     <input type="hidden" class="form-control" id="id" name="id" value="<?php echo $row['id']; ?>">  
-                                                    <input type="text" class="form-control" id="name" name="name" readonly="readonly" value="<?php echo $row['full_name']; ?>" >
+                                                    <input type="text" class="form-control" id="name" name="name" readonly="readonly" value="<?php echo $row['full_name']; ?>" style="font-weight: bold;">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="course">Course</label>
-                                                    <input type="text" class="form-control" id="course" name="course" readonly="readonly" value="<?php echo $row['course']; ?>">
+                                                    <input type="text" class="form-control" id="course" name="course" readonly="readonly" value="<?php echo $row['course']; ?>" style="font-weight: bold;">
     
                                                 </div>
                                                 <div class="form-group">
@@ -84,7 +97,7 @@
                                                     <label for="year">Year</label>
                                                     <select class="form-control" id="year" name="year" required>
                                                         <?php
-                                                            $result = $connect->query("SELECT * FROM year_lvl") or die($connect->error());
+                                                            $result = $connect->query("SELECT * FROM year_lvl ORDER BY year ASC") or die($connect->error());
                                                             while($row = $result->fetch_assoc()):
                                                         ?>
                                                             <option value="" selected="selected" hidden="hidden">Select year level</option>
@@ -135,6 +148,7 @@
                         "course": $("#course").val(),
                         "semester": $("#semester").val(),
                         "year": $("#year").val(),
+                        "s_year": $("#s_year").val(),
                     },
                     success: function(data) {
                         $("#total_fees").html(data);

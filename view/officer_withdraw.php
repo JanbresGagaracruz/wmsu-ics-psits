@@ -133,7 +133,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form method="POST" enctype="multipart/form-data" action="withdraw.php" id="withdraw_form" >
+                <form method="POST" enctype="multipart/form-data" action="officer_withdraw.php" id="withdraw_form" >
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="transaction">Transaction no.</label>

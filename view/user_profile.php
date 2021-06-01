@@ -58,7 +58,7 @@
                                                     $result = mysqli_query($connect, $query);
                                                     while($row = $result->fetch_assoc()){ 
                                                 ?>
-                                                    <strong><h3><?php echo $row['email']; ?></h1></strong>
+                                                    <strong><h3 class="my_email"><?php echo $row['email']; ?></h1></strong>
                                                 <?php } ?>
                                             </div>
                                         </div>
@@ -69,16 +69,16 @@
                                 <div class="col-sm-7 col-md-6">
                                     <div class="card user-profile">
                                         <div class="card-body" style="box-shadow: hsl(0deg 0% 80%) 0 0 16px;">
-                                         <h5>Student Information</h5>
+                                         <h5><i class="fa fa-info-circle" aria-hidden="true"></i> Student Information</h5>
                                             <?php
                                                 $student_id = $_SESSION['id'];
                                                 $query = ("SELECT * FROM request WHERE id = '$student_id' ");
                                                 $result = mysqli_query($connect, $query);
                                                 while($row = $result->fetch_assoc()){ 
                                             ?>
-                                                <small>Student id: <?php echo $row['student_id']; ?></small><br>
-                                                <small>Name: <?php echo $row['first_name']; ?> <?php echo $row['last_name']; ?> <?php echo $row['middle_name']; ?></small><br>
-                                                <small>Course: <?php echo $row['course']; ?></small>
+                                                <small ><i class="fas fa-id-card"></i> <?php echo $row['student_id']; ?></small><br>
+                                                <small ><i class="fas fa-user"></i> <?php echo $row['first_name']; ?> <?php echo $row['last_name']; ?> <?php echo $row['middle_name']; ?></small><br>
+                                                <small ><i class="fas fa-school"></i> <?php echo $row['course']; ?></small>
                                             <?php } ?>
                                         </div>
                                     </div>
@@ -89,7 +89,7 @@
                                         <h5>Transaction Information</h5>
                                             <a href="payment_history.php">View payment history</a>
                                             <br>
-                                            <a href="#">View promissory history</a>
+                                            <a href="promissory_history.php">View promissory history</a>
                                         </div>
                                     </div>
                                 </div>

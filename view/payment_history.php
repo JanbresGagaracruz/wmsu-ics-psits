@@ -61,6 +61,7 @@
                                                                 <th>year</th>
                                                                 <th>Sem</th>
                                                                 <th>Actual fees</th>
+                                                                <th>Payment amount</th>
                                                                 <th>Balance</th>
                                                                 <th>Status</th>
                                                             </tr>
@@ -74,6 +75,7 @@
                                                                 sem,
                                                                 payment_transaction.payment_status,
                                                                 payment_transaction.balance,
+                                                                payment_transaction.payment,
                                                                 manage_fees.total_fees
                                                                 FROM payment_transaction
                                                                 LEFT OUTER  JOIN student_assessment
@@ -96,6 +98,7 @@
                                                                 <td><?php echo $row['year']; ?></td>
                                                                 <td><?php echo $row['sem']; ?></td>
                                                                 <td><?php echo $row['total_fees']; ?></td>
+                                                                <td><?php echo $row['payment']; ?></td>
                                                                 <td><?php echo $row['balance']; ?></td>
                                                                 <td><?php echo $row['payment_status']; ?></td>
                                                             </tr>

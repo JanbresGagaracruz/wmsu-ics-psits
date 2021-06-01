@@ -78,7 +78,7 @@
                                 </thead>
                                 <tbody>
                                     <?php 
-                                        $query = ("SELECT * FROM request WHERE usertype NOT LIKE 'admin' AND approval_status='active' AND assessment_status='not assessed'");
+                                        $query = ("SELECT * FROM request WHERE usertype NOT LIKE 'admin' AND  usertype NOT LIKE 'President' AND approval_status='active' AND assessment_status='not assessed'");
                                         $result = mysqli_query($connect, $query);
                                         while($row = $result->fetch_assoc()){ 
                                     ?>
@@ -120,7 +120,7 @@
                         <fieldset class="scheduler-border">
                             <legend class="scheduler-border">School Session</legend>
                             <div class="form-group">
-                                <select class="form-control" id="s_year" name="s_year" readonly="readonly">
+                                <select class="form-control" id="s_year" name="s_year" readonly="readonly" style="font-weight: bold;">
                                     <?php
                                         $result = $connect->query("SELECT * FROM year WHERE status = 'open';") or die($connect->error());
                                         while($row = $result->fetch_assoc()):
@@ -135,11 +135,11 @@
                             <input type="hidden" class="form-control" id="id" name="id">  
                             <div class="form-group">
                                 <label for="name">Name</label>
-                                <input type="text" class="form-control" id="name" name="name" readonly="readonly">
+                                <input type="text" class="form-control" id="name" name="name" readonly="readonly" style="font-weight: bold;">
                             </div>
                             <div class="form-group">
                                 <label for="course">Course</label>
-                                <input type="text" class="form-control" id="course" name="course" readonly="readonly">
+                                <input type="text" class="form-control" id="course" name="course" readonly="readonly" style="font-weight: bold;">
                             </div>
                             <div class="form-group">
                                 <label for="semester">Semester</label>

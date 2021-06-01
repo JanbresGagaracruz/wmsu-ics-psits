@@ -22,19 +22,25 @@
                     <a href="officer_cashier.php"><i class="fa fa-cash-register "></i>Cashier</a>
                 </li>
                 <li>
-                    <a href="officer_promissory.php"><i class="fa fa-envelope "></i>Create Promissory</a>
-                </li>
-                <li>
-                    <a href="officer_walkin.php"><i class="fa fa-user-alt "></i>Create User</a>
-                </li>
-                <li>
                     <a href="officer_studAssessment.php"><i class="fa fa-balance-scale "></i>Student assessment</a>
                 </li>
                 <li>
-                    <a href="officer_withdraw.php"><i class="fa fa-bank "></i>Create withdraw</a>
+                    <a href="officer_promissory.php"><i class="fa fa-envelope "></i>Create Promissory</a>
                 </li>
                 <li>
-                    <a href="officer_announcement.php"><i class="fa fa-bullhorn "></i>Create Announcement</a>
+                    <a href="officer_account_approval.php"><i class="fa fa-users "></i>Account Approval</a>
+                </li>
+                <li>
+                    <a href="officer_walkin.php"><i class="fa fa-user-alt "></i>User</a>
+                </li>
+                <li>
+                    <a href="officer_announcement.php"><i class="fa fa-bullhorn "></i>Announcement</a>
+                </li>
+                <li>
+                    <a href="officer_withdraw.php"><i class="fa fa-bank "></i>Withdraw</a>
+                </li>
+                <li>
+                    <a href="officer_report.php"><i class="fas fa-chart-bar "></i>Report</a>
                 </li>
                 <li>
                     <a href="login.php?logout=1"><i class="fa fa-power-off "></i>Logout</a>

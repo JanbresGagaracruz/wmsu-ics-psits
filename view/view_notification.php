@@ -83,11 +83,13 @@
                                                     notification.message,
                                                     notification.id,
                                                     notification.date,
+                                                    notification.type ty,
                                                     student_assessment.sem,
                                                     manage_fees.fee_names,
                                                     manage_fees.total_fees,
                                                     year_lvl.year,
                                                     payment_transaction.balance,
+                                                    payment_transaction.payment,
                                                     payment_transaction.payment_status,
                                                     CONCAT(request.last_name, ', ', request.first_name,' ', request.middle_name) as full_name
                                                     FROM notification
@@ -102,16 +104,21 @@
                                                                     LEFT OUTER JOIN manage_fees
                                                                         ON manage_fees.id = student_assessment.manage_id
                                                                         WHERE notification.id ='$la' AND request.id = '$student_id' ");
-                                        $output .= '  
-                                        <div class="table-responsive">  
-                                            <table class="table table-bordered table-hover">'; 
+                                        $output .= ' 
+                                        <div class="card mb-1">
+                                        <div class="card-body" style="box-shadow: hsl(0deg 0% 80%) 0 0 16px; font-weight: bold;">
+                                            <div class="user-info">
+                                            <img src="../assets/ics.png" alt="ICSLOGO" style="opacity: 0.2; position: absolute;">
+                                            <div class="table-responsive">  
+                                                <table class="table-hover">'; 
                                         $result = mysqli_query($connect, $query);
                                         while($row = $result->fetch_assoc()){ 
                                             if($row['id'] == $la){
-                                        $output .= '  
+                                        $output .= ' 
+                                            <center><h5 style="font-weight: bold; color: #43A047;"><i class="fas fa-envelope"></i> '.$row["ty"].'</h5></center> 
                                             <tr>  
                                                 <td width="30%"><label>Date and time</label></td>  
-                                                <td width="70%">'.$row["date"].'</td>  
+                                                <td width="70%" style="color: bold;">'.$row["date"].'</td>  
                                             </tr>  
                                             <tr>  
                                                 <td width="30%"><label>Student name</label></td>  
@@ -138,6 +145,10 @@
                                                 <td width="70%">'.$row["total_fees"].'</td>  
                                             </tr>
                                             <tr>  
+                                                <td width="30%"><label>Payment amount</label></td>  
+                                                <td width="70%">'.$row["payment"].'</td>  
+                                            </tr>
+                                            <tr>  
                                                 <td width="30%"><label>Student balance</label></td>  
                                                 <td width="70%">'.$row["balance"].'</td>  
                                             </tr>
@@ -150,9 +161,15 @@
                                     ?>
                                                 
                                     <?php } 
-                                            $output .= "
+                                            $output .= '
                                             </table>
-                                        </div>";  
+                                            <div style="display:flex; justify-content: center;">
+                                            <a href="payment_history.php">Go to transaction history</a>
+                                            </div>
+                                        </div>
+                                        </div>
+                                        </div>
+                                    </div>';  
                                         echo $output;
                                     ?>
 
@@ -165,6 +182,7 @@
         </div>                                       
         <!--END-->
 
+
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -176,8 +194,6 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
   </script>
-    <!--Custom js-->
-    <script src="/js/notification.js"></script>
 </body>
 
 </html>

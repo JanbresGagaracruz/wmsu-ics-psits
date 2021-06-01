@@ -159,6 +159,13 @@ input.error {
     margin-bottom: 10px;
     color: #a94442!important;
 }
+th, td { white-space: nowrap; }
+div.dataTables_wrapper {
+    margin: 0 auto;
+}
+.card-title, h2{
+    margin-bottom: 0;
+}
 @media (max-width: 576px) { 
     .d-flex{
         justify-content: center;
@@ -171,6 +178,9 @@ input.error {
     }
     #transact{
         margin-top: 1rem;
+    }
+    .my_email{
+        font-size: 15px;
     }
 }
 
