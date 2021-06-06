@@ -280,23 +280,40 @@ $("#edit_fee_name").blur(function () {
 });
 
 //registration restriction input
+$.validator.addMethod("noCaps", function(value, element) {
+   return this.optional(element) || /[B]{1}[G]{1}[0-9]{9}/.test(value); 
+});
+$.validator.addMethod("aim", function(value, element) {
+  return this.optional(element) || /[B]{1}[G]{1}[0-9]{9}[@]{1}[w]{1}[m]{1}[s]{1}[u]{1}[.]{1}[e]{1}[d]{1}[u]{1}[.]{1}[p]{1}[h]{1}/.test(value); 
+});
+$.validator.addMethod("first_letter", function(value, element) {
+  return this.optional(element) || /^[A-Z]{1}/.test(value); 
+});
 $(document).ready(function () {
   $("#reg").validate({
     rules: {
       student_id: {
-        minlength: 11,
+        maxlength: 11,
+        noCaps: true,
+      },
+      email_me: {
+        maxlength: 23,
+        aim: true,
       },
       first_name: {
         minlength: 2,
         maxlength: 20,
+        first_letter: true,
       },
       last_name: {
         minlength: 2,
         maxlength: 20,
+        first_letter: true,
       },
       middle_name: {
         minlength: 2,
         maxlength: 20,
+        first_letter: true,
       },
       password: {
         minlength: 8,
@@ -305,19 +322,27 @@ $(document).ready(function () {
     },
     messages: {
       student_id: {
-        minlength: "Student id should be at least 11 characters.",
+        maxlength: "Student id should be at least 11 characters.",
+        noCaps:  "Please enter valid ID, BG202003394",
+      },
+      email_me: {
+        maxlength: "email should be at least 21 characters.",
+        aim:  "Please enter valid WMSU email, BG202003394@wmsu.edu.ph",
       },
       first_name: {
         minlength: "First name should be at least 2 characters.",
         maxlength: "First name maximum character is 20.",
+        first_letter: "Capilatized the first letter of your name, John.",
       },
       last_name: {
         minlength: "Last name should be at least 2 characters.",
         maxlength: "Last name maximum character is 20.",
+        first_letter: "Capilatized the first letter of your last name, Smith.",
       },
       middle_name: {
         minlength: "Middle name should be at least 2 characters.",
         maxlength: "Middle name maximum character is 20.",
+        first_letter: "Capilatized the first letter of your middle name, Tesla.",
       },
       email: {
         email: "The email format should be in: abc@domain.com.",

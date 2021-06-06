@@ -9,16 +9,15 @@
         header("location: login.php?success=1");
         $_SESSION['message'] = "You cannot access only admin is allowed!";
     }
+
     function fetch_data()  
     {  
         include("../include/database.php");
-        
-        $year = $_POST['year'];
-        $course = $_POST['course'];
-        $sem = $_POST['sem'];
+
         $output = '';  
+        $q=0;
         $i=0;
-        $xd;
+        $get = 0;
         $amount = array();
         $sql=("SELECT 
         CONCAT(request.last_name, ', ', request.first_name,' ', request.middle_name) as full_name,
@@ -43,57 +42,52 @@
                         ON year_lvl.id = student_assessment.year_id
                         LEFT OUTER JOIN request
                             ON request.id = student_assessment.student_id
-                            WHERE year_lvl.id = '$year' AND request.course = '$course' AND student_assessment.sem = '$sem'
         ;");  
         $result = mysqli_query($connect, $sql);  
         while($row = mysqli_fetch_array($result))  
         {   
-            if($row['y_lvl'] == $year && $row['course'] == $course && $row['ass'] == $sem){
-                if($row['promissory_approval'] == 'approved' && $row['balance'] >= 0){  
-                    $sta = $row["payment_status"];
-                    $balance = $row["balance"];
-                    $upay = $row["pay"];
-                    if($sta == "paid"){
-                        $output .= '<tr>  
-                        <td>'.$row["full_name"].'</td>  
-                        <td>'.$row["course"].'</td>
-                        <td>'.$row["year"].'</td>
-                        <td>'.$row["sem"].'</td>
-                        <td style="text-align: right;">'.number_format($balance).'</td> 
-                        <td style="text-align: right;">'.number_format($upay).'</td> 
-                        <td style="background-color: #f8d7da; color: #721c24; text-align: right;">'.$row["payment_status"].'</td>  
-                        </tr>  
-                                ';  
-                    }else{
-                        $output .= '<tr>  
-                        <td>'.$row["full_name"].'</td>  
-                        <td>'.$row["course"].'</td>
-                        <td>'.$row["year"].'</td>
-                        <td>'.$row["sem"].'</td>
-                        <td style="text-align: right;">'.number_format($balance).'</td> 
-                        <td style="text-align: right;">'.number_format($upay).'</td
-                        <td style="background-color: #fff3cd; color: #856404; text-align: right;">'.$row["payment_status"].'</td>  
-                        </tr>  
-                                ';  
-                    }
+            if($row['promissory_approval'] == 'approved' && $row['balance'] >= 0){  
+                $sta = $row["payment_status"];
+                $payment = $row["pay"];
+                $bal = $row["balance"];
+                if($sta == "paid"){
+                    $output .= '<tr>  
+                    <td>'.$row["full_name"].'</td>  
+                    <td>'.$row["course"].'</td>
+                    <td>'.$row["year"].'</td>
+                    <td>'.$row["sem"].'</td>
+                    <td style="text-align: right;">'.number_format($bal).'</td> 
+                    <td style="text-align: right;">'.number_format($payment).'</td> 
+                    <td style="background-color: #f8d7da; color: #721c24; text-align: right;">'.$row["payment_status"].'</td>  
+                    </tr>  
+                            ';  
+                }else{
+                    $output .= '<tr>  
+                    <td>'.$row["full_name"].'</td>  
+                    <td>'.$row["course"].'</td>
+                    <td>'.$row["year"].'</td>
+                    <td>'.$row["sem"].'</td>
+                    <td style="text-align: right;">'.number_format($bal).'</td>  
+                    <td style="text-align: right;">'.number_format($payment).'</td> 
+                    <td style="background-color: #fff3cd; color: #856404; text-align: right;">'.$row["payment_status"].'</td>  
+                    </tr>  
+                            ';  
                 }
                 $i=1;
             }else{
-                $i=0;
+                $q=1;
+                $_SESSION['message'] = "NO RECORD!";
+            header("location: ../view/generate.php?success=1");
             }
             if($i==1){
                 $amount[] = $row["pay"];
                 $get =  array_sum($amount);
-                $xd = $get;
             }
         }
-        if($i == 0){
-            header("location: ../view/generate.php?success=2");
-            $_SESSION['message'] = "NO RECORDS TO GENERATE!";
-        }else{
-            $output .= '<h4 style="margin-top: 0; text-align: right;">Total payment: '.number_format($xd).'</h4>';
+        if($q == 0){
+            $output .= '<h4 style="margin-top: 0; text-align: right;">Total payment: '.number_format($get).'</h4>';
+            return $output;
         }
-        return $output;
     } 
     // 
     function all_data()  

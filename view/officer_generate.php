@@ -71,7 +71,7 @@
                 <div class="row" style="margin-top: 2rem;">
                 <div class="col-md-4"></div>
                     <div class="col-md-4">
-                        <div class="main-box mb-orange">
+                        <div class="main-box mb-orange" style="padding-left: 7rem;">
                             <form method="POST" id="generate" action="officer_generate.php">
                                 <fieldset class="scheduler-border">
                                     <legend class="scheduler-border">Generate Report</legend>

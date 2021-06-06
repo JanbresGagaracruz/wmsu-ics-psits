@@ -28,13 +28,20 @@
         </div>
     </nav>
     <!--Create alert message-->
-    <div class="container">
+    <div class="container justify-content-center">
         <?php if(isset($_SESSION['message'])&& $_GET['success'] == 1): ?>   
             <div class="alert alert-success alert-dismissible mt-2" id="success">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
             <?php 
                     echo $_SESSION['message'];  
                     unset($_SESSION['message']);
+            ?>
+            <?php elseif(isset($_SESSION['message']) && $_GET['success'] == 2): ?>    
+            <div class="alert alert-danger alert-dismissible mt-2" id="success">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <?php 
+                echo $_SESSION['message'];  
+                unset($_SESSION['message']);
             ?>
         <?php endif ?>
     </div>
@@ -73,7 +80,7 @@
                     </div>
                     <label for="email" class="ml-5" style="font-weight: bold;">Email address</label>
                     <div class="form-group">
-                        <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter email"
+                        <input type="email" class="form-control" id="email_me" name="email_me" aria-describedby="emailHelp" placeholder="Enter email"
                         autocomplete="off" required>
                         <div id="availability"></div>
                     </div>
